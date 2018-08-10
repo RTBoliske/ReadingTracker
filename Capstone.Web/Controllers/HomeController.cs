@@ -21,7 +21,7 @@ namespace Capstone.Web.Controllers
             var roles = _db.GetRoleItems();
             var user = _db.GetUserItem("admin");
             bool itWorks = false;
-            itWorks = DbManager.VerifyPassword("password", user.Salt);
+            //itWorks = DbManager.VerifyPassword("password", user.Salt);
             
             return View("Index", itWorks);
         }

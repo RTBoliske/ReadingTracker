@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Capstone.Web;
 
 namespace Capstone.Web.Controllers.Tests
 {
@@ -16,7 +17,8 @@ namespace Capstone.Web.Controllers.Tests
         public void HomeController_IndexAction_ReturnIndexView()
         {
             //Arrange
-            HomeController controller = new HomeController();
+            IDatabaseSvc db = new MockDatabaseSvc();
+            HomeController controller = new HomeController(db);
 
             //Act
             ViewResult result = controller.Index() as ViewResult;

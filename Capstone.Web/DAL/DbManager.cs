@@ -70,14 +70,16 @@ namespace Capstone.Web
             
            
 
-            var passwordHash = HashPasswordWithPBKDF2(password, saltBytes, workFactor);
-            var split = passwordHash.Split('|');
-            result = split[1].Trim() == hash;
+           // var passwordHash = HashPasswordWithPBKDF2(password, saltBytes, workFactor);
+           // var split = passwordHash.Split('|');
+            //result = split[1].Trim() == hash;
             return result;
         }
 
-        public static string HashPasswordWithPBKDF2(string password, byte[] salt, int workFactor = 10000)
+        public static string HashPasswordWithPBKDF2(string password, string saltStr = "abcd1234", int workFactor = 10000)
         {
+            byte[] salt = ASCIIEncoding.ASCII.GetBytes(saltStr);
+
             // Creates the crypto service provider and provides the salt - usually used to check for a password match
             Rfc2898DeriveBytes rfc2898DeriveBytes = new Rfc2898DeriveBytes(password, salt, workFactor);
 
@@ -86,16 +88,6 @@ namespace Capstone.Web
             return Convert.ToBase64String(salt) + " | " + Convert.ToBase64String(hash);
         }
 
-        public static string HashPasswordWithPBKDF2(string password, int saltSize = 10, int workFactor = 10000)
-        {
-            //Creates the crypto service provider and says to use a random salt of size "saltSize"
-            Rfc2898DeriveBytes rfc2898DeriveBytes = new Rfc2898DeriveBytes(password, saltSize, workFactor);
-
-            byte[] hash = rfc2898DeriveBytes.GetBytes(20);      //gets the hashed password
-            byte[] salt = rfc2898DeriveBytes.Salt;              //gets the random salt
-
-            return Convert.ToBase64String(salt) + " | " + Convert.ToBase64String(hash);
-        }
 
     }
 }
