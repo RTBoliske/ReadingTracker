@@ -4,9 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Capstone.Web.DAL
+namespace Capstone.Web
 {
-    interface IDatabaseSVC
+   public interface IDatabaseSvc
     {
+        //Role
+
+        //User
+        List<Users> GetAllUsers();
+
+
     }
 }

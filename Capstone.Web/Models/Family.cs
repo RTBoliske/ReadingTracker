@@ -5,14 +5,9 @@ using System.Web;
 
 namespace Capstone.Web.Models
 {
-    public class BaseItem
+    public class Family
     {
-        public const int InvalidId = -1;
-
-        public int Id { get; set; } = InvalidId;
-
-
-
-
+        public int ID { get; set; }
+        public string FamilyName { get; set; }
     }
 }

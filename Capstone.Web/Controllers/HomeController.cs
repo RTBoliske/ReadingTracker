@@ -18,12 +18,9 @@ namespace Capstone.Web.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            var roles = _db.GetRoleItems();
-            var user = _db.GetUserItem("admin");
-            bool itWorks = false;
-            //itWorks = DbManager.VerifyPassword("password", user.Salt);
+            var user = _db.GetAllUsers();
             
-            return View("Index", itWorks);
+            return View("Index", user);
         }
     }
 }

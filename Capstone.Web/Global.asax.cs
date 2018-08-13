@@ -28,8 +28,8 @@ namespace Capstone.Web
 
 
             string connectionString = ConfigurationManager.ConnectionStrings["DB"].ConnectionString;
-            //kernel.Bind<IDatabaseSvc>().To<DatabaseSvc>().WithConstructorArgument("connectionString", connectionString);
-            kernel.Bind<IDatabaseSvc>().To<MockDatabaseSvc>();
+            kernel.Bind<IDatabaseSvc>().To<DatabaseDAL>().WithConstructorArgument("connectionString", connectionString);
+            //kernel.Bind<IDatabaseSvc>().To<MockDatabaseSvc>();
             return kernel;
 
         }

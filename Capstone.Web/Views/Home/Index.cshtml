@@ -1,10 +1,10 @@
-﻿@model bool
+﻿@model List<Users>
 
-@if (Model)
+@foreach (var item in Model)
 {
-    <h1>It Works!</h1>
+<ul>
+    <li>@item.FirstName</li>
+    <li>@item.LastName</li>
+</ul>
 }
-else
-{
-    <h1>It Doesn't Work! FML!</h1>
-}
+
