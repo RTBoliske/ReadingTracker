@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Capstone.Web.DAL;
 using Ninject;
 using Ninject.Web.Common.WebHost;
 
@@ -27,10 +28,8 @@ namespace Capstone.Web
 
 
             string connectionString = ConfigurationManager.ConnectionStrings["DB"].ConnectionString;
-
-
-            //kernel.Bind<ISomething>().To<Something>().WithConstructorArgument("connectionString", connectionString);
-
+            //kernel.Bind<IDatabaseSvc>().To<DatabaseSvc>().WithConstructorArgument("connectionString", connectionString);
+            kernel.Bind<IDatabaseSvc>().To<MockDatabaseSvc>();
             return kernel;
 
         }

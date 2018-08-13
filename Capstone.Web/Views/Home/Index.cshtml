@@ -1,2 +1,10 @@
-﻿
-<h1>It Works!</h1>
+﻿@model bool
+
+@if (Model)
+{
+    <h1>It Works!</h1>
+}
+else
+{
+    <h1>It Doesn't Work! FML!</h1>
+}
