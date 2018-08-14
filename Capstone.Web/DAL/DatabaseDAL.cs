@@ -41,7 +41,42 @@ namespace Capstone.Web.DAL
                 throw;
             }
         }
+        public Users GetUser(string username, string password)
+        {
+            Users user = new Users();
 
+            string sql = @"SELECT TOP 1 * FROM Users WHERE Username = @username AND password = @password";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@username", username);
+                    cmd.Parameters.AddWithValue("@password", password);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        user = new Users
+                        {
+                            Username = Convert.ToString(reader["Username"]),
+                            Password = Convert.ToString(reader["Password"])
+                        };
+                    }
+
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+
+            return user;
+        }
         private Users MapRowToUsers(SqlDataReader reader)
         {
             return new Users()

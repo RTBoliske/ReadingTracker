@@ -1,5 +1,24 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model LoginViewModel
 
+<div id="login">
+
+    <h2>Login</h2>
+    @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+    {
+        @Html.ValidationMessage("invalid-credentials")
+
+        <div>
+            @Html.TextBoxFor(m => m.Username, new { placeholder = "username" })
+            @Html.ValidationMessageFor(m => m.Username)
+        </div>
+        <div>
+            @Html.PasswordFor(m => m.Password, new { placeholder = "password" })
+            @Html.ValidationMessageFor(m => m.Password)
+        </div>
+        <button>Login</button>
+    }
+</div>
 

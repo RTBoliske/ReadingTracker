@@ -12,6 +12,7 @@ namespace Capstone.Web
 
         //User
         List<Users> GetAllUsers();
+        Users GetUser(string username, string password);
 
 
     }
