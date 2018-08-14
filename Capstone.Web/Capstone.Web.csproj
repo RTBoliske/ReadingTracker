@@ -116,6 +116,7 @@
     <Content Include="DatabaseScripts\data.sql" />
     <Content Include="DatabaseScripts\schema.sql" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\additional-methods.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
