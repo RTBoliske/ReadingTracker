@@ -45,7 +45,7 @@ namespace Capstone.Web.Controllers
                 result = View("Login", model);
             }
 
-            Users user = _db.GetUser(model.Username, model.Password);
+            User user = _db.GetUser(model.Username, model.Password);
             
             if (user == null | user.Password == null)
             {
@@ -58,11 +58,11 @@ namespace Capstone.Web.Controllers
                 Session["User"] = user; 
             }
 
-            if (((Users)Session["User"]).RoleID == 2)
+            if (((User)Session["User"]).RoleID == 2)
             {
                 result = RedirectToAction("ParentActivity", "Home");
             }
-            else if (((Users)Session["User"]).RoleID == 3)
+            else if (((User)Session["User"]).RoleID == 3)
             {
                 result = RedirectToAction("ChildActivity", "Home"); //unsure if we want/need a second view for child
             }
@@ -82,7 +82,7 @@ namespace Capstone.Web.Controllers
 
             PasswordHash ph = new PasswordHash(model.Password);
 
-            Users user = _db.GetUser(model.Username, model.Password);
+            User user = _db.GetUser(model.Username, model.Password);
             // user does not exist or password is wrong
             if (user == null | user.Password == null)
             {
@@ -98,7 +98,7 @@ namespace Capstone.Web.Controllers
             {
                 result = RedirectToAction("ParentActivity", "Home"); 
             }
-            else if (((Users)Session["User"]).RoleID == 3)
+            else if (((User)Session["User"]).RoleID == 3)
             {
                 result = RedirectToAction("ChildActivity", "Home"); //unsure if we want/need a second view for child
             }

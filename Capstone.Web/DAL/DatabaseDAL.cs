@@ -15,9 +15,9 @@ namespace Capstone.Web.DAL
             _connectionString = connectionString;
         }
 
-        public List<Users> GetAllUsers()
+        public List<User> GetAllUsers()
         {
-            List<Users> allUsers = new List<Users>();
+            List<User> allUsers = new List<User>();
 
             string usersSearchSql = @"SELECT * FROM Users;";
             try
@@ -41,9 +41,9 @@ namespace Capstone.Web.DAL
                 throw;
             }
         }
-        public Users GetUser(string username, string password)
+        public User GetUser(string username, string password)
         {
-            Users user = new Users();
+            User user = new User();
 
             string sql = @"SELECT TOP 1 * FROM Users WHERE Username = @username AND password = @password";
 
@@ -61,7 +61,7 @@ namespace Capstone.Web.DAL
 
                     while (reader.Read())
                     {
-                        user = new Users
+                        user = new User
                         {
                             ID = Convert.ToInt32(reader["ID"]),
                             FirstName = Convert.ToString(reader["First_name"]),
@@ -126,9 +126,9 @@ namespace Capstone.Web.DAL
 
         //    return user;
         //}
-        private Users MapRowToUsers(SqlDataReader reader)
+        private User MapRowToUsers(SqlDataReader reader)
         {
-            return new Users()
+            return new User()
             {
                 ID = Convert.ToInt32(reader["ID"]),
                 FirstName = Convert.ToString(reader["First_name"]),

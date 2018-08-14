@@ -11,8 +11,8 @@ namespace Capstone.Web
         //Role
 
         //User
-        List<Users> GetAllUsers();
-        Users GetUser(string username, string password);
+        List<User> GetAllUsers();
+        User GetUser(string username, string password);
 
 
     }
