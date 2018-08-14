@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 
 namespace Capstone.Web
 {
-    public class Users
+    public class User
     {
         public int ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string FamilyName { get; set; }
         public int FamilyID { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
@@ -17,7 +19,7 @@ namespace Capstone.Web
         public int RoleID { get; set; }
     }
 
-    class PasswordHash
+    public class PasswordHash
     {
         private string password;
         private static int _workFactor = 20;
