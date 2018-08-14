@@ -1,4 +1,3 @@
-USE [dbfamilyreader]
 
 INSERT INTO Family (Family_name) VALUES ('DeLaRosa');
 INSERT INTO Family (Family_name) VALUES ('Boliske');
