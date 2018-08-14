@@ -46,7 +46,7 @@ namespace Capstone.Web.Controllers
             }
 
             Users user = _db.GetUser(model.Username, model.Password);
-            // user does not exist or password is wrong
+            
             if (user == null | user.Password == null)
             {
                 ModelState.AddModelError("invalid-credentials", "An invalid username or password was provided");
@@ -73,17 +73,21 @@ namespace Capstone.Web.Controllers
         [HttpPost]
         public ActionResult Register(RegisterViewModel model)
         {
+            ActionResult result = null;
+
             if (!ModelState.IsValid)
             {
-                return View("Register", model);
+                result = View("Register", model);
             }
+
+            PasswordHash ph = new PasswordHash(model.Password);
 
             Users user = _db.GetUser(model.Username, model.Password);
             // user does not exist or password is wrong
             if (user == null | user.Password == null)
             {
                 ModelState.AddModelError("invalid-credentials", "An invalid username or password was provided");
-                return View("Register", model);
+                result = View("Register", model);
             }
             else
             {
@@ -92,12 +96,14 @@ namespace Capstone.Web.Controllers
             }
             if ((int)Session["UserRole"] == 2)
             {
-                return RedirectToAction("ParentActivity", "Home"); 
+                result = RedirectToAction("ParentActivity", "Home"); 
             }
             else if (((Users)Session["User"]).RoleID == 3)
             {
-                return RedirectToAction("ChildActivity", "Home"); //unsure if we want/need a second view for child
+                result = RedirectToAction("ChildActivity", "Home"); //unsure if we want/need a second view for child
             }
+
+            return result;
         }
 
         public ActionResult ParentActivity()
