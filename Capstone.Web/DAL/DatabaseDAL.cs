@@ -63,8 +63,14 @@ namespace Capstone.Web.DAL
                     {
                         user = new Users
                         {
+                            ID = Convert.ToInt32(reader["ID"]),
+                            FirstName = Convert.ToString(reader["First_name"]),
+                            LastName = Convert.ToString(reader["Last_name"]),
+                            FamilyID = Convert.ToInt32(reader["FamilyID"]),
                             Username = Convert.ToString(reader["Username"]),
-                            Password = Convert.ToString(reader["Password"])
+                            Password = Convert.ToString(reader["Password"]),
+                            Salt = Convert.ToString(reader["Salt"]),
+                            RoleID = Convert.ToInt32(reader["RoleID"]),
                         };
                     }
 
