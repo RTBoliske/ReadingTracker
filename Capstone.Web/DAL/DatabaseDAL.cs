@@ -83,6 +83,49 @@ namespace Capstone.Web.DAL
 
             return user;
         }
+        //public Users InsertNewUser(Users user)
+        //{
+        //    Users user = new Users();
+
+        //    string sql = @"INSERT INTO Users (First_name, Last_name, FamilyID, Username, Password, Salt, RoleID) 
+        //                   VALUES (, 'Binegar', 3, 'jbinegar', '1234asdf', 'jbinegar', 2);";
+
+        //    try
+        //    {
+        //        using (SqlConnection conn = new SqlConnection(_connectionString))
+        //        {
+        //            conn.Open();
+
+        //            SqlCommand cmd = new SqlCommand(sql, conn);
+        //            cmd.Parameters.AddWithValue("@username", username);
+        //            cmd.Parameters.AddWithValue("@password", password);
+
+        //            SqlDataReader reader = cmd.ExecuteReader();
+
+        //            while (reader.Read())
+        //            {
+        //                user = new Users
+        //                {
+        //                    ID = Convert.ToInt32(reader["ID"]),
+        //                    FirstName = Convert.ToString(reader["First_name"]),
+        //                    LastName = Convert.ToString(reader["Last_name"]),
+        //                    FamilyID = Convert.ToInt32(reader["FamilyID"]),
+        //                    Username = Convert.ToString(reader["Username"]),
+        //                    Password = Convert.ToString(reader["Password"]),
+        //                    Salt = Convert.ToString(reader["Salt"]),
+        //                    RoleID = Convert.ToInt32(reader["RoleID"]),
+        //                };
+        //            }
+
+        //        }
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        throw;
+        //    }
+
+        //    return user;
+        //}
         private Users MapRowToUsers(SqlDataReader reader)
         {
             return new Users()
