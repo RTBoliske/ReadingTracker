@@ -2,4 +2,55 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Child Activity View</h1>
+@*<h1>Child Activity View</h1>*@
+
+<div class="form-row">
+    <div class="dropdown form-group col-md-2">
+        <label for="SelectBook">Books</label>
+        <select class="form-control form-control-sm" id="SelectBook" required>
+            <option>Select a book</option>
+            <option>Book 1</option>
+            <option>Book 2</option>
+            <option>Book 3</option>
+        </select>
+    </div>
+    <div class="dropdown form-group col-md-2">
+        <label for="BookFormat">Format</label>
+        <select class="form-control form-control-sm" id="BookFormat" required>
+            <option>Reading Format</option>
+            <option>Paper</option>
+            <option>Digital</option>
+            <option>Audiobook</option>
+        </select>
+    </div>
+    <div class="form-group col-md-2">
+        <label for="TimeReading">Time spent reading</label>
+        <input type="number" name="TimeReading" class="form-control form-control-sm col-7" />
+        <label for="TimeFormat" style="font-size: 10px;">Enter minutes only</label>
+    </div>
+    @*<div class="form-group col-md-2">
+            <label for="TimeReading">Time spent reading</label>
+            <input type="text" class="form-control form-control-sm" />
+        </div>*@
+    @*<div class="form-group col-md-2">
+            <label for="TotalReadingTime">Total time reading</label>
+            <input type="text" class="form-control form-control-sm" readonly />
+        </div>*@
+    <div class="form-group col-md-2">
+        <label for="ReadingProgress">Progress</label>
+        <div class="progress" style="height: 10px;">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"></div>
+        </div>
+    </div>
+</div><div>
+    <label for="ReadingNotes">Add Reading Notes...</label>
+    <div>
+        <textarea rows="4" cols="50" placeholder="Enter comments here...">
+            
+        </textarea>
+    </div>
+</div>
+<div>
+    <br />
+    <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+</div>
