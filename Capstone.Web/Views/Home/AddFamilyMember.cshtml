@@ -5,7 +5,9 @@
 
 
 <h2>Add New Family Member</h2>
-<form class="needs-validation" id="addFamForm" novalidate>
+
+@*@using (Html.BeginForm("Director", "Home", FormMethod.Post))
+{*@
     <div class="form-row">
         <div class="form-group col-md-2">
             <label for="UserRole">User's Role</label>
@@ -15,77 +17,30 @@
                 <option>Parent</option>
                 <option>Child</option>
             </select>
-            </div>
+        </div>
         <div class="form-group col-md-2">
             <label for="FirstName">First Name</label>
             <input type="text" class="form-control" id="FirstName" required>
-            <div class="valid-feedback">
-                Looks good!
-            </div>
-            <div class="invalid-feedback">
-                This field is required.
-            </div>
         </div>
         <div class="form-group col-md-2">
             <label for="LastName">Last Name:</label>
             <input type="text" class="form-control" id="LastName" required>
-            <div class="valid-feedback">
-                Looks good!
-            </div>
-            <div class="invalid-feedback">
-                This field is required.
-            </div>
         </div>
         <div class="form-group col-md-2">
             <label for="UserName">User Name:</label>
             <input type="text" class="form-control" id="UserName" required>
-            <div class="valid-feedback">
-                Looks good!
-            </div>
-            <div class="invalid-feedback">
-                This field is required.
-            </div>
         </div>
         <div class="form-group col-md-2">
             <label for="Password">Password:</label>
             <input type="password" class="form-control" id="Password" required>
-            <div class="valid-feedback">
-                Looks good!
-            </div>
-            <div class="invalid-feedback">
-                This field is required.
-            </div>
         </div>
         <div class="form-group col-md-2">
             <label for="ConfirmPassword">Confirm Password:</label>
             <input type="password" class="form-control" id="ConfirmPassword" required>
-            <div class="invalid-feedback">
-                This field is required.
-            </div>
         </div>
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-</form>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+
+@*}*@
 
 
-    
-<script>
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-(function() {
-  'use strict';
-  window.addEventListener('load', function() {
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.getElementsByClassName('needs-validation');
-    // Loop over them and prevent submission
-    var validation = Array.prototype.filter.call(forms, function(form) {
-      form.addEventListener('submit', function(event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }, false);
-})();
-</script>
