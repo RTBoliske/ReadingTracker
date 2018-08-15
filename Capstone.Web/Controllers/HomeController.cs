@@ -19,9 +19,7 @@ namespace Capstone.Web.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            var user = _db.GetAllUsers();
-            
-            return View("Index", user);
+            return View("Index");
         }
 
         public ActionResult Login()
