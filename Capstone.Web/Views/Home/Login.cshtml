@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model LoginViewModel
@@ -6,7 +7,7 @@
 
 
 <h2>Login</h2>
-@using (Html.BeginForm("Login", "Home", FormMethod.Post))
+
 {
     <div id="login">
         <h2>Login</h2>
@@ -25,7 +26,7 @@
             <button>Login</button>
         }
     </div>
-}
 
 
+@* This view is not currently being used.  Login functionality is on the Index View as of now. *@
 

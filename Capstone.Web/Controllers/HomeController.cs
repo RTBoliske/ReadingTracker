@@ -117,7 +117,7 @@ namespace Capstone.Web.Controllers
                 FormsAuthentication.SetAuthCookie(user.Username, true);
                 Session["User"] = user;
             }
-            if ((int)Session["UserRole"] == 2)
+            if (((User)Session["User"]).RoleID == 2)
             {
                 result = RedirectToAction("ParentActivity", "Home"); 
             }

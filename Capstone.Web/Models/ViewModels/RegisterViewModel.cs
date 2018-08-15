@@ -28,7 +28,7 @@ namespace Capstone.Web
         [Compare("Password", ErrorMessage = "Passwords do not match")]
         [Display(Name = "Confirm Password:")]
         public string ConfirmPassword { get; set; }
-        public int RoleID { get; set; }
+        public int RoleID { get; set; } = 2;
         public int FamilyID { get; set; }
     }
 }
