@@ -47,7 +47,7 @@ namespace Capstone.Web.Controllers
 
             User user = _db.GetUser(model.Username, model.Password);
             
-            if (user == null | user.Password == null)
+            if (user == null || user.Password == null)
             {
                 ModelState.AddModelError("invalid-credentials", "An invalid username or password was provided");
                 result = View("Login", model);
@@ -55,17 +55,19 @@ namespace Capstone.Web.Controllers
             else
             {
                 FormsAuthentication.SetAuthCookie(user.Username, true);
-                Session["User"] = user; 
+                Session["User"] = user;
+
+                if (((User)Session["User"]).RoleID == 2)
+                {
+                    result = RedirectToAction("ParentActivity", "Home");
+                }
+                else if (((User)Session["User"]).RoleID == 3)
+                {
+                    result = RedirectToAction("ChildActivity", "Home"); //unsure if we want/need a second view for child
+                }
             }
 
-            if (((User)Session["User"]).RoleID == 2)
-            {
-                result = RedirectToAction("ParentActivity", "Home");
-            }
-            else if (((User)Session["User"]).RoleID == 3)
-            {
-                result = RedirectToAction("ChildActivity", "Home"); //unsure if we want/need a second view for child
-            }
+           
 
             return result;
         }
