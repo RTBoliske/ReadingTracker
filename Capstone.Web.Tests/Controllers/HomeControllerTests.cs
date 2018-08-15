@@ -13,18 +13,18 @@ namespace Capstone.Web.Controllers.Tests
     [TestClass()]
     public class HomeControllerTests
     {
-        [TestMethod()]
-        public void HomeController_IndexAction_ReturnIndexView()
-        {
-            //Arrange
-            IDatabaseSvc db = new MockDatabaseSvc();
-            HomeController controller = new HomeController(db);
+        //[TestMethod()]
+        //public void HomeController_IndexAction_ReturnIndexView()
+        //{
+        //    Arrange
+        //    IDatabaseSvc db = new MockDatabaseSvc();
+        //    HomeController controller = new HomeController(db);
 
-            //Act
-            ViewResult result = controller.Index() as ViewResult;
+        //    Act
+        //    ViewResult result = controller.Index() as ViewResult;
 
-            //Assert
-            Assert.AreEqual("Index", result.ViewName);
-        }
+        //    Assert
+        //    Assert.AreEqual("Index", result.ViewName);
+        //}
     }
 }

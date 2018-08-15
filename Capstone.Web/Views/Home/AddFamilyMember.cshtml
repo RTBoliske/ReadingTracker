@@ -1,3 +1,46 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model User
+
+
+<h2>Add New Family Member</h2>
+
+@*@using (Html.BeginForm("Director", "Home", FormMethod.Post))
+{*@
+    <div class="form-row">
+        <div class="form-group col-md-2">
+            <label for="UserRole">User's Role</label>
+            <select class="form-control" id="UserRole" required>
+                <option></option>
+                <option>Administrator</option>
+                <option>Parent</option>
+                <option>Child</option>
+            </select>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="FirstName">First Name</label>
+            <input type="text" class="form-control" id="FirstName" required>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="LastName">Last Name:</label>
+            <input type="text" class="form-control" id="LastName" required>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="UserName">User Name:</label>
+            <input type="text" class="form-control" id="UserName" required>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="Password">Password:</label>
+            <input type="password" class="form-control" id="Password" required>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="ConfirmPassword">Confirm Password:</label>
+            <input type="password" class="form-control" id="ConfirmPassword" required>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+
+@*}*@
+
+

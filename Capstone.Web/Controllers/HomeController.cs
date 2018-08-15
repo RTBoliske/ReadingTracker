@@ -45,7 +45,7 @@ namespace Capstone.Web.Controllers
                 result = View("Login", model);
             }
 
-            Users user = _db.GetUser(model.Username, model.Password);
+            User user = _db.GetUser(model.Username, model.Password);
             
             if (user == null | user.Password == null)
             {
@@ -58,11 +58,11 @@ namespace Capstone.Web.Controllers
                 Session["User"] = user; 
             }
 
-            if (((Users)Session["User"]).RoleID == 2)
+            if (((User)Session["User"]).RoleID == 2)
             {
                 result = RedirectToAction("ParentActivity", "Home");
             }
-            else if (((Users)Session["User"]).RoleID == 3)
+            else if (((User)Session["User"]).RoleID == 3)
             {
                 result = RedirectToAction("ChildActivity", "Home"); //unsure if we want/need a second view for child
             }
@@ -82,9 +82,32 @@ namespace Capstone.Web.Controllers
 
             PasswordHash ph = new PasswordHash(model.Password);
 
-            Users user = _db.GetUser(model.Username, model.Password);
+            //Pass business object to DAL - DONE
+            //Create Family method - DONE
+            //Create Family needs to return ID - DONE
+            //Create User should return newly created user object - DONE
+
+            User user = new User();
+            user.ID = model.ID;
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            user.Username = model.Username;
+            user.Password = ph.Hash;
+            user.FamilyName = model.FamilyName;
+            user.FamilyID = model.FamilyID;
+            user.Salt = ph.Salt;
+            user.RoleID = model.RoleID;
+
+            Family family = new Family();
+            family.FamilyName = model.FamilyName;
+
+            int familyID = _db.CreateFamily(family);
+            user.FamilyID = familyID;
+
+            user = _db.CreateUser(user);
+
             // user does not exist or password is wrong
-            if (user == null | user.Password == null)
+            if (user == null || user.Password == null) //Question 1
             {
                 ModelState.AddModelError("invalid-credentials", "An invalid username or password was provided");
                 result = View("Register", model);
@@ -98,7 +121,7 @@ namespace Capstone.Web.Controllers
             {
                 result = RedirectToAction("ParentActivity", "Home"); 
             }
-            else if (((Users)Session["User"]).RoleID == 3)
+            else if (((User)Session["User"]).RoleID == 3)
             {
                 result = RedirectToAction("ChildActivity", "Home"); //unsure if we want/need a second view for child
             }
