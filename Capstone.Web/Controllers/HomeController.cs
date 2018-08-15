@@ -82,11 +82,6 @@ namespace Capstone.Web.Controllers
 
             PasswordHash ph = new PasswordHash(model.Password);
 
-            //Pass business object to DAL - DONE
-            //Create Family method - DONE
-            //Create Family needs to return ID - DONE
-            //Create User should return newly created user object - DONE
-
             User user = new User();
             user.ID = model.ID;
             user.FirstName = model.FirstName;
