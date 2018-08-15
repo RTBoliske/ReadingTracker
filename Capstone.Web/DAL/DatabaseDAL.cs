@@ -107,8 +107,9 @@ namespace Capstone.Web.DAL
 
         public User CreateUser(User newUser)
         {
-            string sql = @"INSERT INTO Users (First_name, Last_name, Username, Password, Salt, RoleID) 
-                           VALUES (@firstName, @lastName, @username, @password, @salt, @roleID);";
+            string sql = @"INSERT INTO Users (First_name, Last_name, FamilyID, Username, Password, Salt, RoleID) 
+                           VALUES (@firstName, @lastName, @familyID, @username, @password, @salt, @roleID);
+                           SELECT CAST(SCOPE_IDENTITY() as int);";
 
             try
             {
@@ -117,16 +118,20 @@ namespace Capstone.Web.DAL
                     conn.Open();
                 
                     SqlCommand cmd = new SqlCommand(sql, conn);
+                    
                     cmd.Parameters.AddWithValue("@familyName", newUser.FamilyName);
                     cmd.Parameters.AddWithValue("@firstName", newUser.FirstName);
                     cmd.Parameters.AddWithValue("@lastName", newUser.LastName);
+                    cmd.Parameters.AddWithValue("@familyID", newUser.FamilyID);
                     cmd.Parameters.AddWithValue("@username", newUser.Username);
                     cmd.Parameters.AddWithValue("@password", newUser.Password);
                     cmd.Parameters.AddWithValue("@salt", newUser.Salt);
                     cmd.Parameters.AddWithValue("@roleID", 2);
+                    var userID = (int)cmd.ExecuteScalar();
 
                     User user = new User();
 
+                    user.ID = userID;
                     user.FirstName = newUser.FirstName;
                     user.LastName = newUser.LastName;
                     user.Username = newUser.Username;

@@ -8,21 +8,29 @@
 <h2>Login</h2>
 @using (Html.BeginForm("Login", "Home", FormMethod.Post))
 {
-    <div id="login">
-        <h2>Login</h2>
+    <div id="login" class="form-horizontal col-sm-3">
+      
         @using (Html.BeginForm("Login", "Home", FormMethod.Post))
         {
             @Html.ValidationMessage("invalid-credentials");
 
-            <div>
-                @Html.TextBoxFor(m => m.Username, new { placeholder = "username" })
+
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.Username, new { @class= "form-control form-control-sm", placeholder = "Enter your Username" })
                 @Html.ValidationMessageFor(m => m.Username)
             </div>
-            <div>
-                @Html.PasswordFor(m => m.Password, new { placeholder = "password" })
+            <div class="form-group">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control form-control-sm", placeholder = "Enter your Password" })
                 @Html.ValidationMessageFor(m => m.Password)
             </div>
-            <button>Login</button>
+            //this does nothing currently, added future implementation
+            @*<div class="checkbox">
+                <label><input type="checkbox" /> Remember Me</label>
+            </div>*@
+            <div class="form-group">
+                <button type="button" class="btn btn-sm btn-primary">Login</button>
+            </div>
+            
 
             <div>
                 <p>Don't have an account? Create one <a href='@Url.Action("Register", "Home")'>here</a>.</p>
