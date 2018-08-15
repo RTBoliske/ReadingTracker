@@ -1,10 +1,35 @@
-﻿@model List<User>
-
-@foreach (var item in Model)
-{
-<ul>
-    <li>@item.FirstName</li>
-    <li>@item.LastName</li>
-</ul>
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model LoginViewModel
+
+
+
+<h2>Login</h2>
+@using (Html.BeginForm("Login", "Home", FormMethod.Post))
+{
+    <div id="login">
+        <h2>Login</h2>
+        @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+        {
+            @Html.ValidationMessage("invalid-credentials")
+
+            <div>
+                @Html.TextBoxFor(m => m.Username, new { placeholder = "username" })
+                @Html.ValidationMessageFor(m => m.Username)
+            </div>
+            <div>
+                @Html.PasswordFor(m => m.Password, new { placeholder = "password" })
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+            <button>Login</button>
+
+            <div>
+                <p>Don't have an account? Create one <a href='@Url.Action("Register", "Home")'>here</a>.</p>
+            </div>
+        }
+    </div>
+}
+
+
 
