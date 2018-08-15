@@ -5,27 +5,27 @@
 
 
 
-<h2>Login</h2>
-@using (Html.BeginForm("Login", "Home", FormMethod.Post))
-{
+@*<h2>Login</h2>*@
     <div id="login">
-        <h2>Login</h2>
+        @*<h2>Login</h2>*@
         @using (Html.BeginForm("Login", "Home", FormMethod.Post))
         {
             @Html.ValidationMessage("invalid-credentials")
-
-            <div>
-                @Html.TextBoxFor(m => m.Username, new { placeholder = "username" })
+        <div class="input-group input-group-sm ">
+            <div class="">
+                @Html.TextBoxFor(m => m.Username, new { @class= "form-control mb-sm-4", placeholder = "username" })
                 @Html.ValidationMessageFor(m => m.Username)
             </div>
             <div>
-                @Html.PasswordFor(m => m.Password, new { placeholder = "password" })
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control mb-sm-4", placeholder = "password" })
                 @Html.ValidationMessageFor(m => m.Password)
             </div>
-            <button>Login</button>
+        </div>
+            
+            <button type="button" class="btn btn-primary">Login</button>
         }
     </div>
-}
+
 
 
 

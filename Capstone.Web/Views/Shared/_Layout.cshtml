@@ -6,10 +6,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>_Layout</title>
+    <title>Reading Tracker</title>
 
+    <link rel="stylesheet" href="~/Content/Styles.css" />
     <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    @*<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">*@
     
 
 </head>
@@ -25,25 +26,21 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
+               
                 <li class="nav-item">
                     <a class="nav-link" href="#">Books</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Family</a>
                 </li>
-                @*<li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li>*@
             </ul>
         </div>
-        @*<span class="navbar-brand mb-0 h1">Reading Tracker</span>*@
-        @*<ul>
-            <li><a href="@Url.Action("Index", "")">Home</a></li>
-            <li><a href="@Url.Action("Survey", "")">Survey</a></li>
-        </ul>*@
     </nav>
     <header>
-        <img src="~/Content/Images/family_illustration01.jpg" style="width:437px; height:283px;" alt="Family Reading Tracker logo" />
+        <div class="col-4 text-center">
+            <img src="~/Content/Images/family_illustration01.jpg" style=" width: 100%;" alt="Family Reading Tracker logo" />
+        </div>
+        
     </header>
     
     <div class="container">

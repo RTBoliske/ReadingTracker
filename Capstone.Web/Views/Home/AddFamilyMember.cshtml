@@ -4,15 +4,15 @@
 @model User
 
 
-<h2>Add New Family Member</h2>
+<h2>Add Family Members</h2>
 
 @*@using (Html.BeginForm("Director", "Home", FormMethod.Post))
 {*@
     <div class="form-row">
         <div class="form-group col-md-2">
             <label for="UserRole">User's Role</label>
-            <select class="form-control" id="UserRole" required>
-                <option></option>
+            <select class="form-control form-control-sm" id="UserRole" required>
+                <option>Select a Role</option>
                 <option>Administrator</option>
                 <option>Parent</option>
                 <option>Child</option>
@@ -20,26 +20,26 @@
         </div>
         <div class="form-group col-md-2">
             <label for="FirstName">First Name</label>
-            <input type="text" class="form-control" id="FirstName" required>
+            <input type="text" class="form-control form-control-sm" id="FirstName" required>
         </div>
         <div class="form-group col-md-2">
-            <label for="LastName">Last Name:</label>
-            <input type="text" class="form-control" id="LastName" required>
+            <label for="LastName">Last Name</label>
+            <input type="text" class="form-control form-control-sm" id="LastName" required>
         </div>
         <div class="form-group col-md-2">
-            <label for="UserName">User Name:</label>
-            <input type="text" class="form-control" id="UserName" required>
+            <label for="UserName">User Name</label>
+            <input type="text" class="form-control form-control-sm" id="UserName" required>
         </div>
         <div class="form-group col-md-2">
-            <label for="Password">Password:</label>
-            <input type="password" class="form-control" id="Password" required>
+            <label for="Password">Password</label>
+            <input type="password" class="form-control form-control-sm" id="Password" required>
         </div>
         <div class="form-group col-md-2">
-            <label for="ConfirmPassword">Confirm Password:</label>
-            <input type="password" class="form-control" id="ConfirmPassword" required>
+            <label for="ConfirmPassword">Confirm Password</label>
+            <input type="password" class="form-control form-control-sm" id="ConfirmPassword" required>
         </div>
     </div>
-    <button type="submit" class="btn btn-default">Submit</button>
+    <button type="submit" class="btn btn-sm btn-primary">Submit</button>
 
 @*}*@
 
