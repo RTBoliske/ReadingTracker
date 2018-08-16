@@ -6,10 +6,13 @@
 
 <dl class="row">
     <dt class="col-sm-3">Currently reading:</dt>
-    <dd class="col-sm-9">Title of book currently reading</dd>
+    <dd class="col-sm-6">Title of book currently reading</dd>
+    <dd class="col-sm-3">
+        <button type="submit" class="btn btn-sm btn-primary">View Additional Information</button>
+    </dd>
 
-    <dt class="col-sm-3">Book format:</dt>
-    <dd class="col-sm-9">pull format from db for user reading</dd>
+    @*<dt class="col-sm-3">Book format:</dt>
+    <dd class="col-sm-9">pull format from db for user reading</dd>*@
 
     <dt class="col-sm-3">Time spent reading this book:</dt>
     <dd class="col-sm-9">pull total reading time from db for user reading</dd>
@@ -22,8 +25,11 @@
     </dd>
 
     <dt class="col-sm-3">Add reading time for this book:</dt>
-    <dd class="col-sm-9">
-        <input type="number" name="TimeReading" class="form-control form-control-sm col-3" />
+    <dd class="col-sm-2">
+        <input type="time" name="TimeReading" class="form-control form-control-sm col-sm-6" />
+    </dd>
+    <dd class="col-sm-3">
+        <button type="submit" class="btn btn-sm btn-primary">Submit</button>
     </dd>
 
     
