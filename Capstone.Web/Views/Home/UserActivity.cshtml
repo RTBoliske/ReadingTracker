@@ -2,19 +2,34 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@*<h1>Parent Activity View</h1>*@
+<h1>User Reading Activity View</h1>
 
-<div class="form-row">
-    <div class="dropdown form-group col-md-2">
-        <label for="SelectUser">Users/Readers</label>
-        <select class="form-control form-control-sm" id="SelectBook" required>
-            <option>Select a User</option>
-            <option>Parent 1</option>
-            <option>Parent 2</option>
-            <option>Child 1</option>
-            <option>Child 2</option>
-        </select>
-    </div>
+<dl class="row">
+    <dt class="col-sm-3">Currently reading:</dt>
+    <dd class="col-sm-9">Title of book currently reading</dd>
+
+    <dt class="col-sm-3">Book format:</dt>
+    <dd class="col-sm-9">pull format from db for user reading</dd>
+
+    <dt class="col-sm-3">Time spent reading this book:</dt>
+    <dd class="col-sm-9">pull total reading time from db for user reading</dd>
+
+    <dt class="col-sm-3">Progress toward prize:</dt>
+    <dd class="col-sm-9">
+        <div class="progress" style="height: 15px;">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:75%;" role="progressbar">75%</div>
+        </div>
+    </dd>
+
+    <dt class="col-sm-3">Add reading time for this book:</dt>
+    <dd class="col-sm-9">
+        <input type="number" name="TimeReading" class="form-control form-control-sm col-3" />
+    </dd>
+
+    
+</dl>
+
+@*<div class="form-row">
     <div class="dropdown form-group col-md-2">
         <label for="SelectBook">Books</label>
         <select class="form-control form-control-sm" id="SelectBook" required>
@@ -37,23 +52,22 @@
         <label for="TimeReading">Time spent reading</label>
         <input type="number" name="TimeReading" class="form-control form-control-sm col-7" />
         <label for="TimeFormat" style="font-size: 10px;">Enter minutes only</label>
-    </div>
+    </div>*@
     @*<div class="form-group col-md-2">
             <label for="TimeReading">Time spent reading</label>
-            <input type="time" name="TimeReading" class="form-control form-control-sm col-7" />
+            <input type="text" class="form-control form-control-sm" />
         </div>*@
     @*<div class="form-group col-md-2">
             <label for="TotalReadingTime">Total time reading</label>
             <input type="text" class="form-control form-control-sm" readonly />
         </div>*@
-    <div class="form-group col-md-2">
+    @*<div class="form-group col-md-2">
         <label for="ReadingProgress">Progress</label>
         <div class="progress" style="height: 10px;">
             <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"></div>
         </div>
     </div>
-</div>
-<div>
+</div><div>
     <label for="ReadingNotes">Add Reading Notes...</label>
     <div>
         <textarea rows="4" cols="50" placeholder="Enter comments here...">
@@ -64,4 +78,4 @@
 <div>
     <br />
     <button type="submit" class="btn btn-sm btn-primary">Submit</button>
-</div>
+</div>*@
