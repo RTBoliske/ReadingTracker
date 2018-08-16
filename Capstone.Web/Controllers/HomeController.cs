@@ -163,8 +163,8 @@ namespace Capstone.Web.Controllers
                 user.LastName = model.LastName;
                 user.Username = model.Username;
                 user.Password = ph.Hash;
-                user.FamilyName = ((User)Session["User"]).FamilyName;
-                //user.FamilyID = _db.GetFamilyID(model.FamilyID);
+                user.FamilyName = _db.GetFamilyFromFamilyID(model.FamilyID);
+                user.FamilyID = ((User)Session["User"]).FamilyID;
                 user.Salt = ph.Salt;
                 user.RoleID = model.RoleID;
 
