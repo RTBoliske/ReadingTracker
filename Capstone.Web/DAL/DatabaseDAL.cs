@@ -284,6 +284,8 @@ namespace Capstone.Web.DAL
                         book = new Book
                         {
                             ID = Convert.ToInt32(reader["ID"]),
+                            UserID = Convert.ToInt32(reader["UserID"]),
+                            FamilyID = Convert.ToInt32(reader["FamilyID"]),
                             Title = Convert.ToString(reader["Title"]),
                             ISBN = Convert.ToString(reader["ISBN"]),
                             Type = Convert.ToString(reader["Type"]),
@@ -300,7 +302,7 @@ namespace Capstone.Web.DAL
         }
         public Book CreateBook(Book book)
         {
-            string sql = @"INSERT INTO Book (ID, Title, ISBN, Type) VALUES (@ID, @title, @ISBN, @type);
+            string sql = @"INSERT INTO Book (ID, FamilyID, UserID, Title, ISBN, Type) VALUES (@ID, @UserName, @FamilyID, @Title, @ISBN, @Type);
                            SELECT CAST(SCOPE_IDENTITY() as int);";
 
             try
@@ -312,9 +314,11 @@ namespace Capstone.Web.DAL
                     SqlCommand cmd = new SqlCommand(sql, conn);
 
                     cmd.Parameters.AddWithValue("@ID", book.ID);
-                    cmd.Parameters.AddWithValue("@title", book.Title);
+                    cmd.Parameters.AddWithValue("@UserName", book.UserID);
+                    cmd.Parameters.AddWithValue("@FamilyID", book.FamilyID);
+                    cmd.Parameters.AddWithValue("@Title", book.Title);
                     cmd.Parameters.AddWithValue("@ISBN", book.ISBN);
-                    cmd.Parameters.AddWithValue("@type", book.Type);
+                    cmd.Parameters.AddWithValue("@Type", book.Type);
                     var bookID = (int)cmd.ExecuteScalar();
                     
                     return book;

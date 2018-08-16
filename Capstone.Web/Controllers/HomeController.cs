@@ -192,6 +192,8 @@ namespace Capstone.Web.Controllers
 
                 Book book = new Book();
                 book.ID = model.ID;
+                book.UserID = ((User)Session["User"]).ID;
+                book.FamilyID = ((User)Session["User"]).FamilyID;
                 book.Title = model.Title;
                 book.ISBN = model.ISBN;
                 book.Type = model.Type;
