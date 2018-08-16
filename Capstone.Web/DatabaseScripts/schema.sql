@@ -46,6 +46,18 @@ CREATE TABLE Book(
 	CONSTRAINT pk_book_ID PRIMARY KEY (ID),
 );
 
+CREATE TABLE ReadingLog(
+	ID int Identity(1,1),
+	BookID int NOT NULL,
+	Minutes_read int NOT NULL,
+	Complete bit NOT NULL,
+	Date date NOT NULL,
+);
+
 ALTER TABLE Users ADD FOREIGN KEY (FamilyID) REFERENCES Family(ID);
 ALTER TABLE Users ADD FOREIGN KEY (RoleID) REFERENCES Roles(ID);
+ALTER TABLE ReadingLog ADD FOREIGN KEY (BookID) REFERENCES Book(ID);
 
+INSERT INTO Roles (Role) VALUES ('Administrator');
+INSERT INTO Roles (Role) VALUES ('Parent');
+INSERT INTO Roles (Role) VALUES ('Child');
