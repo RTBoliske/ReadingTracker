@@ -4,10 +4,6 @@ INSERT INTO Family (Family_name) VALUES ('Boliske');
 INSERT INTO Family (Family_name) VALUES ('Binegar');
 INSERT INTO Family (Family_name) VALUES ('Lopez');
 
-INSERT INTO Roles (Role) VALUES ('Administrator');
-INSERT INTO Roles (Role) VALUES ('Parent');
-INSERT INTO Roles (Role) VALUES ('Child');
-
 INSERT INTO Users (First_name, Last_name, FamilyID, Username, Password, Salt, RoleID) 
 VALUES ('Austin', 'DeLaRosa', 1, 'adelarosa', 'FD7PS/mVScRRZ8jZXcg3xkOA8EE=', 'KlJGgDgFj8iaio+x1Bdp/Q==', 2);
 
