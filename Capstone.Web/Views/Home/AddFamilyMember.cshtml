@@ -12,35 +12,40 @@
 
     <div class="form-row">
         <div class="form-group col-md-2">
-            <label for="UserRole">User's Role</label>
-            <select class="form-control form-control-sm" id="UserRole">
-                <option>Select a Role</option>
-                <option>Administrator</option>
-                <option>Parent</option>
-                <option>Child</option>
-            </select>
-            @Html.ValidationMessageFor(m => m.RoleID)
+            <label for="UserRole">User's Role</label><br />
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" name="RoleID" id="inlineCheckbox1" value="3" checked>
+                <label class="form-check-label" for="inlineCheckbox1">Child</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" name="RoleID" id="inlineCheckbox1" value="2">
+                <label class="form-check-label" for="inlineCheckbox1">Parent</label>
+            </div>
         </div>
         <div class="form-group col-md-2">
             <label for="FirstName">First Name</label>
-            <input type="text" class="form-control form-control-sm" id="FirstName">
+            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control form-control-sm"})
+            @Html.ValidationMessageFor(m => m.FirstName)
         </div>
         <div class="form-group col-md-2">
             <label for="LastName">Last Name</label>
-            <input type="text" class="form-control form-control-sm" id="LastName">
+            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control form-control-sm"})
+            @Html.ValidationMessageFor(m => m.LastName)
         </div>
         <div class="form-group col-md-2">
             <label for="UserName">User Name</label>
-            <input type="text" class="form-control form-control-sm" id="UserName">
+            @Html.TextBoxFor(m => m.Username, new { @class = "form-control form-control-sm"})
+            @Html.ValidationMessageFor(m => m.Username)
         </div>
         <div class="form-group col-md-2">
             <label for="Password">Password</label>
-            <input type="password" class="form-control form-control-sm" id="Password">
+            @Html.TextBoxFor(m => m.Password, new { @class = "form-control form-control-sm"})
             @Html.ValidationMessageFor(m => m.Password)
         </div>
         <div class="form-group col-md-2">
             <label for="ConfirmPassword">Confirm Password</label>
-            <input type="password" class="form-control form-control-sm" id="ConfirmPassword">
+            @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control form-control-sm"})
+            @Html.ValidationMessageFor(m => m.ConfirmPassword)
         </div>
     </div>
 
