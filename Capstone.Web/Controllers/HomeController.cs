@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Security;
 
 namespace Capstone.Web.Controllers
@@ -20,11 +16,6 @@ namespace Capstone.Web.Controllers
         public ActionResult Index()
         {
             return View("Index");
-        }
-
-        public ActionResult Login()
-        {
-            return View("Login");
         }
 
         public ActionResult Register()
@@ -64,26 +55,31 @@ namespace Capstone.Web.Controllers
             }
             else
             {
-
                 User user = _db.GetUser(model.Username, model.Password);
-
+                PasswordHash ph = new PasswordHash(model.Password);
                 if (user == null || user.Password == null)
                 {
                     ModelState.AddModelError("invalid-credentials", "An invalid username or password was provided");
-                    result = View("Login", model);
+                    result = View("Index", model);
                 }
-                else
+                else if (ph.Hash != user.Password)
+                {
+                    ModelState.AddModelError("invalid-credentials", "An invalid username or password was provided");
+                    result = View("Index", model);
+                }
+                else if (ph.Hash == user.Password)
                 {
                     FormsAuthentication.SetAuthCookie(user.Username, true);
                     Session["User"] = user;
 
-                    if (((User)Session["User"]).RoleID == 2)
+                    if (((User)Session["User"]).RoleID == 2 || ((User)Session["User"]).RoleID == 3)
                     {
-                        result = RedirectToAction("ParentActivity", "Home");
+                        result = RedirectToAction("UserActivity", "Home");
                     }
-                    else if (((User)Session["User"]).RoleID == 3)
+                    else
                     {
-                        result = RedirectToAction("ChildActivity", "Home"); //unsure if we want/need a second view for child
+                        //page not found
+                        //need to return Admin view
                     }
                 }
             }
@@ -136,13 +132,10 @@ namespace Capstone.Web.Controllers
                     FormsAuthentication.SetAuthCookie(user.Username, true);
                     Session["User"] = user;
                 }
-                if (((User)Session["User"]).RoleID == 2)
+
+                if (((User)Session["User"]).RoleID == 2 || ((User)Session["User"]).RoleID == 3)
                 {
-                    result = RedirectToAction("ParentActivity", "Home"); 
-                }
-                else if (((User)Session["User"]).RoleID == 3)
-                {
-                    result = RedirectToAction("ChildActivity", "Home"); //unsure if we want/need a second view for child
+                    result = RedirectToAction("UserActivity", "Home");
                 }
 
             }
@@ -151,7 +144,7 @@ namespace Capstone.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddFamilyMember(RegisterViewModel model)
+        public ActionResult AddFamilyMember(AddFamilyMemberViewModel model)
         {
             ActionResult result = null;
 
@@ -169,31 +162,16 @@ namespace Capstone.Web.Controllers
                 user.LastName = model.LastName;
                 user.Username = model.Username;
                 user.Password = ph.Hash;
-                user.FamilyName = _db.GetFamilyFromFamilyID(model.FamilyID);
                 user.FamilyID = ((User)Session["User"]).FamilyID;
+                user.FamilyName = _db.GetFamilyFromFamilyID(user.FamilyID);
                 user.Salt = ph.Salt;
                 user.RoleID = model.RoleID;
 
-                user = _db.CreateUser(user);
+                user = _db.CreateFamilyMember(user);
 
-                // user does not exist or password is wrong
-                if (user == null || user.Password == null) //Question 1
-                {
-                    ModelState.AddModelError("invalid-credentials", "An invalid username or password was provided");
-                    result = View("Register", model);
-                }
-                else
-                {
-                    FormsAuthentication.SetAuthCookie(user.Username, true);
-                    Session["User"] = user;
-                }
                 if (((User)Session["User"]).RoleID == 2)
                 {
-                    result = RedirectToAction("ParentActivity", "Home");
-                }
-                else if (((User)Session["User"]).RoleID == 3)
-                {
-                    result = RedirectToAction("ChildActivity", "Home"); //unsure if we want/need a second view for child
+                    result = RedirectToAction("AddFamilyMember", "Home");
                 }
             }
             return result;
@@ -241,5 +219,48 @@ namespace Capstone.Web.Controllers
             }
             return result;
         }
+
+        //[HttpPost]
+        //public ActionResult AddReadingLog(ReadingLogViewModel model)
+        //{
+        //    ActionResult result = null;
+
+        //    if (!ModelState.IsValid)
+        //    {
+        //        result = View("ReadingLog", model);
+        //    }
+        //    else
+        //    {
+
+        //        ReadingLog log = new ReadingLog();
+        //        log.ID = model.ID;
+        //        log.BookID = model.BookID;
+        //        log.MinutesRead = model.MinutesRead;
+        //        log.Type = model.Type;
+        //        //add in User ID via Session info?
+
+        //        book = _db.Create(book);
+
+        //        // book does not exist or ISBN is wrong
+        //        if (book == null || book.ISBN == null)
+        //        {
+        //            ModelState.AddModelError("invalid-credentials", "An invalid book title or ISBN was provided");
+        //            result = View("AddBook", model);
+        //        }
+        //        else
+        //        {
+        //            Session["Book"] = book; //not sure if needed... yet?
+        //        }
+        //        if (((User)Session["User"]).RoleID == 2)
+        //        {
+        //            result = RedirectToAction("ParentActivity", "Home");
+        //        }
+        //        else if (((User)Session["User"]).RoleID == 3)
+        //        {
+        //            result = RedirectToAction("ChildActivity", "Home");
+        //        }
+        //    }
+        //    return result;
+        //}
     }
 }

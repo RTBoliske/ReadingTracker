@@ -2,7 +2,7 @@
     ViewBag.Title = "AddFamilyMember";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model User
+@model AddFamilyMemberViewModel
 
 
 <h2>Add Family Members</h2>
@@ -32,6 +32,7 @@
             @Html.TextBoxFor(m => m.LastName, new { @class = "form-control form-control-sm"})
             @Html.ValidationMessageFor(m => m.LastName)
         </div>
+
         <div class="form-group col-md-2">
             <label for="UserName">User Name</label>
             @Html.TextBoxFor(m => m.Username, new { @class = "form-control form-control-sm"})
