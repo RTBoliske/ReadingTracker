@@ -16,7 +16,8 @@ namespace Capstone.Web
         User CreateUser(User newUser);
 
         //Family
-        User GetFamilyID(int familyID);
+        User GetUserFromFamilyID(int familyID);
+        string GetFamilyFromFamilyID(int familyID);
         int CreateFamily(Family newFamily);
 
         //Book

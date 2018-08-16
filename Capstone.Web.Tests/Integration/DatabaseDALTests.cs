@@ -74,8 +74,13 @@ namespace Capstone.Web.Tests.Integration
             user.FirstName = "Ann";
             user.LastName = "Hostetter";
             user.Password = "1234asdf";
+            PasswordHash ph = new PasswordHash(user.Password);
+
+            user.Salt = ph.Salt;
+            user.Password = ph.Hash;
             user.Username = "ahostetter";
             user.FamilyID = familyID;
+            user.FamilyName = family.FamilyName;
 
             User newUser = readerDAL.CreateUser(user);
 

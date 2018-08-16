@@ -9,12 +9,12 @@ namespace Capstone.Web
     public class LoginViewModel
     {
 
-        
+
         [Required(ErrorMessage = "This field is required.")]
         [Display(Name = "User Name:")]
         public string Username { get; set; }
 
-        
+
         [Required(ErrorMessage = "This field is required.")]
         [Display(Name = "Password:")]
         public string Password { get; set; }
