@@ -55,9 +55,10 @@ namespace Capstone.Web.Controllers
             }
             else
             {
-                User user = _db.GetUser(model.Username, model.Password);
-                PasswordHash ph = new PasswordHash(model.Password);
-                if (user == null || user.Password == null)
+                User user = _db.GetUser(model.Username);
+                PasswordHash ph = new PasswordHash(model.Password, user.Salt);
+                
+                if (user == null)
                 {
                     ModelState.AddModelError("invalid-credentials", "An invalid username or password was provided");
                     result = View("Index", model);

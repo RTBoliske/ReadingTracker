@@ -41,11 +41,11 @@ namespace Capstone.Web.DAL
                 throw;
             }
         }
-        public User GetUser(string username, string password)
+        public User GetUser(string username)
         {
             User user = new User();
 
-            string sql = @"SELECT TOP 1 * FROM Users WHERE Username = @username AND password = @password";
+            string sql = @"SELECT TOP 1 * FROM Users WHERE Username = @username";
 
             try
             {
@@ -55,7 +55,7 @@ namespace Capstone.Web.DAL
 
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@username", username);
-                    cmd.Parameters.AddWithValue("@password", password);
+                    //cmd.Parameters.AddWithValue("@password", password);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
