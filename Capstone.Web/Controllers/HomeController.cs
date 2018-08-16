@@ -241,5 +241,48 @@ namespace Capstone.Web.Controllers
             }
             return result;
         }
+
+        //[HttpPost]
+        //public ActionResult AddReadingLog(ReadingLogViewModel model)
+        //{
+        //    ActionResult result = null;
+
+        //    if (!ModelState.IsValid)
+        //    {
+        //        result = View("ReadingLog", model);
+        //    }
+        //    else
+        //    {
+
+        //        ReadingLog log = new ReadingLog();
+        //        log.ID = model.ID;
+        //        log.BookID = model.BookID;
+        //        log.MinutesRead = model.MinutesRead;
+        //        log.Type = model.Type;
+        //        //add in User ID via Session info?
+
+        //        book = _db.Create(book);
+
+        //        // book does not exist or ISBN is wrong
+        //        if (book == null || book.ISBN == null)
+        //        {
+        //            ModelState.AddModelError("invalid-credentials", "An invalid book title or ISBN was provided");
+        //            result = View("AddBook", model);
+        //        }
+        //        else
+        //        {
+        //            Session["Book"] = book; //not sure if needed... yet?
+        //        }
+        //        if (((User)Session["User"]).RoleID == 2)
+        //        {
+        //            result = RedirectToAction("ParentActivity", "Home");
+        //        }
+        //        else if (((User)Session["User"]).RoleID == 3)
+        //        {
+        //            result = RedirectToAction("ChildActivity", "Home");
+        //        }
+        //    }
+        //    return result;
+        //}
     }
 }

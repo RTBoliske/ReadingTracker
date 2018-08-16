@@ -282,6 +282,12 @@ namespace Capstone.Web.DAL
             }
 
         }
+
+        //public ReadingLog GetReadingLog(ReadingLog log)
+        //public ReadingLog CreateReadingLog(ReadingLog log)
+        //{
+
+        //}
         
         private User MapRowToUsers(SqlDataReader reader)
         {
