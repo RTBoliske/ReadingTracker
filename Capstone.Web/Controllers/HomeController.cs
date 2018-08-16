@@ -32,14 +32,14 @@ namespace Capstone.Web.Controllers
             return View("Register");
         }
 
-        public ActionResult ParentActivity()
+        public ActionResult FamilyActivity()
         {
-            return View("ParentActivity");
+            return View("FamilyActivity");
         }
 
-        public ActionResult ChildActivity()
+        public ActionResult UserActivity()
         {
-            return View("ChildActivity");
+            return View("UserActivity");
         }
 
         public ActionResult AddFamilyMember()
