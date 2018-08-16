@@ -127,6 +127,50 @@ namespace Capstone.Web.DAL
                 throw;
             }
         }
+        public User CreateFamilyMember(User newUser)
+        {
+            string sql = @"INSERT INTO Users (First_name, Last_name, FamilyID, Username, Password, Salt, RoleID) 
+                           VALUES (@firstName, @lastName, @familyID, @username, @password, @salt, @roleID);
+                           SELECT CAST(SCOPE_IDENTITY() as int);";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+
+                    cmd.Parameters.AddWithValue("@familyName", newUser.FamilyName);
+                    cmd.Parameters.AddWithValue("@firstName", newUser.FirstName);
+                    cmd.Parameters.AddWithValue("@lastName", newUser.LastName);
+                    cmd.Parameters.AddWithValue("@familyID", newUser.FamilyID);
+                    cmd.Parameters.AddWithValue("@username", newUser.Username);
+                    cmd.Parameters.AddWithValue("@password", newUser.Password);
+                    cmd.Parameters.AddWithValue("@salt", newUser.Salt);
+                    cmd.Parameters.AddWithValue("@roleID", newUser.RoleID);
+                    var userID = (int)cmd.ExecuteScalar();
+
+                    User user = new User();
+
+                    user.ID = userID;
+                    user.FirstName = newUser.FirstName;
+                    user.LastName = newUser.LastName;
+                    user.Username = newUser.Username;
+                    user.Password = newUser.Password;
+                    user.FamilyName = newUser.FamilyName;
+                    user.FamilyID = newUser.FamilyID;
+                    user.Salt = newUser.Salt;
+                    user.RoleID = newUser.RoleID;
+
+                    return user;
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+        }
 
         public string GetFamilyFromFamilyID(int familyID)
         {
