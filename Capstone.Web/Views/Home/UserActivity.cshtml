@@ -11,31 +11,77 @@
         <button type="submit" class="btn btn-sm btn-primary">View Additional Information</button>
     </dd>
 
-    @*<dt class="col-sm-3">Book format:</dt>
-    <dd class="col-sm-9">pull format from db for user reading</dd>*@
-
     <dt class="col-sm-3">Time spent reading this book:</dt>
     <dd class="col-sm-9">pull total reading time from db for user reading</dd>
 
-    <dt class="col-sm-3">Progress toward prize:</dt>
-    <dd class="col-sm-9">
+    @*<dt class="col-sm-3">Progress toward prize:</dt>
+    <dd class="col-sm-6">
         <div class="progress" style="height: 15px;">
             <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:75%;" role="progressbar">75%</div>
         </div>
     </dd>
+    <dd class="col-sm-3"></dd>*@
 
     <dt class="col-sm-3">Add reading time for this book:</dt>
     <dd class="col-sm-2">
         <input type="time" name="TimeReading" class="form-control form-control-sm col-sm-6" />
     </dd>
-    <dd class="col-sm-3">
-        <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+    <dd class="col-sm-7">
+        <button type="submit" class="btn btn-sm btn-primary">Add reading time</button>
     </dd>
 
-    <dt class="col-sm-3">Click Complete when you've finished the book</dt>
+    <dt class="col-sm-4">Click Complete when you've finished the book</dt>
+    <dd class="col-sm-8">
+        <button type="submit" class="btn btn-sm btn-primary">Complete</button>
+    </dd>
 
-    
+    @*<dt class="col-sm-3">Start a new book</dt>
+    <dd class="col-sm-9"></dd>*@
 </dl>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addBookModal" data-backdrop="false">Start new book</button>
+<div class="modal fade bg-light" id="addBookModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" >Add a new book to read</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="user-name" class="col-form-label">Select User:</label>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="selectUserButton" data-toggle="dropdown">Select User</button>
+                            <div class="dropdown-menu">
+                                <button class="dropdown-item" type="button">User</button>
+                                <button class="dropdown-item" type="button">Another User</button>
+                                <button class="dropdown-item" type="button">Someother User</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="book-title" class="col-form-label">Title:</label>
+                        <text class="form-control" id="book-title-text"></text>
+                    </div>
+                    <div class="form-group">
+                        <label for="book-author" class="col-form-label">Author:</label>
+                        <text class="form-control" id="book-author-text"></text>
+                    </div>
+                    <div class="form-group">
+                        <label for="book-isbn" class="col-form-label">ISBN:</label>
+                        <text class="form-control" id="book-isbn-text"></text>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Add Book</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @*<div class="form-row">
     <div class="dropdown form-group col-md-2">
@@ -61,29 +107,29 @@
         <input type="number" name="TimeReading" class="form-control form-control-sm col-7" />
         <label for="TimeFormat" style="font-size: 10px;">Enter minutes only</label>
     </div>*@
-    @*<div class="form-group col-md-2">
-            <label for="TimeReading">Time spent reading</label>
-            <input type="text" class="form-control form-control-sm" />
-        </div>*@
-    @*<div class="form-group col-md-2">
-            <label for="TotalReadingTime">Total time reading</label>
-            <input type="text" class="form-control form-control-sm" readonly />
-        </div>*@
-    @*<div class="form-group col-md-2">
-        <label for="ReadingProgress">Progress</label>
-        <div class="progress" style="height: 10px;">
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"></div>
+@*<div class="form-group col-md-2">
+        <label for="TimeReading">Time spent reading</label>
+        <input type="text" class="form-control form-control-sm" />
+    </div>*@
+@*<div class="form-group col-md-2">
+        <label for="TotalReadingTime">Total time reading</label>
+        <input type="text" class="form-control form-control-sm" readonly />
+    </div>*@
+@*<div class="form-group col-md-2">
+            <label for="ReadingProgress">Progress</label>
+            <div class="progress" style="height: 10px;">
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"></div>
+            </div>
+        </div>
+    </div><div>
+        <label for="ReadingNotes">Add Reading Notes...</label>
+        <div>
+            <textarea rows="4" cols="50" placeholder="Enter comments here...">
+
+            </textarea>
         </div>
     </div>
-</div><div>
-    <label for="ReadingNotes">Add Reading Notes...</label>
     <div>
-        <textarea rows="4" cols="50" placeholder="Enter comments here...">
-            
-        </textarea>
-    </div>
-</div>
-<div>
-    <br />
-    <button type="submit" class="btn btn-sm btn-primary">Submit</button>
-</div>*@
+        <br />
+        <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+    </div>*@
