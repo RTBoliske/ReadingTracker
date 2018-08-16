@@ -47,7 +47,12 @@ namespace Capstone.Web.Controllers
             return View("AddFamilyMember");
         }
 
-        // POST: User/Login
+        public ActionResult AddBook()
+        {
+            return View("AddBook");
+        }
+
+        
         [HttpPost]
         public ActionResult Login(LoginViewModel model)
         {
@@ -146,50 +151,88 @@ namespace Capstone.Web.Controllers
 
             if (!ModelState.IsValid)
             {
-                result = View("Register", model);
-            }
-
-            PasswordHash ph = new PasswordHash(model.Password);
-
-            User user = new User();
-            user.ID = model.ID;
-            user.FirstName = model.FirstName;
-            user.LastName = model.LastName;
-            user.Username = model.Username;
-            user.Password = ph.Hash;
-            user.FamilyName = ((User)Session["User"]).FamilyName;
-            user.FamilyID = ((User)Session["User"]).FamilyID;
-            user.Salt = ph.Salt;
-            user.RoleID = model.RoleID;
-
-            Family family = new Family();
-            family.FamilyName = model.FamilyName;
-
-            int familyID = _db.CreateFamily(family);
-            user.FamilyID = familyID;
-
-            user = _db.CreateUser(user);
-
-            // user does not exist or password is wrong
-            if (user == null || user.Password == null) //Question 1
-            {
-                ModelState.AddModelError("invalid-credentials", "An invalid username or password was provided");
-                result = View("Register", model);
+                result = View("AddFamilyMember", model);
             }
             else
             {
-                FormsAuthentication.SetAuthCookie(user.Username, true);
-                Session["User"] = user;
-            }
-            if (((User)Session["User"]).RoleID == 2)
-            {
-                result = RedirectToAction("ParentActivity", "Home");
-            }
-            else if (((User)Session["User"]).RoleID == 3)
-            {
-                result = RedirectToAction("ChildActivity", "Home"); //unsure if we want/need a second view for child
-            }
+                PasswordHash ph = new PasswordHash(model.Password);
 
+                User user = new User();
+                user.ID = model.ID;
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.Username = model.Username;
+                user.Password = ph.Hash;
+                user.FamilyName = _db.GetFamilyID(;
+                user.FamilyID = ((User)Session["User"]).FamilyID;
+                user.Salt = ph.Salt;
+                user.RoleID = model.RoleID;
+
+                user = _db.CreateUser(user);
+
+                // user does not exist or password is wrong
+                if (user == null || user.Password == null) //Question 1
+                {
+                    ModelState.AddModelError("invalid-credentials", "An invalid username or password was provided");
+                    result = View("Register", model);
+                }
+                else
+                {
+                    FormsAuthentication.SetAuthCookie(user.Username, true);
+                    Session["User"] = user;
+                }
+                if (((User)Session["User"]).RoleID == 2)
+                {
+                    result = RedirectToAction("ParentActivity", "Home");
+                }
+                else if (((User)Session["User"]).RoleID == 3)
+                {
+                    result = RedirectToAction("ChildActivity", "Home"); //unsure if we want/need a second view for child
+                }
+            }
+            return result;
+        }
+
+        [HttpPost]
+        public ActionResult AddBook(Book model)
+        {
+            ActionResult result = null;
+
+            if (!ModelState.IsValid)
+            {
+                result = View("AddBook", model);
+            }
+            else
+            {
+
+                Book book = new Book();
+                book.ID = model.ID;
+                book.Title = model.Title;
+                book.ISBN = model.ISBN;
+                book.Type = model.Type;
+                //add in User ID via Session info?
+
+                book = _db.CreateBook(book);
+
+                // book does not exist or ISBN is wrong
+                if (book == null || book.ISBN == null)
+                {
+                    ModelState.AddModelError("invalid-credentials", "An invalid book title or ISBN was provided");
+                    result = View("AddBook", model);
+                }
+                else
+                {
+                    Session["Book"] = book; //not sure if needed... yet?
+                }
+                if (((User)Session["User"]).RoleID == 2)
+                {
+                    result = RedirectToAction("ParentActivity", "Home");
+                }
+                else if (((User)Session["User"]).RoleID == 3)
+                {
+                    result = RedirectToAction("ChildActivity", "Home");
+                }
+            }
             return result;
         }
     }

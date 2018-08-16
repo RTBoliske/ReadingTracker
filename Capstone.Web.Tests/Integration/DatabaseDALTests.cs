@@ -81,5 +81,35 @@ namespace Capstone.Web.Tests.Integration
 
             Assert.AreEqual(user.FamilyID, familyID);
         }
+
+        [TestMethod]
+        public void TestGetFamilyID()
+        {
+            DatabaseDAL readerDAL = new DatabaseDAL(_connectionString);
+
+            Family family = new Family();
+            family.FamilyName = "Testing1234";
+            family.ID = readerDAL.CreateFamily(family);
+
+            User user = new User();
+            user.FirstName = "Jose";
+            user.LastName = "Martino";
+            user.Password = "1234asdf";
+
+            PasswordHash ph = new PasswordHash(user.Password);
+
+            user.Salt = ph.Salt;
+            user.Password = ph.Hash;
+            user.Username = "jmartino";
+            user.FamilyID = family.ID;
+            user.FamilyName = family.FamilyName;
+
+
+            User newUser = readerDAL.CreateUser(user);
+
+            user = readerDAL.GetUser(newUser.Username, user.Password);
+
+            Assert.AreEqual(user.FamilyID, family.ID);
+        }
     }
 }

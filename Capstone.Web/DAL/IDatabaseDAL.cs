@@ -14,7 +14,15 @@ namespace Capstone.Web
         List<User> GetAllUsers();
         User GetUser(string username, string password);
         User CreateUser(User newUser);
+
+        //Family
+        User GetFamilyID(int familyID);
         int CreateFamily(Family newFamily);
+
+        //Book
+        Book GetBook(Book book);
+        Book CreateBook(Book book);
+
 
 
     }

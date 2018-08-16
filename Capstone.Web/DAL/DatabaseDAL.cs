@@ -83,28 +83,6 @@ namespace Capstone.Web.DAL
 
             return user;
         }
-
-        public int CreateFamily(Family newFamily)
-        {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(_connectionString))
-                {
-                    conn.Open();
-
-                    SqlCommand cmd = new SqlCommand(@"INSERT INTO Family (Family_name) VALUES (@familyName); SELECT CAST(SCOPE_IDENTITY() as int);", conn);
-                    cmd.Parameters.AddWithValue("@familyName", newFamily.FamilyName);
-                    var familyID = (int)cmd.ExecuteScalar();
-
-                    return familyID;
-                }
-            }
-            catch (SqlException ex)
-            {
-                throw;
-            }
-        }
-
         public User CreateUser(User newUser)
         {
             string sql = @"INSERT INTO Users (First_name, Last_name, FamilyID, Username, Password, Salt, RoleID) 
@@ -116,9 +94,9 @@ namespace Capstone.Web.DAL
                 using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
                     conn.Open();
-                
+
                     SqlCommand cmd = new SqlCommand(sql, conn);
-                    
+
                     cmd.Parameters.AddWithValue("@familyName", newUser.FamilyName);
                     cmd.Parameters.AddWithValue("@firstName", newUser.FirstName);
                     cmd.Parameters.AddWithValue("@lastName", newUser.LastName);
@@ -149,6 +127,127 @@ namespace Capstone.Web.DAL
                 throw;
             }
         }
+
+        public User GetFamilyID(int familyID)
+        {
+            User user = new User();
+
+            string sql = @"SELECT TOP 1 * FROM Family WHERE ID = @familyID";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@familyID", familyID);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        user = new User
+                        {
+                            ID = Convert.ToInt32(reader["ID"]),
+                            FamilyName = Convert.ToString(reader["Family_name"]),
+                        };
+                    }
+
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+
+            return user;
+        }
+        public int CreateFamily(Family newFamily)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(@"INSERT INTO Family (Family_name) VALUES (@familyName); SELECT CAST(SCOPE_IDENTITY() as int);", conn);
+                    cmd.Parameters.AddWithValue("@familyName", newFamily.FamilyName);
+                    var familyID = (int)cmd.ExecuteScalar();
+
+                    return familyID;
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+        }
+
+        public Book GetBook(Book book)
+        {
+
+            string sql = @"SELECT TOP 1 * FROM Book WHERE Title = @title AND ISBN = @ISBN";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@title", book.Title);
+                    cmd.Parameters.AddWithValue("@ISBN", book.ISBN);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        book = new Book
+                        {
+                            ID = Convert.ToInt32(reader["ID"]),
+                            Title = Convert.ToString(reader["Title"]),
+                            ISBN = Convert.ToString(reader["ISBN"]),
+                            Type = Convert.ToString(reader["Type"]),
+                        };
+                    }
+
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return book;
+        }
+        public Book CreateBook(Book book)
+        {
+            string sql = @"INSERT INTO Book (ID, Title, ISBN, Type) VALUES (@ID, @title, @ISBN, @type);
+                           SELECT CAST(SCOPE_IDENTITY() as int);";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+
+                    cmd.Parameters.AddWithValue("@ID", book.ID);
+                    cmd.Parameters.AddWithValue("@title", book.Title);
+                    cmd.Parameters.AddWithValue("@ISBN", book.ISBN);
+                    cmd.Parameters.AddWithValue("@type", book.Type);
+                    var bookID = (int)cmd.ExecuteScalar();
+                    
+                    return bookID;
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+
+        }
+        
         private User MapRowToUsers(SqlDataReader reader)
         {
             return new User()
