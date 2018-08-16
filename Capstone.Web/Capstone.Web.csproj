@@ -201,8 +201,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\AddFamilyMember.cshtml" />
-    <Content Include="Views\Home\ParentActivity.cshtml" />
-    <Content Include="Views\Home\ChildActivity.cshtml" />
+    <Content Include="Views\Home\FamilyActivity.cshtml" />
+    <Content Include="Views\Home\UserActivity.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
