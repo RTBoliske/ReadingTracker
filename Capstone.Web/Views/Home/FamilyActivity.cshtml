@@ -1,10 +1,49 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model Family
 
-@*<h1>Parent Activity View</h1>*@
+<h1>Family Reading Activity</h1>
 
-<div class="form-row">
+@*set for single user, add loop to move through all family readers*@
+@*<dl class="row">
+    <dt class="col-sm-3">Currently reading:</dt>
+    <dd class="col-sm-9">book title</dd>
+
+    <dt class="col-sm-3">Time reading this book:</dt>
+    <dd class="col-sm-9">time in hours and minutes</dd>
+
+    <dt class="col-sm-3">Progress towards prize:</dt>
+    <dd class="col-sm-9">
+        <div class="progress" style="height: 15px;">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:75%;" role="progressbar">75%</div>
+        </div>
+    </dd>
+</dl>*@
+
+@*version #2*@
+<div class="col-lg">
+    <div class="card">
+        @*set link on user name to view user activity*@
+        <div class="card-header"><a href="~/Views/Home/UserActivity.cshtml">User Name</a></div>
+        <div class="card-body">
+            @*book title will be taken from user reading*@
+            <h6 class="card-title">Currently reading: </h6>
+
+            @*will need to update label text to include total reading time*@
+            <h6 for="TotalReadingTime">Time reading this book: </h6>
+
+            @*progress bar amount pulled from db*@
+            <h6 for="ReadingProgress">Progress to prize: </h6>
+            <div class="progress" style="height: 15px;">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:75%;" role="progressbar">75%</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*old version - here for backup only*@
+@*<div class="form-row">
     <div class="dropdown form-group col-md-2">
         <label for="SelectUser">Users/Readers</label>
         <select class="form-control form-control-sm" id="SelectBook" required>
@@ -37,7 +76,7 @@
         <label for="TimeReading">Time spent reading</label>
         <input type="number" name="TimeReading" class="form-control form-control-sm col-7" />
         <label for="TimeFormat" style="font-size: 10px;">Enter minutes only</label>
-    </div>
+    </div>*@
     @*<div class="form-group col-md-2">
             <label for="TimeReading">Time spent reading</label>
             <input type="time" name="TimeReading" class="form-control form-control-sm col-7" />
@@ -46,7 +85,7 @@
             <label for="TotalReadingTime">Total time reading</label>
             <input type="text" class="form-control form-control-sm" readonly />
         </div>*@
-    <div class="form-group col-md-2">
+    @*<div class="form-group col-md-2">
         <label for="ReadingProgress">Progress</label>
         <div class="progress" style="height: 10px;">
             <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"></div>
@@ -64,4 +103,4 @@
 <div>
     <br />
     <button type="submit" class="btn btn-sm btn-primary">Submit</button>
-</div>
+</div>*@
