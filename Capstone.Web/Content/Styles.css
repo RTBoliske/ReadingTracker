@@ -1,3 +1,11 @@
 ﻿body {
 }
 
+#bootstrap-override-navbar{
+    background-color: aqua;
+}
+
+#navbarNav {
+    background-color: aqua;
+}
+
