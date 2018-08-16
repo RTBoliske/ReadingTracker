@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Security;
 
 namespace Capstone.Web.Controllers
@@ -20,11 +16,6 @@ namespace Capstone.Web.Controllers
         public ActionResult Index()
         {
             return View("Index");
-        }
-
-        public ActionResult Login()
-        {
-            return View("Login");
         }
 
         public ActionResult Register()
@@ -70,20 +61,20 @@ namespace Capstone.Web.Controllers
                 if (user == null || user.Password == null)
                 {
                     ModelState.AddModelError("invalid-credentials", "An invalid username or password was provided");
-                    result = View("Login", model);
+                    result = View("Index", model);
                 }
                 else
                 {
                     FormsAuthentication.SetAuthCookie(user.Username, true);
                     Session["User"] = user;
 
-                    if (((User)Session["User"]).RoleID == 2)
+                    if (((User)Session["User"]).RoleID == 2 || ((User)Session["User"]).RoleID == 3)
                     {
-                        result = RedirectToAction("ParentActivity", "Home");
+                        result = RedirectToAction("UserActivity", "Home");
                     }
-                    else if (((User)Session["User"]).RoleID == 3)
+                    else
                     {
-                        result = RedirectToAction("ChildActivity", "Home"); //unsure if we want/need a second view for child
+                        //page not found
                     }
                 }
             }
@@ -151,7 +142,7 @@ namespace Capstone.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddFamilyMember(RegisterViewModel model)
+        public ActionResult AddFamilyMember(AddFamilyMemberViewModel model)
         {
             ActionResult result = null;
 
