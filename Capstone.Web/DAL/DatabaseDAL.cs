@@ -128,7 +128,42 @@ namespace Capstone.Web.DAL
             }
         }
 
-        public User GetFamilyID(int familyID)
+        public string GetFamilyFromFamilyID(int familyID)
+        {
+            Family family = new Family();
+
+            string sql = @"SELECT TOP 1 * FROM Family WHERE ID = @familyID";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@familyID", familyID);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        family = new Family
+                        {
+                            ID = Convert.ToInt32(reader["ID"]),
+                            FamilyName = Convert.ToString(reader["Family_name"]),
+                        };
+                    }
+
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+
+            return family.FamilyName;
+        }
+        public User GetUserFromFamilyID(int familyID)
         {
             User user = new User();
 
