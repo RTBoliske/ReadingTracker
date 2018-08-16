@@ -238,7 +238,7 @@ namespace Capstone.Web.DAL
                     cmd.Parameters.AddWithValue("@type", book.Type);
                     var bookID = (int)cmd.ExecuteScalar();
                     
-                    return bookID;
+                    return book;
                 }
             }
             catch (SqlException ex)
