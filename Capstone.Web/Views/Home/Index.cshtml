@@ -5,39 +5,69 @@
 
 
 
-<h2>Login</h2>
-@using (Html.BeginForm("Login", "Home", FormMethod.Post))
-{
-    <div id="login" class="form-horizontal col-sm-3">
-      
-        @using (Html.BeginForm("Login", "Home", FormMethod.Post))
-        {
-            @Html.ValidationMessage("invalid-credentials");
+@*<h2>Login</h2>
+
+<div id="login" class="form-horizontal col-sm-3">
+
+    @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+    {
+        @Html.ValidationMessage("invalid-credentials");
 
 
-            <div class="form-group">
-                @Html.TextBoxFor(m => m.Username, new { @class= "form-control form-control-sm", placeholder = "Enter your Username" })
-                @Html.ValidationMessageFor(m => m.Username)
-            </div>
-            <div class="form-group">
-                @Html.PasswordFor(m => m.Password, new { @class = "form-control form-control-sm", placeholder = "Enter your Password" })
-                @Html.ValidationMessageFor(m => m.Password)
-            </div>
-            //this does nothing currently, added future implementation
-            @*<div class="checkbox">
+        <div class="form-group">
+            @Html.TextBoxFor(m => m.Username, new { @class = "form-control form-control-sm", placeholder = "Enter your Username" })
+            @Html.ValidationMessageFor(m => m.Username)
+        </div>
+        <div class="form-group">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control form-control-sm", placeholder = "Enter your Password" })
+            @Html.ValidationMessageFor(m => m.Password)
+        </div>
+        //this does nothing currently, added future implementation
+        @*<div class="checkbox">
                 <label><input type="checkbox" /> Remember Me</label>
             </div>*@
+        @*<div class="form-group">
+            <button type="button" class="btn btn-sm btn-primary">Login</button>
+        </div>
+
+
+        <div>
+            <p>Don't have an account? Create one <a href='@Url.Action("Register", "Home")'>here</a>.</p>
+        </div>
+    }*@
+@*</div>*@
+
+
+<div class="container">
+
+
+
+    <h2>Login</h2>
+
+    <div id="login" class="form-horizontal col-sm-3">
+
+        <form action="/Home/Login" method="post">
+            <span class="field-validation-valid" data-valmsg-for="invalid-credentials" data-valmsg-replace="true"></span>            <div class="form-group">
+                <input class="form-control form-control-sm" data-val="true" data-val-required="This field is required." id="Username" name="Username" placeholder="Enter your Username" type="text" value="" />
+                <span class="field-validation-valid" data-valmsg-for="Username" data-valmsg-replace="true"></span>
+            </div>
+            <div class="form-group">
+                <input class="form-control form-control-sm" data-val="true" data-val-required="This field is required." id="Password" name="Password" placeholder="Enter your Password" type="password" />
+                <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+            </div>
             <div class="form-group">
                 <button type="button" class="btn btn-sm btn-primary">Login</button>
             </div>
-            
-
             <div>
-                <p>Don't have an account? Create one <a href='@Url.Action("Register", "Home")'>here</a>.</p>
+                <p>Don't have an account? Create one <a href='/Home/Register'>here</a>.</p>
             </div>
-        }
+        </form>
     </div>
-}
 
+
+
+
+
+</div>
 
 
