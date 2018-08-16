@@ -199,7 +199,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-    <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\AddFamilyMember.cshtml" />
     <Content Include="Views\Home\ParentActivity.cshtml" />

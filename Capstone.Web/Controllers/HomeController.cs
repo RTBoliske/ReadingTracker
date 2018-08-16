@@ -60,31 +60,33 @@ namespace Capstone.Web.Controllers
 
             if (!ModelState.IsValid)
             {
-                result = View("Login", model);
-            }
-
-            User user = _db.GetUser(model.Username, model.Password);
-            
-            if (user == null || user.Password == null)
-            {
-                ModelState.AddModelError("invalid-credentials", "An invalid username or password was provided");
-                result = View("Login", model);
+                result = View("Index", model);
             }
             else
             {
-                FormsAuthentication.SetAuthCookie(user.Username, true);
-                Session["User"] = user;
 
-                if (((User)Session["User"]).RoleID == 2)
+                User user = _db.GetUser(model.Username, model.Password);
+
+                if (user == null || user.Password == null)
                 {
-                    result = RedirectToAction("ParentActivity", "Home");
+                    ModelState.AddModelError("invalid-credentials", "An invalid username or password was provided");
+                    result = View("Login", model);
                 }
-                else if (((User)Session["User"]).RoleID == 3)
+                else
                 {
-                    result = RedirectToAction("ChildActivity", "Home"); //unsure if we want/need a second view for child
+                    FormsAuthentication.SetAuthCookie(user.Username, true);
+                    Session["User"] = user;
+
+                    if (((User)Session["User"]).RoleID == 2)
+                    {
+                        result = RedirectToAction("ParentActivity", "Home");
+                    }
+                    else if (((User)Session["User"]).RoleID == 3)
+                    {
+                        result = RedirectToAction("ChildActivity", "Home"); //unsure if we want/need a second view for child
+                    }
                 }
             }
-
            
 
             return result;
@@ -99,46 +101,50 @@ namespace Capstone.Web.Controllers
             {
                 result = View("Register", model);
             }
-
-            PasswordHash ph = new PasswordHash(model.Password);
-
-            User user = new User();
-            user.ID = model.ID;
-            user.FirstName = model.FirstName;
-            user.LastName = model.LastName;
-            user.Username = model.Username;
-            user.Password = ph.Hash;
-            user.FamilyName = model.FamilyName;
-            user.FamilyID = model.FamilyID;
-            user.Salt = ph.Salt;
-            user.RoleID = model.RoleID;
-
-            Family family = new Family();
-            family.FamilyName = model.FamilyName;
-
-            int familyID = _db.CreateFamily(family);
-            user.FamilyID = familyID;
-
-            user = _db.CreateUser(user);
-
-            // user does not exist or password is wrong
-            if (user == null || user.Password == null) //Question 1
-            {
-                ModelState.AddModelError("invalid-credentials", "An invalid username or password was provided");
-                result = View("Register", model);
-            }
             else
             {
-                FormsAuthentication.SetAuthCookie(user.Username, true);
-                Session["User"] = user;
-            }
-            if (((User)Session["User"]).RoleID == 2)
-            {
-                result = RedirectToAction("ParentActivity", "Home"); 
-            }
-            else if (((User)Session["User"]).RoleID == 3)
-            {
-                result = RedirectToAction("ChildActivity", "Home"); //unsure if we want/need a second view for child
+
+                PasswordHash ph = new PasswordHash(model.Password);
+
+                User user = new User();
+                user.ID = model.ID;
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.Username = model.Username;
+                user.Password = ph.Hash;
+                user.FamilyName = model.FamilyName;
+                user.FamilyID = model.FamilyID;
+                user.Salt = ph.Salt;
+                user.RoleID = model.RoleID;
+
+                Family family = new Family();
+                family.FamilyName = model.FamilyName;
+
+                int familyID = _db.CreateFamily(family);
+                user.FamilyID = familyID;
+
+                user = _db.CreateUser(user);
+
+                // user does not exist or password is wrong
+                if (user == null || user.Password == null) //Question 1
+                {
+                    ModelState.AddModelError("invalid-credentials", "An invalid username or password was provided");
+                    result = View("Register", model);
+                }
+                else
+                {
+                    FormsAuthentication.SetAuthCookie(user.Username, true);
+                    Session["User"] = user;
+                }
+                if (((User)Session["User"]).RoleID == 2)
+                {
+                    result = RedirectToAction("ParentActivity", "Home"); 
+                }
+                else if (((User)Session["User"]).RoleID == 3)
+                {
+                    result = RedirectToAction("ChildActivity", "Home"); //unsure if we want/need a second view for child
+                }
+
             }
 
             return result;

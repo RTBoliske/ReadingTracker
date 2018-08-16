@@ -15,14 +15,15 @@
 </div>
 
 <div id="register_family" class="col-sm-3">
-    <form>
+    <form action="/Home/Register" method="post">
         <div class="form-group">
             @*<label for="firstName">First Name</label>*@
-            <input type="text" class="form-control form-control-sm" id="firstName" placeholder="Enter your first name">
+            @*<input type="text" class="form-control form-control-sm" id="firstName" placeholder="Enter your first name" name="FirstName">*@
+            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control form-control-sm", placeholder = "Enter your first name" })
         </div>
         <div class="form-group">
             @*<label for="lastName">Last Name:</label>*@
-            <input type="text" class="form-control form-control-sm" id="lastName" placeholder="Enter your last name">
+            <input type="text" class="form-control form-control-sm" id="lastName" name="LastName" placeholder="Enter your last name">
         </div>
         <div class="form-group">
             @*<label for="userName">User Name:</label>*@

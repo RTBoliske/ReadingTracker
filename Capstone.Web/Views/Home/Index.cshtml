@@ -1,11 +1,12 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Html.EnableClientValidation(false);
 }
 @model LoginViewModel
 
 
 
-@*<h2>Login</h2>
+<h2>Login</h2>
 
 <div id="login" class="form-horizontal col-sm-3">
 
@@ -26,19 +27,19 @@
         @*<div class="checkbox">
                 <label><input type="checkbox" /> Remember Me</label>
             </div>*@
-        @*<div class="form-group">
-            <button type="button" class="btn btn-sm btn-primary">Login</button>
+        <div class="form-group">
+            <button class="btn btn-sm btn-primary">Login</button>
         </div>
 
 
         <div>
             <p>Don't have an account? Create one <a href='@Url.Action("Register", "Home")'>here</a>.</p>
         </div>
-    }*@
-@*</div>*@
+    }
+</div>
 
 
-<div class="container">
+@*<div class="container">
 
 
 
@@ -68,6 +69,6 @@
 
 
 
-</div>
+</div>*@
 
 
