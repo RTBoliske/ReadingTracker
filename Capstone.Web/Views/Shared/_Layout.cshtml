@@ -14,6 +14,18 @@
 </head>
 
 <body>
+    @*<header>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm"></div>
+                <div class="col-sm" id="logo_image">
+                    <img src="~/Content/Images/family_illustration01.jpg" style=" width: 100%;" alt="Family Reading Tracker logo" />
+                    <img src="" alt="family_reading_image" />
+                </div>
+                <div class="col-sm"></div>
+            </div>
+        </div>
+    </header>*@
     <nav class="navbar navbar-expand-lg navbar-light">
         <div id="tracker_title">
             <a class="navbar-brand nav-link" href="@Url.Action("Index", "Home")">Reading Tracker</a>
@@ -21,7 +33,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
-            
+
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
@@ -44,18 +56,16 @@
         </div>
     </nav>
     <header>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm"></div>
-                <div class="col-sm" id="logo_image">
-                    <img src="~/Content/Images/family_illustration01.jpg" style=" width: 100%;" alt="Family Reading Tracker logo" />
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm"></div>
+                    <div class="col-sm" id="logo_image">
+                        <img src="~/Content/Images/family_illustration01.jpg" style=" width: 100%;" alt="Family Reading Tracker logo" />
+                    </div>
+                    <div class="col-sm"></div>
                 </div>
-                <div class="col-sm"></div>
             </div>
-            
-        </div>
-        
-    </header>
+        </header>
 
     <div class="container">
         @RenderBody()
