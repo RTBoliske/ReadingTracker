@@ -207,12 +207,10 @@ namespace Capstone.Web.Controllers
 
                 Book book = new Book();
                 book.ID = model.ID;
-                book.UserID = model.UserID;
                 book.FamilyID = ((User)Session["User"]).FamilyID;
                 book.Title = model.Title;
                 book.Author = model.Author;
                 book.ISBN = model.ISBN;
-                book.Type = model.Type;
 
                 book = _db.CreateBook(book);
 
@@ -228,11 +226,11 @@ namespace Capstone.Web.Controllers
                 }
                 if (((User)Session["User"]).RoleID == 2)
                 {
-                    result = RedirectToAction("ParentActivity", "Home");
+                    result = RedirectToAction("UserActivity", "Home");
                 }
                 else if (((User)Session["User"]).RoleID == 3)
                 {
-                    result = RedirectToAction("ChildActivity", "Home");
+                    result = RedirectToAction("UserActivity", "Home");
                 }
             }
             return result;
@@ -254,7 +252,7 @@ namespace Capstone.Web.Controllers
                 log.UserID = model.UserID;
                 log.FamilyID = model.FamilyID; //use Session??
                 log.MinutesRead = model.MinutesRead;
-                log.Complete = model.Complete;
+                log.Status = model.Status;
                 //date gets added in DAL
 
                 log = _db.CreateReadingLog(log);
