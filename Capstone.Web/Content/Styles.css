@@ -1,12 +1,12 @@
 ﻿body {
 }
 
-/*#bootstrap-override-navbar{
-    background-color: aqua;
+#navbarNav, #tracker_title, #navbar_log_out {
+    background-color: deepskyblue;
 }
 
-#navbarNav {
-    background-color: aqua;
+/*#tracker_title {
+    background-color: deepskyblue;
 }*/
 
 #addBookModal {
