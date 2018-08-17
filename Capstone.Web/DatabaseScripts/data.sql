@@ -13,12 +13,12 @@ VALUES ('Ted', 'Boliske', 2, 'tboliske', 'cQgdTq37FO2vDD+jCr4mhFWBePc=', 'VBZ1VO
 INSERT INTO Users (First_name, Last_name, FamilyID, Username, Password, Salt, RoleID) 
 VALUES ('Joe', 'Binegar', 3, 'jbinegar', 'ujf3h3kIuzWmJtr8Zti7YoPECN8=', 'bkkKEisi+ah7yJYD8s4tBg==', 2);
 
-INSERT INTO Book (FamilyID, UserID, Title, Author, ISBN, Type, Complete, isActive) 
-VALUES (1, 1, 'Screwtape Letters', 'C.S. Lewis', '9781974042333', 'Paper', 0, 1);
-INSERT INTO Book (FamilyID, UserID, Title, Author, ISBN, Type, Complete, isActive) 
-VALUES (1, 1, 'An Infinity of Little Hours', 'Nancy Maguire', '9781283095358', 'Paper', 1, 0);
-INSERT INTO Book (FamilyID, UserID, Title, Author, ISBN, Type, Complete, isActive) 
-VALUES (1, 1, 'Catechism of the Council of Trent', 'Pius IV', '9780895558848', 'Paper', 0, 1);
+INSERT INTO Book (FamilyID, Title, Author, ISBN) 
+VALUES (1, 'Screwtape Letters', 'C.S. Lewis', '9781974042333');
+INSERT INTO Book (FamilyID, Title, Author, ISBN) 
+VALUES (1, 'An Infinity of Little Hours', 'Nancy Maguire', '9781283095358');
+INSERT INTO Book (FamilyID, Title, Author, ISBN) 
+VALUES (1, 'Catechism of the Council of Trent', 'Pius IV', '9780895558848');
 
-INSERT INTO ReadingLog (BookID, UserID, FamilyID, Minutes_read, Complete, Date)
-VALUES (1, 1, 1, 65, 0, '08/17/2018');
+INSERT INTO ReadingLog (BookID, Type, UserID, FamilyID, Minutes_read, Complete, isActive, Date)
+VALUES (1, 'Paper', 1, 1, 65, 0, 1, '08/17/2018');

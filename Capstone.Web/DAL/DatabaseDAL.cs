@@ -366,11 +366,10 @@ namespace Capstone.Web.DAL
                         book = new Book
                         {
                             ID = Convert.ToInt32(reader["ID"]),
-                            UserID = Convert.ToInt32(reader["UserID"]),
                             FamilyID = Convert.ToInt32(reader["FamilyID"]),
                             Title = Convert.ToString(reader["Title"]),
+                            Author = Convert.ToString(reader["Author"]),
                             ISBN = Convert.ToString(reader["ISBN"]),
-                            Type = Convert.ToString(reader["Type"]),
                         };
                     }
 

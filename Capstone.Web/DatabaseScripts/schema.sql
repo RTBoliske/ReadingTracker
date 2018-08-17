@@ -41,13 +41,9 @@ CREATE TABLE Roles(
 CREATE TABLE Book(
 	ID int Identity(1,1),
 	FamilyID int NOT NULL,
-	UserID int NOT NULL,
 	Title varchar(100) NOT NULL,
 	Author varchar (100) NOT NULL,
 	ISBN varchar (20) NOT NULL,
-	Type varchar (50) NOT NULL,
-	Complete bit NOT NULL,
-	isActive bit NOT NULL,
 	CONSTRAINT pk_book_ID PRIMARY KEY (ID),
 );
 
@@ -57,15 +53,16 @@ CREATE TABLE ReadingLog(
 	UserID int NOT NULL,
 	FamilyID int NOT NULL,
 	Minutes_read int NOT NULL,
-	Complete bit NOT NULL,
+	Status varchar (15) NOT NULL,
+	Type varchar (50) NOT NULL,
 	Date date NOT NULL,
 );
 
 ALTER TABLE Users ADD FOREIGN KEY (FamilyID) REFERENCES Family(ID);
 ALTER TABLE Users ADD FOREIGN KEY (RoleID) REFERENCES Roles(ID);
 ALTER TABLE Book ADD FOREIGN KEY (FamilyID) REFERENCES Family(ID);
-ALTER TABLE Book ADD FOREIGN KEY (UserID) REFERENCES Users(ID);
 ALTER TABLE ReadingLog ADD FOREIGN KEY (BookID) REFERENCES Book(ID);
+ALTER TABLE ReadingLog ADD FOREIGN KEY (UserID) REFERENCES Users(ID);
 
 INSERT INTO Roles (Role) VALUES ('Administrator');
 INSERT INTO Roles (Role) VALUES ('Parent');
