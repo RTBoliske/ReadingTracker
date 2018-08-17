@@ -118,6 +118,7 @@
     <Content Include="Content\Images\Parent_ADHD-Children_Social_How-Books-Can-Work-Magic-for-Our-Kids_Articl-11129_cartoon-of-family-Reading-3.jpg" />
     <Content Include="Content\Images\possum-and-mice-reading.jpg" />
     <Content Include="Content\Images\reading-bookmark-punch-card-read-for-reward-track-minutes-help-for-reluctant-reader-8.jpg" />
+    <Content Include="Content\UserActivityJQuery.js" />
     <Content Include="DatabaseScripts\data.sql" />
     <Content Include="DatabaseScripts\schema.sql" />
     <Content Include="Global.asax" />
