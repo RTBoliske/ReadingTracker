@@ -12,7 +12,8 @@ namespace Capstone.Web
         public int UserID { get; set; }
         public int FamilyID { get; set; }
         public int MinutesRead { get; set; }
-        public bool Complete { get; set; }
+        public string Status { get; set; }
+        public string Type { get; set; }
         public DateTime Date { get; set; }
     }
 }
