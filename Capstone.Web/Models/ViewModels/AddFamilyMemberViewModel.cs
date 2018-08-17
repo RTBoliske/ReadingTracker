@@ -5,11 +5,18 @@ using System.Linq;
 using System.Web;
 
 namespace Capstone.Web
-{ 
+{
     public class AddFamilyMemberViewModel
     {
+        public enum SuccessState
+        {
+            None = 0,
+            Failed = 1,
+            Success = 2
+        }
+
         public int ID { get; set; }
-    
+
         [Required(ErrorMessage = "This field is required")]
         [Display(Name = "First Name:")]
         public string FirstName { get; set; }
@@ -17,7 +24,7 @@ namespace Capstone.Web
         [Required(ErrorMessage = "This field is required")]
         [Display(Name = "Last Name:")]
         public string LastName { get; set; }
-     
+
         [Required(ErrorMessage = "This field is required")]
         [Display(Name = "Username:")]
         public string Username { get; set; }
@@ -34,5 +41,9 @@ namespace Capstone.Web
         public int RoleID { get; set; }
 
         public int FamilyID { get; set; }
+
+        public List<User> FamilyMembersList { get; set; }
+
+        public SuccessState AddSuccessState {get; set;}
     }
 }

@@ -10,22 +10,24 @@
 
     <link rel="stylesheet" href="~/Content/Styles.css" />
     <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+   
+
     @*<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">*@
 </head>
 
 <body>
     @*<header>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm"></div>
-                <div class="col-sm" id="logo_image">
-                    <img src="~/Content/Images/family_illustration01.jpg" style=" width: 100%;" alt="Family Reading Tracker logo" />
-                    <img src="" alt="family_reading_image" />
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm"></div>
+                    <div class="col-sm" id="logo_image">
+                        <img src="~/Content/Images/family_illustration01.jpg" style=" width: 100%;" alt="Family Reading Tracker logo" />
+                        <img src="" alt="family_reading_image" />
+                    </div>
+                    <div class="col-sm"></div>
                 </div>
-                <div class="col-sm"></div>
             </div>
-        </div>
-    </header>*@
+        </header>*@
     <nav class="navbar navbar-expand-lg navbar-light">
         <div id="tracker_title">
             <a class="navbar-brand nav-link" href="@Url.Action("Index", "Home")">Reading Tracker</a>
@@ -56,16 +58,16 @@
         </div>
     </nav>
     <header>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm"></div>
-                    <div class="col-sm" id="logo_image">
-                        <img src="~/Content/Images/family_illustration01.jpg" style=" width: 100%;" alt="Family Reading Tracker logo" />
-                    </div>
-                    <div class="col-sm"></div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm"></div>
+                <div class="col-sm" id="logo_image">
+                    <img src="~/Content/Images/family_illustration01.jpg" style=" width: 100%;" alt="Family Reading Tracker logo" />
                 </div>
+                <div class="col-sm"></div>
             </div>
-        </header>
+        </div>
+    </header>
 
     <div class="container">
         @RenderBody()
@@ -75,7 +77,9 @@
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
-    @*<script src="~/Scripts/Validation Scripts/AddFamMemVal.js"></script>*@
+   
+   
+   
 </body>
 
 </html>
