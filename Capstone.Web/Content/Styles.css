@@ -5,9 +5,13 @@
     background-color: deepskyblue;
 }
 
-/*#tracker_title {
-    background-color: deepskyblue;
-}*/
+#login_header, #login_footer {
+    background-color: #ffe866;
+}
+
+#login {
+    padding-top: 5%;
+}
 
 #addBookModal {
     background-color: white;
