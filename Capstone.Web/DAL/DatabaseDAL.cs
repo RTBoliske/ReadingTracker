@@ -207,11 +207,11 @@ namespace Capstone.Web.DAL
 
             return family.FamilyName;
         }
-        public User GetUserFromFamilyID(int familyID)
+        public User GetUserByFamily(int familyID)
         {
             User user = new User();
 
-            string sql = @"SELECT TOP 1 * FROM Family WHERE ID = @familyID";
+            string sql = @"SELECT First_name, Last_name FROM Users WHERE FamilyID = @familyID";
 
             try
             {
@@ -229,7 +229,13 @@ namespace Capstone.Web.DAL
                         user = new User
                         {
                             ID = Convert.ToInt32(reader["ID"]),
-                            FamilyName = Convert.ToString(reader["Family_name"]),
+                            FirstName = Convert.ToString(reader["First_name"]),
+                            LastName = Convert.ToString(reader["Last_name"]),
+                            FamilyID = Convert.ToInt32(reader["FamilyID"]),
+                            Username = Convert.ToString(reader["Username"]),
+                            Password = Convert.ToString(reader["Password"]),
+                            Salt = Convert.ToString(reader["Salt"]),
+                            RoleID = Convert.ToInt32(reader["RoleID"]),
                         };
                     }
 
@@ -241,6 +247,82 @@ namespace Capstone.Web.DAL
             }
 
             return user;
+        }
+        //public User GetUserFromFamilyID(int familyID)
+        //{
+        //    User user = new User();
+
+        //    string sql = @"SELECT TOP 1 * FROM Family WHERE ID = @familyID";
+
+        //    try
+        //    {
+        //        using (SqlConnection conn = new SqlConnection(_connectionString))
+        //        {
+        //            conn.Open();
+
+        //            SqlCommand cmd = new SqlCommand(sql, conn);
+        //            cmd.Parameters.AddWithValue("@familyID", familyID);
+
+        //            SqlDataReader reader = cmd.ExecuteReader();
+
+        //            while (reader.Read())
+        //            {
+        //                user = new User
+        //                {
+        //                    ID = Convert.ToInt32(reader["ID"]),
+        //                    FamilyName = Convert.ToString(reader["Family_name"]),
+        //                };
+        //            }
+
+        //        }
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        throw;
+        //    }
+
+        //    return user;
+        //}
+        public List<User> GetAllUsersFromFamilyID(int familyID)
+        {
+            List<User> userList = new List<User>();
+
+            string sql = @"SELECT * FROM Users WHERE FamilyID = @familyID";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@familyID", familyID);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        User user = new User
+                        {
+                            ID = Convert.ToInt32(reader["ID"]),
+                            FirstName = Convert.ToString(reader["First_name"]),
+                            LastName = Convert.ToString(reader["Last_name"]),
+                            FamilyID = Convert.ToInt32(reader["FamilyID"]),
+                            Username = Convert.ToString(reader["Username"]),
+                            Password = Convert.ToString(reader["Password"]),
+                            Salt = Convert.ToString(reader["Salt"]),
+                            RoleID = Convert.ToInt32(reader["RoleID"]),
+                        };
+                        userList.Add(user);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+
+            return userList;
         }
         public int CreateFamily(Family newFamily)
         {
@@ -331,12 +413,73 @@ namespace Capstone.Web.DAL
 
         }
 
-        //public ReadingLog GetReadingLog(ReadingLog log)
-        //public ReadingLog CreateReadingLog(ReadingLog log)
-        //{
+        public ReadingLog GetReadingLog(ReadingLog log)
+        {
+            string sql = @"SELECT * FROM ReadingLog WHERE UserID = @UserID";
 
-        //}
-        
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@UserID", log.UserID);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        log = new ReadingLog
+                        {
+                            ID = Convert.ToInt32(reader["ID"]),
+                            BookID = Convert.ToInt32(reader["BookID"]),
+                            UserID = Convert.ToInt32(reader["UserID"]),
+                            FamilyID = Convert.ToInt32(reader["FamilyID"]),
+                            MinutesRead = Convert.ToInt32(reader["Minutes_read"]),
+                            Complete = Convert.ToBoolean(reader["Complete"]),
+                            Date = Convert.ToDateTime(reader["Date"]),
+                        };
+                    }
+
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return log;
+        } //need to test
+        public ReadingLog CreateReadingLog(ReadingLog log)
+        {
+            string sql = @"INSERT INTO ReadingLog ReadingLog (BookID, UserID, FamilyID, Minutes_read, Complete, Date)
+                           VALUES (@BookID, @UserID, @FamilyID, @Minutes_read, @Complete, @Date);
+                           SELECT CAST(SCOPE_IDENTITY() as int);";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+
+                    cmd.Parameters.AddWithValue("@BookID", log.BookID);
+                    cmd.Parameters.AddWithValue("@UserID", log.UserID);
+                    cmd.Parameters.AddWithValue("@FamilyID", log.FamilyID);
+                    cmd.Parameters.AddWithValue("@MInutes_read", log.MinutesRead);
+                    cmd.Parameters.AddWithValue("@Complete", log.Complete);
+                    cmd.Parameters.AddWithValue("@Date", DateTime.Now);
+                    var bookID = (int)cmd.ExecuteScalar();
+
+                    return log;
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+        } //need to test
+
         private User MapRowToUsers(SqlDataReader reader)
         {
             return new User()

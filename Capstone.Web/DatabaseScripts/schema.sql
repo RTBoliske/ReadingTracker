@@ -43,14 +43,19 @@ CREATE TABLE Book(
 	FamilyID int NOT NULL,
 	UserID int NOT NULL,
 	Title varchar(100) NOT NULL,
+	Author varchar (100) NOT NULL,
 	ISBN varchar (20) NOT NULL,
 	Type varchar (50) NOT NULL,
+	Complete bit NOT NULL,
+	isActive bit NOT NULL,
 	CONSTRAINT pk_book_ID PRIMARY KEY (ID),
 );
 
 CREATE TABLE ReadingLog(
 	ID int Identity(1,1),
 	BookID int NOT NULL,
+	UserID int NOT NULL,
+	FamilyID int NOT NULL,
 	Minutes_read int NOT NULL,
 	Complete bit NOT NULL,
 	Date date NOT NULL,

@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using System.Web.Security;
 
 namespace Capstone.Web.Controllers
@@ -30,7 +31,12 @@ namespace Capstone.Web.Controllers
 
         public ActionResult UserActivity()
         {
-            return View("UserActivity");
+            List<User> userList = new List<User>();
+            userList = _db.GetAllUsersFromFamilyID(((User)Session["User"]).FamilyID);
+            UserActivityViewModel model = new UserActivityViewModel();
+            model.UserList = userList;
+            
+            return View("UserActivity", model);
         }
 
         public ActionResult AddFamilyMember()
@@ -192,12 +198,12 @@ namespace Capstone.Web.Controllers
 
                 Book book = new Book();
                 book.ID = model.ID;
-                book.UserID = ((User)Session["User"]).ID;
+                book.UserID = model.UserID;
                 book.FamilyID = ((User)Session["User"]).FamilyID;
                 book.Title = model.Title;
+                book.Author = model.Author;
                 book.ISBN = model.ISBN;
                 book.Type = model.Type;
-                //add in User ID via Session info?
 
                 book = _db.CreateBook(book);
 
@@ -223,47 +229,47 @@ namespace Capstone.Web.Controllers
             return result;
         }
 
-        //[HttpPost]
-        //public ActionResult AddReadingLog(ReadingLogViewModel model)
-        //{
-        //    ActionResult result = null;
+        [HttpPost]
+        public ActionResult AddReadingLog(UserActivityViewModel model)
+        {
+            ActionResult result = null;
 
-        //    if (!ModelState.IsValid)
-        //    {
-        //        result = View("ReadingLog", model);
-        //    }
-        //    else
-        //    {
+            if (!ModelState.IsValid)
+            {
+                result = View("UserActivity", model);
+            }
+            else
+            {
 
-        //        ReadingLog log = new ReadingLog();
-        //        log.ID = model.ID;
-        //        log.BookID = model.BookID;
-        //        log.MinutesRead = model.MinutesRead;
-        //        log.Type = model.Type;
-        //        //add in User ID via Session info?
+                ReadingLog log = new ReadingLog();
+                log.UserID = model.UserID;
+                log.FamilyID = model.FamilyID; //use Session??
+                log.MinutesRead = model.MinutesRead;
+                log.Complete = model.Complete;
+                //date gets added in DAL
 
-        //        book = _db.Create(book);
+                log = _db.CreateReadingLog(log);
 
-        //        // book does not exist or ISBN is wrong
-        //        if (book == null || book.ISBN == null)
-        //        {
-        //            ModelState.AddModelError("invalid-credentials", "An invalid book title or ISBN was provided");
-        //            result = View("AddBook", model);
-        //        }
-        //        else
-        //        {
-        //            Session["Book"] = book; //not sure if needed... yet?
-        //        }
-        //        if (((User)Session["User"]).RoleID == 2)
-        //        {
-        //            result = RedirectToAction("ParentActivity", "Home");
-        //        }
-        //        else if (((User)Session["User"]).RoleID == 3)
-        //        {
-        //            result = RedirectToAction("ChildActivity", "Home");
-        //        }
-        //    }
-        //    return result;
-        //}
+                // book does not exist or ISBN is wrong
+                if (log.ID == 0)
+                {
+                    ModelState.AddModelError("invalid-credentials", "The reading log was not successfully created.");
+                    result = View("UserActivity", model);
+                }
+                else
+                {
+                    Session["Log"] = log; //not sure if needed... yet?
+                }
+                if (((User)Session["User"]).RoleID == 2)
+                {
+                    result = RedirectToAction("UserActivity", "Home");
+                }
+                else if (((User)Session["User"]).RoleID == 3)
+                {
+                    result = RedirectToAction("UserActivity", "Home");
+                }
+            }
+            return result;
+        }
     }
 }

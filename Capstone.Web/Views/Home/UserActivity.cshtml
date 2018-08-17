@@ -1,6 +1,7 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model UserActivityViewModel
 
 <h1>User Reading Activity View</h1>
 
@@ -49,29 +50,34 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form action="/Home/AddReadingLog" method="post">
                     <div class="form-group">
                         <label for="user-name" class="col-form-label">Select User:</label>
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="selectUserButton" data-toggle="dropdown">Select User</button>
                             <div class="dropdown-menu">
-                                <button class="dropdown-item" type="button">User</button>
-                                <button class="dropdown-item" type="button">Another User</button>
-                                <button class="dropdown-item" type="button">Someother User</button>
+                                @foreach(var item in Model.UserList)
+                                {
+                                <button class="dropdown-item" type="button" name="UserID" value="@item.ID">@item.FirstName</button>
+                                }
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="book-title" class="col-form-label">Title:</label>
-                        <text class="form-control" id="book-title-text"></text>
+                        <text class="form-control" id="book-title-text" name="Title"></text>
                     </div>
                     <div class="form-group">
                         <label for="book-author" class="col-form-label">Author:</label>
-                        <text class="form-control" id="book-author-text"></text>
+                        <text class="form-control" id="book-author-text" name="Author"></text>
                     </div>
                     <div class="form-group">
                         <label for="book-isbn" class="col-form-label">ISBN:</label>
-                        <text class="form-control" id="book-isbn-text"></text>
+                        <text class="form-control" id="book-isbn-text" name="ISBN"></text>
+                    </div>
+                    <div class="form-group">
+                        <label for="book-isbn" class="col-form-label">Format:</label>
+                        <text class="form-control" id="book-isbn-text" name="Type"></text>
                     </div>
                 </form>
             </div>
