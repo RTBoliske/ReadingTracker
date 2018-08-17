@@ -55,38 +55,47 @@ namespace Capstone.Web.Controllers
         {
             ActionResult result = null;
 
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || model.Password == null || model.Username == null)
             {
                 result = View("Index", model);
             }
             else
             {
                 User user = _db.GetUser(model.Username);
-                PasswordHash ph = new PasswordHash(model.Password, user.Salt);
-                
-                if (user == null)
-                {
-                    ModelState.AddModelError("invalid-credentials", "An invalid username or password was provided");
-                    result = View("Index", model);
-                }
-                else if (ph.Hash != user.Password)
-                {
-                    ModelState.AddModelError("invalid-credentials", "An invalid username or password was provided");
-                    result = View("Index", model);
-                }
-                else if (ph.Hash == user.Password)
-                {
-                    FormsAuthentication.SetAuthCookie(user.Username, true);
-                    Session["User"] = user;
 
-                    if (((User)Session["User"]).RoleID == 2 || ((User)Session["User"]).RoleID == 3)
+                if (user.Username == null || user.Password == null)
+                {
+                    ModelState.AddModelError("invalid-credentials", "An invalid username or password was provided");
+                    result = View("Index", model);
+                }
+                else
+                {
+                    PasswordHash ph = new PasswordHash(model.Password, user.Salt);
+
+                    if (user == null)
                     {
-                        result = RedirectToAction("UserActivity", "Home");
+                        ModelState.AddModelError("invalid-credentials", "An invalid username or password was provided");
+                        result = View("Index", model);
                     }
-                    else
+                    else if (ph.Hash != user.Password)
                     {
-                        //page not found
-                        //need to return Admin view
+                        ModelState.AddModelError("invalid-credentials", "An invalid username or password was provided");
+                        result = View("Index", model);
+                    }
+                    else if (ph.Hash == user.Password)
+                    {
+                        FormsAuthentication.SetAuthCookie(user.Username, true);
+                        Session["User"] = user;
+
+                        if (((User)Session["User"]).RoleID == 2 || ((User)Session["User"]).RoleID == 3)
+                        {
+                            result = RedirectToAction("UserActivity", "Home");
+                        }
+                        else
+                        {
+                            //page not found
+                            //need to return Admin view
+                        }
                     }
                 }
             }
