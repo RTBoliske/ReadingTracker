@@ -16,19 +16,7 @@
 </head>
 
 <body>
-    @*<header>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm"></div>
-                    <div class="col-sm" id="logo_image">
-                        <img src="~/Content/Images/family_illustration01.jpg" style=" width: 100%;" alt="Family Reading Tracker logo" />
-                        <img src="" alt="family_reading_image" />
-                    </div>
-                    <div class="col-sm"></div>
-                </div>
-            </div>
-        </header>*@
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-expand-md navbar-expand-sm navbar-light">
         <div id="tracker_title">
             <a class="navbar-brand nav-link" href="@Url.Action("Index", "Home")">Reading Tracker</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
@@ -37,7 +25,7 @@
         </div>
 
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <ul class="navbar-nav mr-auto mt-2 mt-sm-0">
                 <li class="nav-item">
                     <a class="nav-link" href="@Url.Action("Index", "Home")">Home</a>
                 </li>
@@ -45,9 +33,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="@Url.Action("UserActivity", "Home")">Activity</a>
                 </li>
-                <li class="nav-item">
+                @*<li class="nav-item">
                     <a class="nav-link" href="#">Books</a>
-                </li>
+                </li>*@
                 <li class="nav-item">
                     <a class="nav-link" href="@Url.Action("FamilyActivity", "Home")">Family</a>
                 </li>
@@ -58,18 +46,11 @@
         </div>
     </nav>
     <header>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm"></div>
-                <div class="col-sm" id="logo_image">
-                    <img src="~/Content/Images/family_illustration01.jpg" style=" width: 100%;" alt="Family Reading Tracker logo" />
-                </div>
-                <div class="col-sm"></div>
-            </div>
-        </div>
+       
     </header>
 
-    <div class="container">
+    <div class="container -fluid">
+       
         @RenderBody()
     </div>
 

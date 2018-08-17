@@ -3,8 +3,57 @@
 }
 @model RegisterViewModel
 
-<div id="register_title" class="col-md-12">
-    <h1>Create your Family Reading Account</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="card">
+                <h5 class="card-header">Register</h5>
+                
+                    <div id="register_family">
+                        <form action="/Home/Register" method="post">
+                            <div class="card-body">
+                                <div class="card-text">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control form-control-sm form-control-md", placeholder = "First name" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control form-control-sm form-control-md", placeholder = "Last name" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(m => m.Username, new { @class = "form-control form-control-sm form-control-md", placeholder = "User name" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(m => m.FamilyName, new { @class = "form-control form-control-sm form-control-md", placeholder = "Family name" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(m => m.Password, new { @class = "form-control form-control-sm form-control-md", placeholder = "Password" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control form-control-sm form-control-md", placeholder = "Confirm password" })
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-sm btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-footer">
+                                <p>Have an account?<br />
+                                   Log in <a href='@Url.Action("Index", "Home")' class="card-link">here</a>.
+                                </p>
+                            </div>
+                        </form>
+                      </div>
+             </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@*<div id="register_title" class="col-md-12">
+    <h5>Create your Family Reading Account</h5>
     <br />
 </div>
 <div id="register_text" class="col-sm-8">
@@ -17,22 +66,22 @@
 <div id="register_family" class="col-sm-3">
     <form action="/Home/Register" method="post">
         <div class="form-group">
-            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control form-control-sm", placeholder = "Enter your first name" })
+            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control form-control-sm", placeholder = "First name" })
         </div>
         <div class="form-group">
-            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control form-control-sm", placeholder = "Enter your last name" })
+            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control form-control-sm", placeholder = "Last name" })
         </div>
         <div class="form-group">
-            @Html.TextBoxFor(m => m.Username, new { @class = "form-control form-control-sm", placeholder = "Enter your user name" })
+            @Html.TextBoxFor(m => m.Username, new { @class = "form-control form-control-sm", placeholder = "User name" })
         </div>
         <div class="form-group">
-            @Html.TextBoxFor(m => m.FamilyName, new { @class = "form-control form-control-sm", placeholder = "Enter your Family name" })
+            @Html.TextBoxFor(m => m.FamilyName, new { @class = "form-control form-control-sm", placeholder = "Family name" })
         </div>
         <div class="form-group">
-            @Html.TextBoxFor(m => m.Password, new { @class = "form-control form-control-sm", placeholder = "Enter your password" })
+            @Html.TextBoxFor(m => m.Password, new { @class = "form-control form-control-sm", placeholder = "Password" })
         </div>
         <div class="form-group">
-            @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control form-control-sm", placeholder = "Confirm your password" })
+            @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control form-control-sm", placeholder = "Confirm password" })
         </div>
         
         <div class="form-group">
@@ -40,4 +89,4 @@
         </div>
         
     </form>
-</div>
+</div>*@

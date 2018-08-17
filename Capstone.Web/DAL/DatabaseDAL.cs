@@ -366,11 +366,10 @@ namespace Capstone.Web.DAL
                         book = new Book
                         {
                             ID = Convert.ToInt32(reader["ID"]),
-                            UserID = Convert.ToInt32(reader["UserID"]),
                             FamilyID = Convert.ToInt32(reader["FamilyID"]),
                             Title = Convert.ToString(reader["Title"]),
+                            Author = Convert.ToString(reader["Author"]),
                             ISBN = Convert.ToString(reader["ISBN"]),
-                            Type = Convert.ToString(reader["Type"]),
                         };
                     }
 
@@ -384,7 +383,7 @@ namespace Capstone.Web.DAL
         }
         public Book CreateBook(Book book)
         {
-            string sql = @"INSERT INTO Book (ID, FamilyID, UserID, Title, ISBN, Type) VALUES (@ID, @UserName, @FamilyID, @Title, @ISBN, @Type);
+            string sql = @"INSERT INTO Book (ID, FamilyID, Title, Author, ISBN) VALUES (@ID, @FamilyID, @Title, @Author, @ISBN);
                            SELECT CAST(SCOPE_IDENTITY() as int);";
 
             try
@@ -396,11 +395,10 @@ namespace Capstone.Web.DAL
                     SqlCommand cmd = new SqlCommand(sql, conn);
 
                     cmd.Parameters.AddWithValue("@ID", book.ID);
-                    cmd.Parameters.AddWithValue("@UserName", book.UserID);
                     cmd.Parameters.AddWithValue("@FamilyID", book.FamilyID);
                     cmd.Parameters.AddWithValue("@Title", book.Title);
+                    cmd.Parameters.AddWithValue("@Author", book.Author);
                     cmd.Parameters.AddWithValue("@ISBN", book.ISBN);
-                    cmd.Parameters.AddWithValue("@Type", book.Type);
                     var bookID = (int)cmd.ExecuteScalar();
                     
                     return book;
@@ -415,7 +413,9 @@ namespace Capstone.Web.DAL
 
         public ReadingLog GetReadingLog(ReadingLog log)
         {
-            string sql = @"SELECT * FROM ReadingLog WHERE UserID = @UserID";
+            string sql = @"SELECT ReadingLog.BookID AS BookID, Users.ID AS ID, Family.ID AS FamilyID, ReadingLog.Minutes_read AS Minutes_read, ReadingLog.Type AS Type,
+                           ReadingLog.Status AS Status, ReadingLog.Date AS Date FROM ReadingLog JOIN BOOK ON Book.ID = ReadingLog.BookID 
+                           JOIN Family ON Family.ID = ReadingLog.FamilyID JOIN Users ON Users.FamilyID = Family.ID;";
 
             try
             {
@@ -436,7 +436,8 @@ namespace Capstone.Web.DAL
                             UserID = Convert.ToInt32(reader["UserID"]),
                             FamilyID = Convert.ToInt32(reader["FamilyID"]),
                             MinutesRead = Convert.ToInt32(reader["Minutes_read"]),
-                            Complete = Convert.ToBoolean(reader["Complete"]),
+                            Type = Convert.ToString(reader["Type"]),
+                            Status = Convert.ToString(reader["Status"]),
                             Date = Convert.ToDateTime(reader["Date"]),
                         };
                     }
@@ -451,8 +452,8 @@ namespace Capstone.Web.DAL
         } //need to test
         public ReadingLog CreateReadingLog(ReadingLog log)
         {
-            string sql = @"INSERT INTO ReadingLog ReadingLog (BookID, UserID, FamilyID, Minutes_read, Complete, Date)
-                           VALUES (@BookID, @UserID, @FamilyID, @Minutes_read, @Complete, @Date);
+            string sql = @"INSERT INTO ReadingLog ReadingLog (BookID, UserID, FamilyID, Minutes_read, Status, Type, Date)
+                           VALUES (@BookID, @UserID, @FamilyID, @Minutes_read, @Status, @Type, @Date);
                            SELECT CAST(SCOPE_IDENTITY() as int);";
 
             try
@@ -466,8 +467,9 @@ namespace Capstone.Web.DAL
                     cmd.Parameters.AddWithValue("@BookID", log.BookID);
                     cmd.Parameters.AddWithValue("@UserID", log.UserID);
                     cmd.Parameters.AddWithValue("@FamilyID", log.FamilyID);
-                    cmd.Parameters.AddWithValue("@MInutes_read", log.MinutesRead);
-                    cmd.Parameters.AddWithValue("@Complete", log.Complete);
+                    cmd.Parameters.AddWithValue("@Minutes_read", log.MinutesRead);
+                    cmd.Parameters.AddWithValue("@Status", log.Status);
+                    cmd.Parameters.AddWithValue("@Type", log.Type);
                     cmd.Parameters.AddWithValue("@Date", DateTime.Now);
                     var bookID = (int)cmd.ExecuteScalar();
 
