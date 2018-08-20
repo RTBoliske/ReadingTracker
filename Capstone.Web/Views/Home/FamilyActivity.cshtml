@@ -4,18 +4,24 @@
 }
 @model UserActivityViewModel
 <style>
-    .box-info:nth-of-type(odd) {
-        background-color: #3ecdc6 !important;
+    .box-info {
+        padding:2em;
+        color: white;
     }
-
+    .currentlyreading{
+        margin: 1em;
+    }
+    .totaltime{
+        margin:1em;
+    }
 </style>
 
 
 @* colors list
-    bg-color-1
-    bg-color-2
-    bg-color-6
-    bg-color-4
+    bg-color-1      background-color: #f0c24b!important;   yellow
+    bg-color-2      background-color: #b5d56a!important;   green
+    bg-color-6      background-color: #ea77ad!important;   pink
+    bg-color-4      background-color: #84bed6!important;   blue
 
 *@
 
@@ -37,52 +43,57 @@
         </div>
 
         @* Family Members *@
-        @*<div class="row">*@
+        <div class="row">
 
-            @*@foreach (var user in Model.UserList)
-            {
-                <div class="col-sm-6 col-xs-12">
-                    <div class="media teamStyle">
-                        <div class="media-body" style="border:solid">
+        @*@foreach (var user in Model.UserList)
+                {
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="media teamStyle">
+                            <div class="media-body" style="border:solid">
 
-                            <h4 class="media-heading"><a href="#">@user.FirstName</a></h4>
-                            <h5>Currently Reading: </h5>
-                            <h5>Progress: </h5>
+                                <h4 class="media-heading"><a href="#">@user.FirstName</a></h4>
+                                <h5>Currently Reading: </h5>
+                                <h5>Progress: </h5>
 
+                            </div>
                         </div>
                     </div>
-                </div>
-            }
-        </div>*@
-        <div class="familymembercard">
-            @foreach (var user in Model.UserList)
+                }
+            </div>*@
+      
+            @for(int i = 0; i < Model.UserList.Count; i++)
             {
+                var user = Model.UserList[i];
 
             <div class="col-md-3 col-xs-6" id="FamilyMembersContainer">
                 <a href='@Url.Action("UserActivity", "Home", new {id = user.ID})'>
-                    <div class="box" id="box">
+                    <div class="box bg-color-@(((i % 4) + 1) == 3 ? 6 : (i % 4) + 1)" id="box">
+
                         <div class="box-info">
+
                             <h4>
                                 @user.FirstName
-                        </h4>
-                        <div class="current">
-                            <span>Currently Reading: @Model.Title</span>
+                            </h4>
 
-                        </div>
-                        <div class="current">
-                            <span>Progress: @Model.MinutesRead</span>
-                        </div>
-                        <div class="progress">
-                            <span></span>
+                            <div class="currentlyreading">
+                                <span><b>Currently Reading:</b></span><br />
+                                <span><i>Book Title @Model.Title</i></span>
+                            </div>
+
+
+                            <div class="totaltime">
+                                <span><b>Total Reading Time: </b></span><br />
+                                <span><i>@Model.MinutesRead</i></span>
+                            </div>
+
+
                         </div>
 
                     </div>
-
-                </div>
                 </a>
                 </div>
             }
         </div>
 
-        </div>
+    </div>
 </section>
