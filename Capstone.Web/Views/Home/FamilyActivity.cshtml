@@ -58,25 +58,28 @@
             @foreach (var user in Model.UserList)
             {
 
-                <div class="col-md-3 col-xs-6" id="FamilyMembersContainer">
-
+            <div class="col-md-3 col-xs-6" id="FamilyMembersContainer">
+                <a href='@Url.Action("UserActivity", "Home", new {id = user.ID})'>
                     <div class="box" id="box">
                         <div class="box-info">
-                            <h4>@user.FirstName</h4>
-                            <div class="current">
-                                <span>Currently Reading: @Model.Title</span>
-                               
-                            </div>
-                            <div class="current">
-                                <span>Progress: @Model.MinutesRead</span>
-                            </div>
-                            <div class="progress">
-                                <span></span>
-                            </div>
+                            <h4>
+                                @user.FirstName
+                        </h4>
+                        <div class="current">
+                            <span>Currently Reading: @Model.Title</span>
 
+                        </div>
+                        <div class="current">
+                            <span>Progress: @Model.MinutesRead</span>
+                        </div>
+                        <div class="progress">
+                            <span></span>
                         </div>
 
                     </div>
+
+                </div>
+                </a>
                 </div>
             }
         </div>
