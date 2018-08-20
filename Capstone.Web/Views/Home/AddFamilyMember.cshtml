@@ -8,15 +8,21 @@
 
 @if (Model.AddSuccessState == AddFamilyMemberViewModel.SuccessState.Success)
 {
-    <div class="alert alert-success" role="alert">
-        A new family member has been successfully added!
-    </div>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Success!</strong> A new family member has been successfully added!
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
 }
 else if (Model.AddSuccessState == AddFamilyMemberViewModel.SuccessState.Failed)
 {
-    <div class="alert alert-danger" role="alert">
-        Oops! Something went wrong.  Please try again.
-    </div>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Oops!</strong> Something went wrong.  Please try again.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
 }
 
 
