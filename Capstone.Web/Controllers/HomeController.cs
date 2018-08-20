@@ -25,6 +25,13 @@ namespace Capstone.Web.Controllers
             return View("Register");
         }
 
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon(); // it will clear the session at the end of request
+            return RedirectToAction("Index", "Home");
+        }
+
         public ActionResult FamilyActivity()
         {
             return View("FamilyActivity");
@@ -62,6 +69,8 @@ namespace Capstone.Web.Controllers
         {
             return View("AddBook");
         }
+
+
 
         
         [HttpPost]
