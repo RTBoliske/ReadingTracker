@@ -2,106 +2,87 @@
     Layout = "~/Views/Shared/_LayoutTheme.cshtml";
     Html.EnableClientValidation(false);
 }
-@model Family
+@model UserActivityViewModel
+<style>
+    .box-info:nth-of-type(odd) {
+        background-color: #3ecdc6 !important;
+    }
 
-<h1>Family Reading Activity</h1>
+</style>
 
-@*set for single user, add loop to move through all family readers*@
-@*<dl class="row">
-    <dt class="col-sm-3">Currently reading:</dt>
-    <dd class="col-sm-9">book title</dd>
 
-    <dt class="col-sm-3">Time reading this book:</dt>
-    <dd class="col-sm-9">time in hours and minutes</dd>
+@* colors list
+    bg-color-1
+    bg-color-2
+    bg-color-6
+    bg-color-4
 
-    <dt class="col-sm-3">Progress towards prize:</dt>
-    <dd class="col-sm-9">
-        <div class="progress" style="height: 15px;">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:75%;" role="progressbar">75%</div>
-        </div>
-    </dd>
-</dl>*@
+*@
 
-@*version #2*@
-<div class="col-lg">
-    <div class="card">
-        @*set link on user name to view user activity*@
-        <div class="card-header"><a href="~/Views/Home/UserActivity.cshtml">User Name</a></div>
-        <div class="card-body">
-            @*book title will be taken from user reading*@
-            <h6 class="card-title">Currently reading: </h6>
 
-            @*will need to update label text to include total reading time*@
-            <h6 for="TotalReadingTime">Time reading this book: </h6>
+<section class="mainContent full-width clearfix">
+    <div class="container">
 
-            @*progress bar amount pulled from db*@
-            <h6 for="ReadingProgress">Progress to prize: </h6>
-            <div class="progress" style="height: 15px;">
-                <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:75%;" role="progressbar">75%</div>
+        @*Family Members Header *@
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="sectionTitle text-center">
+                    <h2>
+                        <span class="shape shape-left bg-color-4"></span>
+                        <span>Family Members</span>
+                        <span class="shape shape-right bg-color-4"></span>
+                    </h2>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
-@*old version - here for backup only*@
-@*<div class="form-row">
-    <div class="dropdown form-group col-md-2">
-        <label for="SelectUser">Users/Readers</label>
-        <select class="form-control form-control-sm" id="SelectBook" required>
-            <option>Select a User</option>
-            <option>Parent 1</option>
-            <option>Parent 2</option>
-            <option>Child 1</option>
-            <option>Child 2</option>
-        </select>
-    </div>
-    <div class="dropdown form-group col-md-2">
-        <label for="SelectBook">Books</label>
-        <select class="form-control form-control-sm" id="SelectBook" required>
-            <option>Select a book</option>
-            <option>Book 1</option>
-            <option>Book 2</option>
-            <option>Book 3</option>
-        </select>
-    </div>
-    <div class="dropdown form-group col-md-2">
-        <label for="BookFormat">Format</label>
-        <select class="form-control form-control-sm" id="BookFormat" required>
-            <option>Reading Format</option>
-            <option>Paper</option>
-            <option>Digital</option>
-            <option>Audiobook</option>
-        </select>
-    </div>
-    <div class="form-group col-md-2">
-        <label for="TimeReading">Time spent reading</label>
-        <input type="number" name="TimeReading" class="form-control form-control-sm col-7" />
-        <label for="TimeFormat" style="font-size: 10px;">Enter minutes only</label>
-    </div>*@
-    @*<div class="form-group col-md-2">
-            <label for="TimeReading">Time spent reading</label>
-            <input type="time" name="TimeReading" class="form-control form-control-sm col-7" />
+        @* Family Members *@
+        @*<div class="row">*@
+
+            @*@foreach (var user in Model.UserList)
+            {
+                <div class="col-sm-6 col-xs-12">
+                    <div class="media teamStyle">
+                        <div class="media-body" style="border:solid">
+
+                            <h4 class="media-heading"><a href="#">@user.FirstName</a></h4>
+                            <h5>Currently Reading: </h5>
+                            <h5>Progress: </h5>
+
+                        </div>
+                    </div>
+                </div>
+            }
         </div>*@
-    @*<div class="form-group col-md-2">
-            <label for="TotalReadingTime">Total time reading</label>
-            <input type="text" class="form-control form-control-sm" readonly />
-        </div>*@
-    @*<div class="form-group col-md-2">
-        <label for="ReadingProgress">Progress</label>
-        <div class="progress" style="height: 10px;">
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"></div>
+        <div class="familymembercard">
+            @foreach (var user in Model.UserList)
+            {
+
+            <div class="col-md-3 col-xs-6" id="FamilyMembersContainer">
+                <a href='@Url.Action("UserActivity", "Home", new {id = user.ID})'>
+                    <div class="box" id="box">
+                        <div class="box-info">
+                            <h4>
+                                @user.FirstName
+                        </h4>
+                        <div class="current">
+                            <span>Currently Reading: @Model.Title</span>
+
+                        </div>
+                        <div class="current">
+                            <span>Progress: @Model.MinutesRead</span>
+                        </div>
+                        <div class="progress">
+                            <span></span>
+                        </div>
+
+                    </div>
+
+                </div>
+                </a>
+                </div>
+            }
         </div>
-    </div>
-</div>
-<div>
-    <label for="ReadingNotes">Add Reading Notes...</label>
-    <div>
-        <textarea rows="4" cols="50" placeholder="Enter comments here...">
-            
-        </textarea>
-    </div>
-</div>
-<div>
-    <br />
-    <button type="submit" class="btn btn-sm btn-primary">Submit</button>
-</div>*@
+
+        </div>
+</section>

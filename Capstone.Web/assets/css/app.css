@@ -5862,15 +5862,15 @@ footer .color-bar {
 }
 
 .smooth-loader-wrapper .smooth-loader .dot-1 {
-  -webkit-animation: animateDot1 1.5s linear infinite;
-          animation: animateDot1 1.5s linear infinite;
+  -webkit-animation: animateDot1 1s linear infinite;
+          animation: animateDot1 1s linear infinite;
   left: 30px;
   background: #f0c24b;
 }
 
 .smooth-loader-wrapper .smooth-loader .dot-2 {
-  -webkit-animation: animateDot2 1.5s linear infinite;
-          animation: animateDot2 1.5s linear infinite;
+  -webkit-animation: animateDot2 1s linear infinite;
+          animation: animateDot2 1s linear infinite;
   -webkit-animation-delay: 0.5s;
           animation-delay: 0.5s;
   left: 60px;
@@ -5878,15 +5878,15 @@ footer .color-bar {
 }
 
 .smooth-loader-wrapper .smooth-loader .dot-3 {
-  -webkit-animation: animateDot3 1.5s linear infinite;
-          animation: animateDot3 1.5s linear infinite;
+  -webkit-animation: animateDot3 1s linear infinite;
+          animation: animateDot3 1s linear infinite;
   left: 30px;
   background: #ea7066;
 }
 
 .smooth-loader-wrapper .smooth-loader .dot-4 {
-  -webkit-animation: animateDot4 1.5s linear infinite;
-          animation: animateDot4 1.5s linear infinite;
+  -webkit-animation: animateDot4 1s linear infinite;
+          animation: animateDot4 1s linear infinite;
   -webkit-animation-delay: 0.5s;
           animation-delay: 0.5s;
   left: 60px;

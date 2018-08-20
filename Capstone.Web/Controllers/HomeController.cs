@@ -25,9 +25,20 @@ namespace Capstone.Web.Controllers
             return View("Register");
         }
 
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon(); // it will clear the session at the end of request
+            return RedirectToAction("Index", "Home");
+        }
+
         public ActionResult FamilyActivity()
         {
-            return View("FamilyActivity");
+            List<User> userList = new List<User>();
+            userList = _db.GetAllUsersFromFamilyID(((User)Session["User"]).FamilyID);
+            UserActivityViewModel model = new UserActivityViewModel();
+            model.UserList = userList;
+            return View("FamilyActivity", model);
         }
 
         public ActionResult UserActivity()
@@ -58,10 +69,27 @@ namespace Capstone.Web.Controllers
             return View("AddFamilyMember", model);
         }
 
+        //public ActionResult Prize()
+        //{
+        //    //need to add method to call allPrizes
+        //    PrizeViewModel model = new PrizeViewModel();
+        //    if (TempData.ContainsKey("AddSuccessState"))
+        //    {
+        //        model.AddSuccessState = (AddFamilyMemberViewModel.SuccessState)TempData["AddSuccessState"];
+        //    }
+        //    else
+        //    {
+        //        model.AddSuccessState = AddFamilyMemberViewModel.SuccessState.None;
+        //    }
+        //    return View("AddPrize", model);
+        //}
+
         public ActionResult AddBook()
         {
             return View("AddBook");
         }
+
+
 
         
         [HttpPost]
