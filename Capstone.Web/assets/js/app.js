@@ -20,10 +20,14 @@
 jQuery(document).ready(function(){
 
   /*======== 1. PREELOADER ========*/
-  'use strict';
-  setTimeout(function(){
-		$('body').addClass('loaded');
-	}, 3000);
+    'use strict';
+ // setTimeout(function(){
+	//	$('body').addClass('loaded');
+	//}, 3000);
+
+    $(function () {
+        $('body').addClass('loaded');
+    })
 
   /*======== 2. MENU SCROLL ========*/
    $(window).load(function(){

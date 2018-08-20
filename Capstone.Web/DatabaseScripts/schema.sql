@@ -58,11 +58,23 @@ CREATE TABLE ReadingLog(
 	Date date NOT NULL,
 );
 
+CREATE TABLE Prize(
+	ID int Identity(1,1),
+	UserType int NOT NULL,
+	Goal int NOT NULL,
+	MaxNumPrize int,
+	isActive bit NOT NULL,
+	StartDate Date,
+	EndDate Date,
+	FamilyID int NOT NULL,
+);
+
 ALTER TABLE Users ADD FOREIGN KEY (FamilyID) REFERENCES Family(ID);
 ALTER TABLE Users ADD FOREIGN KEY (RoleID) REFERENCES Roles(ID);
 ALTER TABLE Book ADD FOREIGN KEY (FamilyID) REFERENCES Family(ID);
 ALTER TABLE ReadingLog ADD FOREIGN KEY (BookID) REFERENCES Book(ID);
 ALTER TABLE ReadingLog ADD FOREIGN KEY (UserID) REFERENCES Users(ID);
+ALTER TABLE Prize ADD FOREIGN KEY (FamilyID) REFERENCES Family(ID);
 
 INSERT INTO Roles (Role) VALUES ('Administrator');
 INSERT INTO Roles (Role) VALUES ('Parent');

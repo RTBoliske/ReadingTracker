@@ -1,16 +1,11 @@
 ﻿@{
     Layout = "~/Views/Shared/_LayoutTheme.cshtml";
 }
-
-@{
-    ViewBag.Title = "AddFamilyMember";
-    Layout = "~/Views/Shared/_LayoutTheme.cshtml";
-}
-@model AddFamilyMemberViewModel
+@model PrizeViewModel
 
 
 
-@if (Model.AddSuccessState == AddFamilyMemberViewModel.SuccessState.Success)
+@*@if (Model.AddSuccessState == PrizeViewModel.SuccessState.Success)
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>Success!</strong> A new family member has been successfully added!
@@ -19,7 +14,7 @@
         </button>
     </div>
 }
-else if (Model.AddSuccessState == AddFamilyMemberViewModel.SuccessState.Failed)
+else if (Model.AddSuccessState == PrizeViewModel.SuccessState.Failed)
 {
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <strong>Oops!</strong> Something went wrong.  Please try again.
@@ -27,10 +22,10 @@ else if (Model.AddSuccessState == AddFamilyMemberViewModel.SuccessState.Failed)
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-}
+}*@
 
 
-<div class="table-responsive">
+@*<div class="table-responsive">
     <table class="table table-bordered table-sm">
         <thead>
             <tr>
@@ -41,7 +36,7 @@ else if (Model.AddSuccessState == AddFamilyMemberViewModel.SuccessState.Failed)
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.FamilyMembersList)
+            @foreach (var item in Model.PrizeList)
             {
                 <tr>
                     <td>@item.FirstName</td>
@@ -59,16 +54,12 @@ else if (Model.AddSuccessState == AddFamilyMemberViewModel.SuccessState.Failed)
             }
         </tbody>
     </table>
-</div>
+</div>*@
 
 
-<h2>Add Family Members</h2>
-
-@using (Html.BeginForm("AddFamilyMember", "Home", FormMethod.Post))
-{
 
 
-    <div class="form-row">
+    @*<div class="form-row">
         <div class="form-group col-md-2">
             <label for="UserRole">User's Role</label><br />
             <div class="form-check form-check-inline">
@@ -82,7 +73,7 @@ else if (Model.AddSuccessState == AddFamilyMemberViewModel.SuccessState.Failed)
         </div>
         <div class="form-group col-md-2">
             <label for="FirstName">First Name</label>
-            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control form-control-sm" })
+            @Html.TextBoxFor(m => m.UserType, new { @class = "form-control form-control-sm" })
             @Html.ValidationMessageFor(m => m.FirstName)
         </div>
         <div class="form-group col-md-2">
@@ -106,12 +97,11 @@ else if (Model.AddSuccessState == AddFamilyMemberViewModel.SuccessState.Failed)
             @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control form-control-sm" })
             @Html.ValidationMessageFor(m => m.ConfirmPassword)
         </div>
-    </div>
+    </div>*@
 
-    <div style="text-align:center">
+    @*<div style="text-align:center">
         <button type="submit" class="btn btn-sm btn-primary">Submit</button>
-    </div>
+    </div>*@
 }
-
 
 
