@@ -19,6 +19,45 @@ INSERT INTO Book (FamilyID, Title, Author, ISBN)
 VALUES (1, 'An Infinity of Little Hours', 'Nancy Maguire', '9781283095358');
 INSERT INTO Book (FamilyID, Title, Author, ISBN) 
 VALUES (1, 'Catechism of the Council of Trent', 'Pius IV', '9780895558848');
+INSERT INTO Book (FamilyID, Title, Author, ISBN) 
+VALUES (3, 'Screwtape Letters', 'C.S. Lewis', '9781974042333');
+INSERT INTO Book (FamilyID, Title, Author, ISBN) 
+VALUES (3, 'An Infinity of Little Hours', 'Nancy Maguire', '9781283095358');
+INSERT INTO Book (FamilyID, Title, Author, ISBN) 
+VALUES (3, 'Catechism of the Council of Trent', 'Pius IV', '9780895558848');
+INSERT INTO Book (FamilyID, Title, Author, ISBN) 
+VALUES (2, 'Screwtape Letters', 'C.S. Lewis', '9781974042333');
+INSERT INTO Book (FamilyID, Title, Author, ISBN) 
+VALUES (2, 'An Infinity of Little Hours', 'Nancy Maguire', '9781283095358');
+INSERT INTO Book (FamilyID, Title, Author, ISBN) 
+VALUES (2, 'Catechism of the Council of Trent', 'Pius IV', '9780895558848');
 
-INSERT INTO ReadingLog (BookID, Type, UserID, FamilyID, Minutes_read, Complete, isActive, Date)
-VALUES (1, 'Paper', 1, 1, 65, 0, 1, '08/17/2018');
+INSERT INTO ReadingLog (BookID, Type, UserID, FamilyID, Minutes_read, Status, Date)
+VALUES (1, 'Paper', 1, 1, 65, 'Active','08/17/2018');
+INSERT INTO ReadingLog (BookID, Type, UserID, FamilyID, Minutes_read, Status,Date)
+VALUES (1, 'Paper', 1, 1, 35, 'Active','08/20/2018');
+INSERT INTO ReadingLog (BookID, Type, UserID, FamilyID, Minutes_read, Status,Date)
+VALUES (1, 'Paper', 1, 1, 95, 'Active','08/19/2018');
+INSERT INTO ReadingLog (BookID, Type, UserID, FamilyID, Minutes_read, Status, Date)
+VALUES (1, 'Paper', 4, 3, 65, 'Active','08/17/2018');
+INSERT INTO ReadingLog (BookID, Type, UserID, FamilyID, Minutes_read, Status,Date)
+VALUES (1, 'Paper', 4, 3, 35, 'Active','08/20/2018');
+INSERT INTO ReadingLog (BookID, Type, UserID, FamilyID, Minutes_read, Status,Date)
+VALUES (1, 'Paper', 4, 3, 95, 'Active','08/19/2018');
+
+INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID)
+VALUES (2, 300, 0, 1, '01/01/2018', '12/30/2018', 1);
+INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID)
+VALUES (3, 300, 0, 1, '01/01/2018', '12/30/2018', 1);
+INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID)
+VALUES (3, 300, 0, 1, '01/01/2018', '12/30/2018', 3);
+INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID)
+VALUES (3, 300, 0, 1, '01/01/2018', '12/30/2018', 3);
+INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID)
+VALUES (2, 300, 0, 1, '01/01/2018', '12/30/2018', 2);
+INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID)
+VALUES (2, 300, 0, 1, '01/01/2018', '12/30/2018', 2);
+INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID)
+VALUES (2, 300, 0, 1, '01/01/2018', '12/30/2018', 3);
+INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID)
+VALUES (2, 300, 0, 1, '01/01/2018', '12/30/2018', 3);

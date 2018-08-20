@@ -65,6 +65,21 @@ namespace Capstone.Web.Controllers
             return View("AddFamilyMember", model);
         }
 
+        //public ActionResult Prize()
+        //{
+        //    //need to add method to call allPrizes
+        //    PrizeViewModel model = new PrizeViewModel();
+        //    if (TempData.ContainsKey("AddSuccessState"))
+        //    {
+        //        model.AddSuccessState = (AddFamilyMemberViewModel.SuccessState)TempData["AddSuccessState"];
+        //    }
+        //    else
+        //    {
+        //        model.AddSuccessState = AddFamilyMemberViewModel.SuccessState.None;
+        //    }
+        //    return View("AddPrize", model);
+        //}
+
         public ActionResult AddBook()
         {
             return View("AddBook");
