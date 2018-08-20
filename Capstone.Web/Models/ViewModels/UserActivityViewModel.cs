@@ -17,7 +17,7 @@ namespace Capstone.Web
         public string Format { get; set; }
         public string ISBN { get; set; }
         public int MinutesRead { get; set; }
-        public bool Complete { get; set; }
+        public string Status { get; set; }
         public string Type { get; set; }
         public bool BookActive { get; set; }
         public List<User> UserList { get; set; }

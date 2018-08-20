@@ -5,13 +5,64 @@
 @model AddFamilyMemberViewModel
 
 
+
+@if (Model.AddSuccessState == AddFamilyMemberViewModel.SuccessState.Success)
+{
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Success!</strong> A new family member has been successfully added!
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+}
+else if (Model.AddSuccessState == AddFamilyMemberViewModel.SuccessState.Failed)
+{
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Oops!</strong> Something went wrong.  Please try again.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+}
+
+
+<div class="table-responsive">
+    <table class="table table-bordered table-sm">
+        <thead>
+            <tr>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Username</th>
+                <th scope="col">Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.FamilyMembersList)
+            {
+                <tr>
+                    <td>@item.FirstName</td>
+                    <td>@item.LastName</td>
+                    <td>@item.Username</td>
+                    @if (item.RoleID == 2)
+                    {
+                        <td>Parent</td>
+                    }
+                    else
+                    {
+                        <td>Child</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
 <h2>Add Family Members</h2>
-
-
-
 
 @using (Html.BeginForm("AddFamilyMember", "Home", FormMethod.Post))
 {
+
 
     <div class="form-row">
         <div class="form-group col-md-2">
@@ -27,28 +78,28 @@
         </div>
         <div class="form-group col-md-2">
             <label for="FirstName">First Name</label>
-            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control form-control-sm"})
+            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control form-control-sm" })
             @Html.ValidationMessageFor(m => m.FirstName)
         </div>
         <div class="form-group col-md-2">
             <label for="LastName">Last Name</label>
-            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control form-control-sm"})
+            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control form-control-sm" })
             @Html.ValidationMessageFor(m => m.LastName)
         </div>
 
         <div class="form-group col-md-2">
             <label for="UserName">User Name</label>
-            @Html.TextBoxFor(m => m.Username, new { @class = "form-control form-control-sm"})
+            @Html.TextBoxFor(m => m.Username, new { @class = "form-control form-control-sm" })
             @Html.ValidationMessageFor(m => m.Username)
         </div>
         <div class="form-group col-md-2">
             <label for="Password">Password</label>
-            @Html.TextBoxFor(m => m.Password, new { @class = "form-control form-control-sm"})
+            @Html.TextBoxFor(m => m.Password, new { @class = "form-control form-control-sm" })
             @Html.ValidationMessageFor(m => m.Password)
         </div>
         <div class="form-group col-md-2">
             <label for="ConfirmPassword">Confirm Password</label>
-            @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control form-control-sm"})
+            @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control form-control-sm" })
             @Html.ValidationMessageFor(m => m.ConfirmPassword)
         </div>
     </div>
@@ -57,4 +108,5 @@
         <button type="submit" class="btn btn-sm btn-primary">Submit</button>
     </div>
 }
- 
+
+

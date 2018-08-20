@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -41,7 +42,20 @@ namespace Capstone.Web.Controllers
 
         public ActionResult AddFamilyMember()
         {
-            return View("AddFamilyMember");
+
+            List<User> userList = new List<User>();
+            userList = _db.GetAllUsersFromFamilyID(((User)Session["User"]).FamilyID);
+            AddFamilyMemberViewModel model = new AddFamilyMemberViewModel();
+            if(TempData.ContainsKey("AddSuccessState"))
+            {
+                model.AddSuccessState = (AddFamilyMemberViewModel.SuccessState)TempData["AddSuccessState"];
+            }
+            else
+            {
+                model.AddSuccessState = AddFamilyMemberViewModel.SuccessState.None;
+            }
+            model.FamilyMembersList = userList;
+            return View("AddFamilyMember", model);
         }
 
         public ActionResult AddBook()
@@ -163,32 +177,41 @@ namespace Capstone.Web.Controllers
         public ActionResult AddFamilyMember(AddFamilyMemberViewModel model)
         {
             ActionResult result = null;
-
-            if (!ModelState.IsValid)
+            try
             {
-                result = View("AddFamilyMember", model);
-            }
-            else
-            {
-                PasswordHash ph = new PasswordHash(model.Password);
-
-                User user = new User();
-                user.ID = model.ID;
-                user.FirstName = model.FirstName;
-                user.LastName = model.LastName;
-                user.Username = model.Username;
-                user.Password = ph.Hash;
-                user.FamilyID = ((User)Session["User"]).FamilyID;
-                user.FamilyName = _db.GetFamilyFromFamilyID(user.FamilyID);
-                user.Salt = ph.Salt;
-                user.RoleID = model.RoleID;
-
-                user = _db.CreateFamilyMember(user);
-
-                if (((User)Session["User"]).RoleID == 2)
+                if (!ModelState.IsValid)
                 {
-                    result = RedirectToAction("AddFamilyMember", "Home");
+                    throw new Exception();
+
                 }
+                else
+                {
+                    PasswordHash ph = new PasswordHash(model.Password);
+
+                    User user = new User();
+                    user.ID = model.ID;
+                    user.FirstName = model.FirstName;
+                    user.LastName = model.LastName;
+                    user.Username = model.Username;
+                    user.Password = ph.Hash;
+                    user.FamilyID = ((User)Session["User"]).FamilyID;
+                    user.FamilyName = _db.GetFamilyFromFamilyID(user.FamilyID);
+                    user.Salt = ph.Salt;
+                    user.RoleID = model.RoleID;
+
+                    user = _db.CreateFamilyMember(user);
+
+                    if (((User)Session["User"]).RoleID == 2)
+                    {
+                        TempData["AddSuccessState"] = AddFamilyMemberViewModel.SuccessState.Success;
+                        result = RedirectToAction("AddFamilyMember", "Home");
+                    }
+                }
+            }
+            catch(Exception)
+            {
+                TempData["AddSuccessState"] = AddFamilyMemberViewModel.SuccessState.Failed;
+                result = RedirectToAction("AddFamilyMember", "Home");
             }
             return result;
         }
@@ -207,12 +230,10 @@ namespace Capstone.Web.Controllers
 
                 Book book = new Book();
                 book.ID = model.ID;
-                book.UserID = model.UserID;
                 book.FamilyID = ((User)Session["User"]).FamilyID;
                 book.Title = model.Title;
                 book.Author = model.Author;
                 book.ISBN = model.ISBN;
-                book.Type = model.Type;
 
                 book = _db.CreateBook(book);
 
@@ -228,11 +249,11 @@ namespace Capstone.Web.Controllers
                 }
                 if (((User)Session["User"]).RoleID == 2)
                 {
-                    result = RedirectToAction("ParentActivity", "Home");
+                    result = RedirectToAction("UserActivity", "Home");
                 }
                 else if (((User)Session["User"]).RoleID == 3)
                 {
-                    result = RedirectToAction("ChildActivity", "Home");
+                    result = RedirectToAction("UserActivity", "Home");
                 }
             }
             return result;
@@ -254,7 +275,7 @@ namespace Capstone.Web.Controllers
                 log.UserID = model.UserID;
                 log.FamilyID = model.FamilyID; //use Session??
                 log.MinutesRead = model.MinutesRead;
-                log.Complete = model.Complete;
+                log.Status = model.Status;
                 //date gets added in DAL
 
                 log = _db.CreateReadingLog(log);
