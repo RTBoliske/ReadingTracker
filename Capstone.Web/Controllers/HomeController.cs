@@ -71,7 +71,7 @@ namespace Capstone.Web.Controllers
 
             if (!ModelState.IsValid || model.Password == null || model.Username == null)
             {
-                result = View("Index", model);
+                result = View("Register", model);
             }
             else
             {
@@ -121,7 +121,7 @@ namespace Capstone.Web.Controllers
         [HttpPost]
         public ActionResult Register(RegisterViewModel model)
         {
-            ActionResult result = null;
+           ActionResult result = null;
 
             if (!ModelState.IsValid)
             {

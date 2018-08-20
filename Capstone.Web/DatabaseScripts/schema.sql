@@ -28,7 +28,7 @@ CREATE TABLE Users(
 
 CREATE TABLE Family(
 	ID int Identity(1,1),
-	Family_name varchar(50) NOT NULL UNIQUE,
+	Family_name varchar(50) NOT NULL,
 	CONSTRAINT pk_family_ID PRIMARY KEY (ID),
 );
 
