@@ -4,9 +4,50 @@
 }
 @model UserActivityViewModel
 
-<h1>User Reading Activity View</h1>
+<h1>@Model.UserList[Model.UserID].FirstName's Activity View</h1>
 
-<dl class="row">
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-heading" id="headingOne">
+                    <h5 class="mb-0">Add Reading Time</h5>
+                </div>
+                <div class="class-body">
+                    <div class="col-sm-3">
+                        <dl>
+                            <dt class="">enter hours</dt>
+                            <dd class="">
+                                <input type="number" name="readTimeHrs" />
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="col-sm-3">
+                        <dl>
+                            <dt class="">enter minutes</dt>
+                            <dd class="">
+                                <input type="number" name="readTimeMins" />
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <button type="button" class="btn btn-primary">Add Time</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-8">
+            <div class="panel panel-default">
+                <div class="panel-heading" id="headingTwo">
+                    <h5 class="mb-0">User Activity</h5>
+                </div>
+                <div class="class-body">some stuff about the current user's activity</div>
+                <div class="panel-footer">some footer stuff</div>
+            </div>
+        </div>
+    </div>
+
+@*old code - to be discarded*@
+@*<dl class="row">
     <dt class="col-sm-3">Currently reading:</dt>
     <dd class="col-sm-6">Title of book currently reading</dd>
     <dd class="col-sm-3">
@@ -16,13 +57,13 @@
     <dt class="col-sm-3">Time spent reading this book:</dt>
     <dd class="col-sm-9">pull total reading time from db for user reading</dd>
 
-    @*<dt class="col-sm-3">Progress toward prize:</dt>
+    <dt class="col-sm-3">Progress toward prize:</dt>
     <dd class="col-sm-6">
         <div class="progress" style="height: 15px;">
             <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:75%;" role="progressbar">75%</div>
         </div>
     </dd>
-    <dd class="col-sm-3"></dd>*@
+    <dd class="col-sm-3"></dd>
 
     <dt class="col-sm-3">Add reading time for this book:</dt>
     <dd class="col-sm-2">
@@ -37,10 +78,10 @@
         <button type="submit" class="btn btn-sm btn-primary">Complete</button>
     </dd>
 
-    @*<dt class="col-sm-3">Start a new book</dt>
-    <dd class="col-sm-9"></dd>*@
-</dl>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addBookModal" data-backdrop="false">Start new book</button>
+    <dt class="col-sm-3">Start a new book</dt>
+    <dd class="col-sm-9"></dd>
+</dl>*@
+@*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addBookModal" data-backdrop="false">Start new book</button>
 <div class="modal fade bg-light" id="addBookModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
@@ -88,28 +129,8 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 
 
-<h2>Family Members</h2>
-
-<div class="card-columns">
-    @foreach (var user in Model.UserList)
-    {
-        @*<div class="card">
-                <div class="card-body text-center">
-                    <p class="card-text">@user.FirstName</p>
-                </div>
-            </div>*@
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Card title</h4>
-                <p class="card-text">Some example text. Some example text.</p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-            </div>
-        </div>
-    }
-</div>
 
 <script src="~/Content/UserActivityJQuery.js"></script>
