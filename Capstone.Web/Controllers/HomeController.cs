@@ -69,7 +69,7 @@ namespace Capstone.Web.Controllers
             return View("AddFamilyMember", model);
         }
 
-        //public ActionResult Prize()
+        //public ActionResult AddPrize()
         //{
         //    //need to add method to call allPrizes
         //    PrizeViewModel model = new PrizeViewModel();

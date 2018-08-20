@@ -5,7 +5,7 @@
 
 
 
-@*@if (Model.AddSuccessState == PrizeViewModel.SuccessState.Success)
+@if (Model.AddSuccessState == PrizeViewModel.SuccessState.Success)
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>Success!</strong> A new family member has been successfully added!
@@ -22,44 +22,45 @@ else if (Model.AddSuccessState == PrizeViewModel.SuccessState.Failed)
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-}*@
+}
 
 
 @*<div class="table-responsive">
-    <table class="table table-bordered table-sm">
-        <thead>
-            <tr>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Username</th>
-                <th scope="col">Role</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.PrizeList)
-            {
+        <table class="table table-bordered table-sm">
+            <thead>
                 <tr>
-                    <td>@item.FirstName</td>
-                    <td>@item.LastName</td>
-                    <td>@item.Username</td>
-                    @if (item.RoleID == 2)
-                    {
-                        <td>Parent</td>
-                    }
-                    else
-                    {
-                        <td>Child</td>
-                    }
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Role</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>*@
+            </thead>
+            <tbody>
+                @foreach (var item in Model.PrizeList)
+                {
+                    <tr>
+                        <td>@item.FirstName</td>
+                        <td>@item.LastName</td>
+                        <td>@item.Username</td>
+                        @if (item.RoleID == 2)
+                        {
+                            <td>Parent</td>
+                        }
+                        else
+                        {
+                            <td>Child</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>*@
 
 
 
-
-    @*<div class="form-row">
+@using (Html.BeginForm("AddPrize", "Home", FormMethod.Post))
+{
+    <div class="form-row">
         <div class="form-group col-md-2">
             <label for="UserRole">User's Role</label><br />
             <div class="form-check form-check-inline">
@@ -71,37 +72,46 @@ else if (Model.AddSuccessState == PrizeViewModel.SuccessState.Failed)
                 <label class="form-check-label" for="inlineCheckbox1">Parent</label>
             </div>
         </div>
-        <div class="form-group col-md-2">
-            <label for="FirstName">First Name</label>
-            @Html.TextBoxFor(m => m.UserType, new { @class = "form-control form-control-sm" })
-            @Html.ValidationMessageFor(m => m.FirstName)
+        <label for="UserRole">User's Role</label>
+        <div class="form-check form-check-inline">
+            <input type="radio" class="form-check-input" name="UserType" id="inlineCheckbox1" value="3" checked>
+            <label class="form-check-label" for="inlineCheckbox1">Child</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input type="radio" class="form-check-input" name="UserType" id="inlineCheckbox1" value="2">
+            <label class="form-check-label" for="inlineCheckbox1">Parent</label>
         </div>
         <div class="form-group col-md-2">
-            <label for="LastName">Last Name</label>
-            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control form-control-sm" })
-            @Html.ValidationMessageFor(m => m.LastName)
+            <label for="Milestone">Goal</label>
+            @Html.TextBoxFor(m => m.Milestone, new { @class = "form-control form-control-sm" })
+            @Html.ValidationMessageFor(m => m.Milestone)
         </div>
 
         <div class="form-group col-md-2">
-            <label for="UserName">User Name</label>
-            @Html.TextBoxFor(m => m.Username, new { @class = "form-control form-control-sm" })
-            @Html.ValidationMessageFor(m => m.Username)
+            <label for="MaxNumPrizes">Max # of Prizes</label>
+            @Html.TextBoxFor(m => m.MaxNumPrizes, new { @class = "form-control form-control-sm" })
+            @Html.ValidationMessageFor(m => m.MaxNumPrizes)
         </div>
         <div class="form-group col-md-2">
-            <label for="Password">Password</label>
-            @Html.TextBoxFor(m => m.Password, new { @class = "form-control form-control-sm" })
-            @Html.ValidationMessageFor(m => m.Password)
+            <label for="isActive">Active?</label>
+            @Html.TextBoxFor(m => m.isActive, new { @class = "form-control form-control-sm" })
+            @Html.ValidationMessageFor(m => m.isActive)
         </div>
         <div class="form-group col-md-2">
-            <label for="ConfirmPassword">Confirm Password</label>
-            @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control form-control-sm" })
-            @Html.ValidationMessageFor(m => m.ConfirmPassword)
+            <label for="StartDate">Confirm Password</label>
+            @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control form-control-sm" })
+            @Html.ValidationMessageFor(m => m.StartDate)
         </div>
-    </div>*@
+        <div class="form-group col-md-2">
+            <label for="EndDate">Confirm Password</label>
+            @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control form-control-sm" })
+            @Html.ValidationMessageFor(m => m.EndDate)
+        </div>
+    </div>
 
-    @*<div style="text-align:center">
+    <div style="text-align:center">
         <button type="submit" class="btn btn-sm btn-primary">Submit</button>
-    </div>*@
+    </div>
 }
 
 
