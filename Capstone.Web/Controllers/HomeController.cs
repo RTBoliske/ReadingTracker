@@ -34,7 +34,11 @@ namespace Capstone.Web.Controllers
 
         public ActionResult FamilyActivity()
         {
-            return View("FamilyActivity");
+            List<User> userList = new List<User>();
+            userList = _db.GetAllUsersFromFamilyID(((User)Session["User"]).FamilyID);
+            UserActivityViewModel model = new UserActivityViewModel();
+            model.UserList = userList;
+            return View("FamilyActivity", model);
         }
 
         public ActionResult UserActivity()
