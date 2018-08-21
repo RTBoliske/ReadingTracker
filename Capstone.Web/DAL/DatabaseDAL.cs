@@ -626,9 +626,11 @@ namespace Capstone.Web.DAL
         public List<Prize> GetPrizesByUser (Prize prize)
         { 
             string sql = @"SELECT Prize.ID AS ID, Prize.UserType AS UserType, Prize.Goal AS Goal, 
-                           Prize.MaxNumPrize AS MaxNumPrize, Prize.isActive AS isActive, Prize.FamilyID AS FamilyID  FROM Prize 
+                           Prize.MaxNumPrize AS MaxNumPrize, Prize.isActive AS isActive,
+                           Prize.StartDate AS StartDate, Prize.EndDate AS EndDate FROM Prize 
                            JOIN Family ON Prize.FamilyID = Family.ID JOIN Users ON Users.FamilyID = Family.ID 
-                           WHERE Family.ID = @familyID AND @todayDate > Prize.StartDate AND @EndDate < Prize.EndDate AND isActive = 1;
+                           WHERE Family.ID = @familyID AND @todayDate > Prize.StartDate AND @todayDate < Prize.EndDate 
+                           AND isActive = 1;
                            SELECT CAST(SCOPE_IDENTITY() as int);";
 
             List<Prize> prizeList = new List<Prize>();
@@ -654,7 +656,6 @@ namespace Capstone.Web.DAL
                             Milestone = Convert.ToInt32(reader["Goal"]),
                             MaxNumPrizes = Convert.ToInt32(reader["MaxNumPrize"]),
                             isActive = Convert.ToBoolean(reader["isActive"]),
-                            FamilyID = Convert.ToInt32(reader["FamilyID"]),
                             StartDate = Convert.ToDateTime(reader["StartDate"]),
                             EndDate = Convert.ToDateTime(reader["EndDate"]),
                         };
@@ -685,7 +686,5 @@ namespace Capstone.Web.DAL
                 RoleID = Convert.ToInt32(reader["RoleID"]),
             };
         }
-
-        
     }
 }
