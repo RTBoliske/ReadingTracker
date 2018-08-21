@@ -6,153 +6,227 @@
 
 <h1>@Model.UserList[Model.UserID].FirstName's Activity</h1>
 
-<div class="row">
-    <div class="col-sm-4 col-md-4 col-lg-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">Log Reading Time</div>
-            <div class="panel-body">
-                <label for="hoursRead">Hours Read:</label>
-                <input type="text" class="form-control" id="hoursRead" />
-            </div>
-        </div>
-    </div>
-
-    <div class="col-sm-8 col-md-8 col-lg-8">
-        <div class="panel panel-default">
-            <div class="panel-heading">Current Activity</div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <div class="dropdown">
-                            @*@Html.DropDownListFor(m => m.Title, new { @class="form-control form-control-sm"})*@
-                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                                Active Books<span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li>active book 1</li>
-                                <li>active book 2</li>
-                                <li class="divider"></li>
-                                <li>inactive book 1</li>
-                                <li>inactive book 2</li>
-                            </ul>
-                        </div>
+<section class="mainContent full-width clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-2 col-sm-6 col-xs-12">
+                <div class="panel panel-default formPanel">
+                    <div class="panel-heading bg-color-1 border-color-1">
+                        <h3 class="panel-title">Add reading time</h3>
                     </div>
-                    <div class="col-sm-3">
-                        <h5>Read for: <span class="label label-outline-primary">num minutes</span></h5>
-                    </div>
-                    <div class="col-sm-3">
-                        <h5>Read type: <span class="label label-outline-primary">reading type</span></h5>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="checkbox">
-                            <label><input type="checkbox" value="" />Finished Book</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <h5>Current Goal: </h5>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: 70%">70%</div>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-    </div>
-</div>
-
-@*old code - to be discarded*@
-@*<dl class="row">
-    <dt class="col-sm-3">Currently reading:</dt>
-    <dd class="col-sm-6">Title of book currently reading</dd>
-    <dd class="col-sm-3">
-        <button type="submit" class="btn btn-sm btn-primary">View Additional Information</button>
-    </dd>
-
-    <dt class="col-sm-3">Time spent reading this book:</dt>
-    <dd class="col-sm-9">pull total reading time from db for user reading</dd>
-
-    <dt class="col-sm-3">Progress toward prize:</dt>
-    <dd class="col-sm-6">
-        <div class="progress" style="height: 15px;">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:75%;" role="progressbar">75%</div>
-        </div>
-    </dd>
-    <dd class="col-sm-3"></dd>
-
-    <dt class="col-sm-3">Add reading time for this book:</dt>
-    <dd class="col-sm-2">
-        <input type="time" name="TimeReading" class="form-control form-control-sm col-sm-6" />
-    </dd>
-    <dd class="col-sm-7">
-        <button type="submit" class="btn btn-sm btn-primary">Add reading time</button>
-    </dd>
-
-    <dt class="col-sm-4">Click Complete when you've finished the book</dt>
-    <dd class="col-sm-8">
-        <button type="submit" class="btn btn-sm btn-primary">Complete</button>
-    </dd>
-
-    <dt class="col-sm-3">Start a new book</dt>
-    <dd class="col-sm-9"></dd>
-</dl>*@
-@*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addBookModal" data-backdrop="false">Start new book</button>
-<div class="modal fade bg-light" id="addBookModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" >Add a new book to read</h5>
-                <button type="button" class="close" data-dismiss="modal">
-                    <span>&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="/Home/AddReadingLog" method="post">
-                    <div class="form-group">
-                        <label for="user-name" class="col-form-label">Select User:</label>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="selectUserButton" data-toggle="dropdown">Select User</button>
-                            <div class="dropdown-menu">
-                                @foreach (var item in Model.UserList)
-                                {
-                                <button class="dropdown-item" type="button" name="UserID" value="@item.ID">@item.FirstName</button>
-                                }
+                    <div class="panel-body">
+                        <form action="" method="post" role="form">
+                            <label for="SelectBook">Select a current Book</label>
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                    Active Books<span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>active book 1</li>
+                                    <li>active book 2</li>
+                                    <li class="divider"></li>
+                                    <li>inactive book 1</li>
+                                    <li>inactive book 2</li>
+                                </ul>
                             </div>
-                        </div>
+                            <div class="form-group formField">
+                                <label for="AddReadingHours">Hours:</label>
+                                @Html.TextBoxFor(m => m.MinutesRead, new { @class = "form-control form-control-sm" })
+                                @Html.ValidationMessageFor(m => m.MinutesRead)
+                            </div>
+                            <div class="form-group formField">
+                                <label for="AddReadingMinutes">Minutes:</label>
+                                @Html.TextBoxFor(m => m.MinutesRead, new { @class = "form-control form-control-sm" })
+                                @Html.ValidationMessageFor(m => m.MinutesRead)
+                            </div>
+                            <div style="text-align: center;">
+                                <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label for="book-title" class="col-form-label">Title:</label>
-                        <text class="form-control" id="book-title-text" name="Title"></text>
-                    </div>
-                    <div class="form-group">
-                        <label for="book-author" class="col-form-label">Author:</label>
-                        <text class="form-control" id="book-author-text" name="Author"></text>
-                    </div>
-                    <div class="form-group">
-                        <label for="book-isbn" class="col-form-label">ISBN:</label>
-                        <text class="form-control" id="book-isbn-text" name="ISBN"></text>
-                    </div>
-                    <div class="form-group">
-                        <label for="book-isbn" class="col-form-label">Format:</label>
-                        <input type="text" class="form-control" id="book-type-text" name="Type" />
-                    </div>
-                </form>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Add Book</button>
+
+            <h3 class="color-1">Progress</h3>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 70%">70%</div>
             </div>
+
+            <h3 class="color-1">Reading Log</h3>
+            <div class="table-responsive">
+                <table class="table table-curved">
+                    <thead>
+                        <tr>
+                            <th class="col-sm-3 bg-color-1">Title</th>
+                            <th class="col-sm-3 bg-color-1">Reading Time</th>
+                            <th class="col-sm-3 bg-color-1">Reading Format</th>
+                            <th class="col-sm-3 bg-color-1">Completed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>title 1</td>
+                            <td>35 minutes</td>
+                            <td>paper</td>
+                            <td>
+                                <input type="checkbox" value="true" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
         </div>
     </div>
-</div>*@
+</section>
+
+            @*<div class="row">
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Log Reading Time</div>
+                        <div class="panel-body">
+                            <label for="hoursRead">Hours Read:</label>
+                            <input type="text" class="form-control" id="hoursRead" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-8 col-md-8 col-lg-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Current Activity</div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="dropdown">
+                                        @Html.DropDownListFor(m => m.Title, new { @class="form-control form-control-sm"})
+                                        @*<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                                                            Active Books<span class="caret"></span>
+                                                                        </button>
+                                                                        <ul class="dropdown-menu">
+                                                                            <li>active book 1</li>
+                                                                            <li>active book 2</li>
+                                                                            <li class="divider"></li>
+                                                                            <li>inactive book 1</li>
+                                                                            <li>inactive book 2</li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <h5>Read for: <span class="label label-outline-primary">num minutes</span></h5>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <h5>Read type: <span class="label label-outline-primary">reading type</span></h5>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <div class="checkbox">
+                                                                        <label><input type="checkbox" value="" />Finished Book</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-12">
+                                                                    <h5>Current Goal: </h5>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-12">
+                                                                    <div class="progress">
+                                                                        <div class="progress-bar" role="progressbar" style="width: 70%">70%</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>*@
+
+                                @*old code - to be discarded*@
+                                @*<dl class="row">
+                <dt class="col-sm-3">Currently reading:</dt>
+                <dd class="col-sm-6">Title of book currently reading</dd>
+                <dd class="col-sm-3">
+                    <button type="submit" class="btn btn-sm btn-primary">View Additional Information</button>
+                </dd>
+
+                <dt class="col-sm-3">Time spent reading this book:</dt>
+                <dd class="col-sm-9">pull total reading time from db for user reading</dd>
+
+                <dt class="col-sm-3">Progress toward prize:</dt>
+                <dd class="col-sm-6">
+                    <div class="progress" style="height: 15px;">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:75%;" role="progressbar">75%</div>
+                    </div>
+                </dd>
+                <dd class="col-sm-3"></dd>
+
+                <dt class="col-sm-3">Add reading time for this book:</dt>
+                <dd class="col-sm-2">
+                    <input type="time" name="TimeReading" class="form-control form-control-sm col-sm-6" />
+                </dd>
+                <dd class="col-sm-7">
+                    <button type="submit" class="btn btn-sm btn-primary">Add reading time</button>
+                </dd>
+
+                <dt class="col-sm-4">Click Complete when you've finished the book</dt>
+                <dd class="col-sm-8">
+                    <button type="submit" class="btn btn-sm btn-primary">Complete</button>
+                </dd>
+
+                <dt class="col-sm-3">Start a new book</dt>
+                <dd class="col-sm-9"></dd>
+            </dl>*@
+                                @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addBookModal" data-backdrop="false">Start new book</button>
+            <div class="modal fade bg-light" id="addBookModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" >Add a new book to read</h5>
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span>&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/Home/AddReadingLog" method="post">
+                                <div class="form-group">
+                                    <label for="user-name" class="col-form-label">Select User:</label>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="selectUserButton" data-toggle="dropdown">Select User</button>
+                                        <div class="dropdown-menu">
+                                            @foreach (var item in Model.UserList)
+                                            {
+                                            <button class="dropdown-item" type="button" name="UserID" value="@item.ID">@item.FirstName</button>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="book-title" class="col-form-label">Title:</label>
+                                    <text class="form-control" id="book-title-text" name="Title"></text>
+                                </div>
+                                <div class="form-group">
+                                    <label for="book-author" class="col-form-label">Author:</label>
+                                    <text class="form-control" id="book-author-text" name="Author"></text>
+                                </div>
+                                <div class="form-group">
+                                    <label for="book-isbn" class="col-form-label">ISBN:</label>
+                                    <text class="form-control" id="book-isbn-text" name="ISBN"></text>
+                                </div>
+                                <div class="form-group">
+                                    <label for="book-isbn" class="col-form-label">Format:</label>
+                                    <input type="text" class="form-control" id="book-type-text" name="Type" />
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Add Book</button>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
 
 
 
-<script src="~/Content/UserActivityJQuery.js"></script>
+                                <script src="~/Content/UserActivityJQuery.js"></script>
