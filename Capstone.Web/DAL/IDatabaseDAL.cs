@@ -27,6 +27,7 @@ namespace Capstone.Web
         Book CreateBook(Book book);
         List<Book> GetActiveBooks(int userID);
         List<Book> GetInactiveBooks(int userID);
+        List<Book> GetAllBooksByFamilyID(int familyID);
 
         //Reading Log
         ReadingLog GetReadingLog(ReadingLog log);

@@ -353,7 +353,7 @@ namespace Capstone.Web.DAL
         }
         public Book CreateBook(Book book)
         {
-            string sql = @"INSERT INTO Book (FamilyID, Title, Author, ISBN) VALUES (@ID, @FamilyID, @Title, @Author, @ISBN);
+            string sql = @"INSERT INTO Book (FamilyID, Title, Author, ISBN) VALUES (@FamilyID, @Title, @Author, @ISBN);
                            SELECT CAST(SCOPE_IDENTITY() as int);";
 
             try
@@ -380,6 +380,49 @@ namespace Capstone.Web.DAL
             }
 
         }
+
+        public List<Book> GetAllBooksByFamilyID(int familyID)
+        {
+            List<Book> bookList = new List<Book>();
+            string sql = @"SELECT Book.Title As Title,
+                                  Book.Author As Author,
+                                  Book.ISBN As ISBN
+                                  From Book
+                                  Where Book.FamilyID = @FamilyID;";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@FamilyID", familyID);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while(reader.Read())
+                    {
+                        Book book = new Book
+                        {
+                            //ID = Convert.ToInt32(reader["ID"]),
+                            Title = Convert.ToString(reader["Title"]),
+                            Author = Convert.ToString(reader["Author"]),
+                            ISBN = Convert.ToString(reader["ISBN"]),
+                            //FamilyID = Convert.ToInt32(reader["FamilyID"]),
+                        };
+                        bookList.Add(book);
+                    }
+                }
+            }
+            catch(SqlException)
+            {
+                throw;
+            }
+            
+            return bookList;
+        }
+        
         public List<Book> GetActiveBooks(int userID)
         {
             List<Book> bookList = new List<Book>();
@@ -429,6 +472,8 @@ namespace Capstone.Web.DAL
             }
             return bookList;
         }
+
+
         public List<Book> GetInactiveBooks(int userID)
         {
             List<Book> bookList = new List<Book>();

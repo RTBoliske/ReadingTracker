@@ -94,7 +94,19 @@ namespace Capstone.Web.Controllers
 
         public ActionResult AddBook()
         {
-            return View("AddBook");
+            List<Book> bookList = new List<Book>();
+            bookList = _db.GetAllBooksByFamilyID(((User)Session["User"]).FamilyID);
+            AddBookViewModel model = new AddBookViewModel();
+            if (TempData.ContainsKey("AddSuccessState"))
+            {
+                model.AddSuccessState = (AddBookViewModel.SuccessState)TempData["AddSuccessState"];
+            }
+            else
+            {
+                model.AddSuccessState = AddBookViewModel.SuccessState.None;
+            }
+            model.BookList = bookList;
+            return View("AddBook", model);
         }
 
 
@@ -256,41 +268,55 @@ namespace Capstone.Web.Controllers
         public ActionResult AddBook(Book model)
         {
             ActionResult result = null;
-
-            if (!ModelState.IsValid)
-            {
-                result = View("AddBook", model);
-            }
-            else
+            try
             {
 
-                Book book = new Book();
-                book.ID = model.ID;
-                book.FamilyID = ((User)Session["User"]).FamilyID;
-                book.Title = model.Title;
-                book.Author = model.Author;
-                book.ISBN = model.ISBN;
 
-                book = _db.CreateBook(book);
-
-                // book does not exist or ISBN is wrong
-                if (book == null || book.ISBN == null)
+                if (!ModelState.IsValid)
                 {
-                    ModelState.AddModelError("invalid-credentials", "An invalid book title or ISBN was provided");
                     result = View("AddBook", model);
                 }
                 else
                 {
-                    Session["Book"] = book; //not sure if needed... yet?
+
+                    Book book = new Book();
+                    book.ID = model.ID;
+                    book.FamilyID = ((User)Session["User"]).FamilyID;
+                    book.Title = model.Title;
+                    book.Author = model.Author;
+                    book.ISBN = model.ISBN;
+
+                    book = _db.CreateBook(book);
+
+                    if (((User)Session["User"]).RoleID == 2)
+                    {
+                        TempData["AddSuccessState"] = AddBookViewModel.SuccessState.Success;
+                        result = RedirectToAction("AddBook", "Home");
+                    }
+                    // book does not exist or ISBN is wrong
+                    //if (book == null || book.ISBN == null)
+                    //{
+                    //    ModelState.AddModelError("invalid-credentials", "An invalid book title or ISBN was provided");
+                    //    result = View("AddBook", model);
+                    //}
+                    //else
+                    //{
+                    //    Session["Book"] = book; //not sure if needed... yet?
+                    //}
+                    //if (((User)Session["User"]).RoleID == 2)
+                    //{
+                    //    result = RedirectToAction("UserActivity", "Home");
+                    //}
+                    //else if (((User)Session["User"]).RoleID == 3)
+                    //{
+                    //    result = RedirectToAction("UserActivity", "Home");
+                    //}
                 }
-                if (((User)Session["User"]).RoleID == 2)
-                {
-                    result = RedirectToAction("UserActivity", "Home");
-                }
-                else if (((User)Session["User"]).RoleID == 3)
-                {
-                    result = RedirectToAction("UserActivity", "Home");
-                }
+            }
+            catch(Exception)
+            {
+                TempData["AddSuccessState"] = AddBookViewModel.SuccessState.Failed;
+                result = RedirectToAction("AddBook", "Home");
             }
             return result;
         }
