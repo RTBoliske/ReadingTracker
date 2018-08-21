@@ -658,6 +658,7 @@
     <Content Include="Views\Home\FamilyActivity.cshtml" />
     <Content Include="Views\Shared\_LayoutTheme.cshtml" />
     <Content Include="Views\Home\AddPrize.cshtml" />
+    <Content Include="Views\Home\AddABook.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
