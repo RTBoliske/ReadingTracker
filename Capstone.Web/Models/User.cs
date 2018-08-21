@@ -38,7 +38,7 @@ namespace Capstone.Web
 
         public string Salt { get; set; }
 
-        [Required(ErrorMessage = "This field is required")]
+        //[Required(ErrorMessage = "This field is required")]
         public int RoleID { get; set; }
     }
 

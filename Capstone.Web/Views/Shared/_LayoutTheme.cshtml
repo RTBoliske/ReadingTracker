@@ -73,8 +73,7 @@
                     <div class="row">
                         <div class="col-sm-7">
                             <ul class="list-inline topList">
-                                <li><i class="fa fa-envelope bg-color-1" aria-hidden="true"></i> <a href="mailto:austin.delarosa@gmail.com">austin.delarosa@gmail.com</a></li>
-                                <li><i class="fa fa-phone bg-color-2" aria-hidden="true"></i> +1 859 444 8011</li>
+                               
                                 @*<li><i class="fa fa-clock-o bg-color-6" aria-hidden="true"></i> Open: 9am - 6pm</li>*@
                             </ul>
                         </div>
@@ -385,7 +384,10 @@
                             @if (Session["User"] != null)
                             {
                                 <li class="dropdown singleDrop color-6 ">
-                                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gg bg-color-6" aria-hidden="true"></i> <span>Check Child</span></a>
+                                    <a href="@Url.Action("AddBook", "Home")" class="navbar-brand" @*data-toggle="dropdown"*@ role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-calendar bg-color-6" aria-hidden="true"></i>
+                                        <span>Add A Book</span>
+                                    </a>
                                     @*<ul class="dropdown-menu dropdown-menu-right">
                     <li class=" "><a href="accordion-toggles.html">Accordions &amp; Toggles</a></li>
                     <li class=""><a href="tabs-dropdown.html">Tabs &amp; Dropdowns</a></li>

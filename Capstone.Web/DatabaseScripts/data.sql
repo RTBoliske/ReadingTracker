@@ -17,7 +17,7 @@ VALUES ('Nora', 'Young', 2, 'nyoung', 'cQgdTq37FO2vDD+jCr4mhFWBePc=', 'VBZ1VOmoZ
 INSERT INTO Users (First_name, Last_name, FamilyID, Username, Password, Salt, RoleID) 
 VALUES ('Dylan', 'Boliske', 2, 'dboliske', 'ujf3h3kIuzWmJtr8Zti7YoPECN8=', 'bkkKEisi+ah7yJYD8s4tBg==', 3);
 INSERT INTO Users (First_name, Last_name, FamilyID, Username, Password, Salt, RoleID) 
-VALUES ('Jack', 'Binegar', 3, 'jbinegar', 'ujf3h3kIuzWmJtr8Zti7YoPECN8=', 'bkkKEisi+ah7yJYD8s4tBg==', 2);
+VALUES ('Jack', 'Binegar', 3, 'jbinegar1', 'ujf3h3kIuzWmJtr8Zti7YoPECN8=', 'bkkKEisi+ah7yJYD8s4tBg==', 2);
 INSERT INTO Users (First_name, Last_name, FamilyID, Username, Password, Salt, RoleID) 
 VALUES ('Wes', 'Binegar', 3, 'd1binegar', 'ujf3h3kIuzWmJtr8Zti7YoPECN8=', 'bkkKEisi+ah7yJYD8s4tBg==', 3);
 INSERT INTO Users (First_name, Last_name, FamilyID, Username, Password, Salt, RoleID) 
