@@ -335,45 +335,52 @@ namespace Capstone.Web.Controllers
         public ActionResult AddPrize(Prize model)
         {
             ActionResult result = null;
-
-            if (!ModelState.IsValid)
-            {
-                result = View("AddPrize", model);
-            }
-            else
-            {
-
-                Prize prize = new Prize();
-                prize.ID = model.ID;
-                prize.FamilyID = ((User)Session["User"]).FamilyID;
-                prize.UserType = model.UserType;
-                prize.Milestone = model.Milestone;
-                prize.MaxNumPrizes = model.MaxNumPrizes;
-                prize.isActive = model.isActive;
-                prize.StartDate = model.StartDate;
-                prize.EndDate = model.EndDate;
-
-
-                prize = _db.AddPrize(prize);
-
-                // book does not exist or ISBN is wrong
-                if (prize == null)
+            try {
+                if (!ModelState.IsValid)
                 {
-                    ModelState.AddModelError("invalid-credentials", "An invalid prize was attempted");
                     result = View("AddPrize", model);
                 }
-                //else
-                //{
-                //    Session["Book"] = book; //not sure if needed... yet?
-                //}
-                if (((User)Session["User"]).RoleID == 2)
+                else
                 {
-                    result = RedirectToAction("AddPrize", "Home");
+
+                    Prize prize = new Prize();
+                    prize.ID = model.ID;
+                    prize.FamilyID = ((User)Session["User"]).FamilyID;
+                    prize.UserType = model.UserType;
+                    prize.Milestone = model.Milestone;
+                    prize.MaxNumPrizes = model.MaxNumPrizes;
+                    prize.isActive = model.isActive;
+                    prize.StartDate = model.StartDate;
+                    prize.EndDate = model.EndDate;
+
+
+                    prize = _db.AddPrize(prize);
+
+                    // book does not exist or ISBN is wrong
+                    if (prize == null)
+                    {
+                        ModelState.AddModelError("invalid-credentials", "An invalid prize was attempted");
+                        result = View("AddPrize", model);
+                    }
+                    //else
+                    //{
+                    //    Session["Book"] = book; //not sure if needed... yet?
+                    //}
+                    if (((User)Session["User"]).RoleID == 2)
+                    {
+                        TempData["AddSuccessState"] = AddFamilyMemberViewModel.SuccessState.Success;
+                        result = RedirectToAction("AddPrize", "Home");
+                    }
+                    else if (((User)Session["User"]).RoleID == 3)
+                    {
+                        result = RedirectToAction("AddPrize", "Home");
+                    }
                 }
-                else if (((User)Session["User"]).RoleID == 3)
-                {
-                    result = RedirectToAction("AddPrize", "Home");
-                }
+            }
+            catch (Exception)
+            {
+                TempData["AddSuccessState"] = AddFamilyMemberViewModel.SuccessState.Failed;
+                throw;
             }
             return result;
         }

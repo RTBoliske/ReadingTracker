@@ -21,6 +21,7 @@ namespace Capstone.Web
         public string Type { get; set; }
         public bool BookActive { get; set; }
         public List<User> UserList { get; set; }
-
+        public List<Book> ActiveBooks { get; set; }
+        public List<Book> InactiveBooks { get; set; }
     }
 }
