@@ -55,63 +55,105 @@ else if (Model.AddSuccessState == PrizeViewModel.SuccessState.Failed)
             </tbody>
         </table>
     </div>*@
-
-
-
-@using (Html.BeginForm("AddPrize", "Home", FormMethod.Post))
-{
-    <div class="form-row">
-        <div class="form-group col-md-2">
-            <label for="UserRole">User's Role</label><br />
-            <div class="form-check form-check-inline">
-                <input type="radio" class="form-check-input" name="RoleID" id="inlineCheckbox1" value="3" checked>
-                <label class="form-check-label" for="inlineCheckbox1">Child</label>
+@*<div class="rightSidebar">*@
+<section class="mainContent full-width clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-2 col-sm-6 col-xs-12">
+                <div class="panel panel-default formPanel">
+                    <div class="panel-heading bg-color-1 border-color-1">
+                        <h3 class="panel-title">Create  an account</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form action="/Home/AddPrize" method="post" role="form">
+                            <label for="UserRole">User's Role</label>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" name="UserType" id="inlineCheckbox1" value="3" checked>
+                                <label class="form-check-label" for="inlineCheckbox1">Child</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" name="UserType" id="inlineCheckbox1" value="2">
+                                <label class="form-check-label" for="inlineCheckbox1">Parent</label>
+                            </div>
+                            <div class="form-group formField">
+                                <label for="Milestone">Reading Goal (in minutes)</label>
+                                @Html.TextBoxFor(m => m.Milestone, new { @class = "form-control form-control-sm" })
+                                @Html.ValidationMessageFor(m => m.Milestone)
+                            </div>
+                            <div class="form-group formField">
+                                <label for="MaxNumPrizes">Max # of Prizes</label>
+                                @Html.TextBoxFor(m => m.MaxNumPrizes, new { @class = "form-control form-control-sm" })
+                                @Html.ValidationMessageFor(m => m.MaxNumPrizes)
+                            </div>
+                            <div class="form-group formField">
+                                <label for="isActive">Is Goal Active?</label>
+                                @Html.TextBoxFor(m => m.isActive, new { @class = "form-control form-control-sm" })
+                                @Html.ValidationMessageFor(m => m.isActive)
+                            </div>
+                            <div class="form-group formField">
+                                <label for="StartDate">Start Date</label>
+                                @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control form-control-sm" })
+                                @Html.ValidationMessageFor(m => m.StartDate)
+                            </div>
+                            <div class="form-group formField">
+                                <label for="EndDate">End Date</label>
+                                @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control form-control-sm" })
+                                @Html.ValidationMessageFor(m => m.EndDate)
+                            </div>
+                            <div style="text-align:center">
+                                <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="form-check form-check-inline">
-                <input type="radio" class="form-check-input" name="RoleID" id="inlineCheckbox1" value="2">
-                <label class="form-check-label" for="inlineCheckbox1">Parent</label>
-            </div>
-        </div>
-        <label for="UserRole">User's Role</label>
-        <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" name="UserType" id="inlineCheckbox1" value="3" checked>
-            <label class="form-check-label" for="inlineCheckbox1">Child</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" name="UserType" id="inlineCheckbox1" value="2">
-            <label class="form-check-label" for="inlineCheckbox1">Parent</label>
-        </div>
-        <div class="form-group col-md-2">
-            <label for="Milestone">Goal</label>
-            @Html.TextBoxFor(m => m.Milestone, new { @class = "form-control form-control-sm" })
-            @Html.ValidationMessageFor(m => m.Milestone)
-        </div>
 
-        <div class="form-group col-md-2">
-            <label for="MaxNumPrizes">Max # of Prizes</label>
-            @Html.TextBoxFor(m => m.MaxNumPrizes, new { @class = "form-control form-control-sm" })
-            @Html.ValidationMessageFor(m => m.MaxNumPrizes)
-        </div>
-        <div class="form-group col-md-2">
-            <label for="isActive">Active?</label>
-            @Html.TextBoxFor(m => m.isActive, new { @class = "form-control form-control-sm" })
-            @Html.ValidationMessageFor(m => m.isActive)
-        </div>
-        <div class="form-group col-md-2">
-            <label for="StartDate">Confirm Password</label>
-            @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control form-control-sm" })
-            @Html.ValidationMessageFor(m => m.StartDate)
-        </div>
-        <div class="form-group col-md-2">
-            <label for="EndDate">Confirm Password</label>
-            @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control form-control-sm" })
-            @Html.ValidationMessageFor(m => m.EndDate)
+            <h3 class="color-1">Prizes Available</h3>
+            <div class="table-responsive">
+                <table class="table table-curved">
+                    <thead>
+                        <tr>
+                            <th class="col-sm-2 bg-color-1">User Type <i class="fa fa-arrow-down" aria-hidden="true"></i></th>
+                            <th class="col-sm-2 bg-color-2">Goal!</th>
+                            <th class="col-sm-2 bg-color-3">Max # Prizes</th>
+                            <th class="col-sm-2 bg-color-4">Active?</th>
+                            <th class="col-sm-2 bg-color-5">Start Date</th>
+                            <th class="col-sm-2 bg-color-6">End Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.PrizeList)
+                        {
+                        <tr>
+                            <td>@item.UserType</td>
+                            <td>
+                                <span class="color-2">Num Minutes</span>
+                                @item.Milestone
+                            </td>
+                            <td>
+                                <span class="color-3">Math</span>
+                                @item.MaxNumPrizes
+                            </td>
+                            <td>
+                                <span class="color-4">Geography</span>
+                                @item.isActive
+                            </td>
+                            <td>
+                                <span class="color-5">English</span>
+                                @item.StartDate
+                            </td>
+                            <td>
+                                <span class="color-6">Art</span>
+                                @item.EndDate
+                            </td>
+                        </tr>
+                        }
+                        </tbody>
+                </table>
+            </div>
         </div>
     </div>
-
-    <div style="text-align:center">
-        <button type="submit" class="btn btn-sm btn-primary">Submit</button>
-    </div>
-}
+</section>
+@*</div>*@
 
 
