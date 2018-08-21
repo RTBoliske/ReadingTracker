@@ -23,8 +23,10 @@ namespace Capstone.Web
         List<User> GetAllUsersFromFamilyID(int familyID);
 
         //Book
-        Book GetBook(Book book);
+        Book GetMostCurrentBook(int userID);
         Book CreateBook(Book book);
+        List<Book> GetActiveBooks(int userID);
+        List<Book> GetInactiveBooks(int userID);
 
         //Reading Log
         ReadingLog GetReadingLog(ReadingLog log);
@@ -33,6 +35,7 @@ namespace Capstone.Web
         //Prizes
         List<Prize> GetPrizes(int familyID);
         Prize AddPrize(Prize prize);
+        List<Prize> GetPrizesByUser(ReadingLog log);
 
 
     }
