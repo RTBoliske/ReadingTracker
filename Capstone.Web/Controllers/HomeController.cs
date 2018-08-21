@@ -47,6 +47,10 @@ namespace Capstone.Web.Controllers
             userList = _db.GetAllUsersFromFamilyID(((User)Session["User"]).FamilyID);
             UserActivityViewModel model = new UserActivityViewModel();
             model.UserList = userList;
+
+            Prize prize = new Prize();
+            prize.FamilyID = model.FamilyID;
+            model.PrizeList = _db.GetPrizesByUser(prize);
             
             return View("UserActivity", model);
         }
