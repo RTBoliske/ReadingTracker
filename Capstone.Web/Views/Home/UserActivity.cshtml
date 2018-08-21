@@ -1,6 +1,18 @@
 ﻿@{
     Layout = "~/Views/Shared/_LayoutTheme.cshtml";
     Html.EnableClientValidation(false);
+
+    User currentUser = new Capstone.Web.User();
+
+    foreach(var user in Model.UserList)
+    {
+        if(user.ID == Model.UserID)
+        {
+            currentUser = user;
+        }
+    }
+
+
 }
 @model UserActivityViewModel
 
@@ -8,9 +20,20 @@
 
 <section class="mainContent full-width clearfix">
     <div class="container">
-        <div class="sectionTitle text-center">
-            <h3><span>@Model.UserList[Model.UserID].FirstName's Activity</span></h3>
+        
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="sectionTitle text-center">
+                    <h2>
+                        <span class="shape shape-left bg-color-4"></span>
+                        <span>@currentUser.FirstName's Activity</span>
+                        <span class="shape shape-right bg-color-4"></span>
+                    </h2>
+                </div>
+            </div>
         </div>
+
         <div class="row">
             <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="panel panel-default formPanel">
