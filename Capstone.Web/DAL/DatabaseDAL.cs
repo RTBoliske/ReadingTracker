@@ -15,6 +15,7 @@ namespace Capstone.Web.DAL
             _connectionString = connectionString;
         }
 
+        //User
         public List<User> GetAllUsers()
         {
             List<User> allUsers = new List<User>();
@@ -172,6 +173,7 @@ namespace Capstone.Web.DAL
             }
         }
 
+        //Family
         public string GetFamilyFromFamilyID(int familyID)
         {
             Family family = new Family();
@@ -248,41 +250,6 @@ namespace Capstone.Web.DAL
 
             return user;
         }
-        //public User GetUserFromFamilyID(int familyID)
-        //{
-        //    User user = new User();
-
-        //    string sql = @"SELECT TOP 1 * FROM Family WHERE ID = @familyID";
-
-        //    try
-        //    {
-        //        using (SqlConnection conn = new SqlConnection(_connectionString))
-        //        {
-        //            conn.Open();
-
-        //            SqlCommand cmd = new SqlCommand(sql, conn);
-        //            cmd.Parameters.AddWithValue("@familyID", familyID);
-
-        //            SqlDataReader reader = cmd.ExecuteReader();
-
-        //            while (reader.Read())
-        //            {
-        //                user = new User
-        //                {
-        //                    ID = Convert.ToInt32(reader["ID"]),
-        //                    FamilyName = Convert.ToString(reader["Family_name"]),
-        //                };
-        //            }
-
-        //        }
-        //    }
-        //    catch (SqlException ex)
-        //    {
-        //        throw;
-        //    }
-
-        //    return user;
-        //}
         public List<User> GetAllUsersFromFamilyID(int familyID)
         {
             List<User> userList = new List<User>();
@@ -345,10 +312,13 @@ namespace Capstone.Web.DAL
             }
         }
 
-        public Book GetBook(Book book)
+        //Books
+        public Book GetMostCurrentBook(int userID)
         {
 
             string sql = @"SELECT TOP 1 * FROM Book WHERE Title = @title AND ISBN = @ISBN";
+
+            Book book = new Book();
 
             try
             {
@@ -410,7 +380,20 @@ namespace Capstone.Web.DAL
             }
 
         }
+        List<Book> GetActiveBooks(int userID)
+        {
+            List<Book> bookList = new List<Book>();
 
+            return bookList;
+        }
+        List<Book> GetInactiveBooks(int userID)
+        {
+            List<Book> bookList = new List<Book>();
+
+            return bookList;
+        }
+
+        //Reading Logs
         public ReadingLog GetReadingLog(ReadingLog log)
         {
             string sql = @"SELECT ReadingLog.BookID AS BookID, Users.ID AS ID, Family.ID AS FamilyID, ReadingLog.Minutes_read AS Minutes_read, ReadingLog.Type AS Type,
@@ -481,7 +464,8 @@ namespace Capstone.Web.DAL
                 throw;
             }
         } //need to test
-
+        
+        //Prizes
         public List<Prize> GetPrizes (int familyID)
         {
             List<Prize> prizeList = new List<Prize>();
@@ -554,7 +538,54 @@ namespace Capstone.Web.DAL
                 throw;
             }
         }
+        public List<Prize> GetPrizesByUser (ReadingLog log)
+        { 
+            string sql = @"SELECT Prize.ID AS ID, Prize.UserType AS UserType, Prize.Goal AS Goal, 
+                           Prize.MaxNumPrize AS MaxNumPrize, Prize.isActive AS isActive, Prize.FamilyID AS FamilyID  FROM Prize 
+                           JOIN Family ON Prize.FamilyID = Family.ID JOIN Users ON Users.FamilyID = Family.ID 
+                           WHERE Family.ID = @familyID AND @todayDate > Prize.StartDate AND @EndDate < Prize.EndDate AND isActive = 1;
+                           SELECT CAST(SCOPE_IDENTITY() as int);";
 
+            List<Prize> prizeList = new List<Prize>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@familyID", log.FamilyID);
+                    cmd.Parameters.AddWithValue("@todayDate", DateTime.Now);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Prize prize = new Prize
+                        {
+                            ID = Convert.ToInt32(reader["ID"]),
+                            UserType = Convert.ToInt32(reader["UserType"]),
+                            Milestone = Convert.ToInt32(reader["Goal"]),
+                            MaxNumPrizes = Convert.ToInt32(reader["MaxNumPrize"]),
+                            isActive = Convert.ToBoolean(reader["isActive"]),
+                            FamilyID = Convert.ToInt32(reader["FamilyID"]),
+                            StartDate = Convert.ToDateTime(reader["StartDate"]),
+                            EndDate = Convert.ToDateTime(reader["EndDate"]),
+                        };
+                        prizeList.Add(prize);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+
+            return prizeList;
+        }
+
+        //Mappers
         private User MapRowToUsers(SqlDataReader reader)
         {
             return new User()
