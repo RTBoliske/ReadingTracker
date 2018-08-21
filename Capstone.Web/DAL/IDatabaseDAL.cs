@@ -30,6 +30,10 @@ namespace Capstone.Web
         ReadingLog GetReadingLog(ReadingLog log);
         ReadingLog CreateReadingLog(ReadingLog log);
 
+        //Prizes
+        List<Prize> GetPrizes(int familyID);
+        Prize AddPrize(Prize prize);
+
 
     }
 }

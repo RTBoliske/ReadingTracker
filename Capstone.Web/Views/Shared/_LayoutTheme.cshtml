@@ -297,7 +297,7 @@
                             @if (Session["User"] != null)
                             {
                                 <li class="dropdown singleDrop color-4 ">
-                                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <a href="@Url.Action("AddPrize", "Home")" class="dropdown-toggle" @*data-toggle="dropdown"*@ role="button" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa fa-pencil-square-o bg-color-4" aria-hidden="true"></i>
                                         <span>Prizes</span>
                                     </a>
