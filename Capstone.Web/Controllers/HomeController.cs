@@ -368,11 +368,11 @@ namespace Capstone.Web.Controllers
                 //}
                 if (((User)Session["User"]).RoleID == 2)
                 {
-                    result = RedirectToAction("UserActivity", "Home");
+                    result = RedirectToAction("AddPrize", "Home");
                 }
                 else if (((User)Session["User"]).RoleID == 3)
                 {
-                    result = RedirectToAction("UserActivity", "Home");
+                    result = RedirectToAction("AddPrize", "Home");
                 }
             }
             return result;
