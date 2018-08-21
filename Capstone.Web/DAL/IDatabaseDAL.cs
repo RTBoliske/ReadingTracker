@@ -35,7 +35,7 @@ namespace Capstone.Web
         //Prizes
         List<Prize> GetPrizes(int familyID);
         Prize AddPrize(Prize prize);
-        List<Prize> GetPrizesByUser(ReadingLog log);
+        List<Prize> GetPrizesByUser(Prize prize);
 
 
     }

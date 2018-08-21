@@ -51,7 +51,6 @@ CREATE TABLE ReadingLog(
 	ID int Identity(1,1),
 	BookID int NOT NULL,
 	UserID int NOT NULL,
-	FamilyID int NOT NULL,
 	Minutes_read int NOT NULL,
 	Status varchar (15) NOT NULL,
 	Type varchar (50) NOT NULL,
