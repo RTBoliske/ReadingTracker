@@ -624,6 +624,7 @@
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Family.cs" />
     <Compile Include="Models\Prize.cs" />
+    <Compile Include="Models\PrizeProgress.cs" />
     <Compile Include="Models\ReadingLog.cs" />
     <Compile Include="Models\ViewModels\AddFamilyMemberViewModel.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />

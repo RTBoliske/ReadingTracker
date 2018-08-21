@@ -45,18 +45,18 @@ VALUES (2, 'An Infinity of Little Hours', 'Nancy Maguire', '9781283095358');
 INSERT INTO Book (FamilyID, Title, Author, ISBN) 
 VALUES (2, 'Catechism of the Council of Trent', 'Pius IV', '9780895558848');
 
-INSERT INTO ReadingLog (Type, UserID, Minutes_read, Status, Date)
-VALUES ('Paper', 1, 65, 'Active','08/17/2018');
-INSERT INTO ReadingLog (Type, UserID, Minutes_read, Status,Date)
-VALUES ('Paper', 1, 35, 'Active','08/20/2018');
-INSERT INTO ReadingLog (Type, UserID, Minutes_read, Status,Date)
-VALUES ('Paper', 1, 95, 'Active','08/19/2018');
-INSERT INTO ReadingLog (Type, UserID, Minutes_read, Status, Date)
-VALUES ('Paper', 4, 65, 'Active','08/17/2018');
-INSERT INTO ReadingLog (Type, UserID, Minutes_read, Status,Date)
-VALUES ('Paper', 4, 35, 'Active','08/20/2018');
-INSERT INTO ReadingLog (Type, UserID, Minutes_read, Status,Date)
-VALUES ('Paper', 4, 95, 'Active','08/19/2018');
+INSERT INTO ReadingLog (BookId, Type, UserID, Minutes_read, Status, Date)
+VALUES (1, 'Paper', 1, 65, 'Active','08/17/2018');
+INSERT INTO ReadingLog (BookId, Type, UserID, Minutes_read, Status, Date)
+VALUES (1, 'Paper', 1, 35, 'Active','08/20/2018');
+INSERT INTO ReadingLog (BookId, Type, UserID, Minutes_read, Status, Date)
+VALUES (1, 'Paper', 1, 95, 'Active','08/19/2018');
+INSERT INTO ReadingLog (BookId, Type, UserID, Minutes_read, Status, Date)
+VALUES (1, 'Paper', 4, 65, 'Active','08/17/2018');
+INSERT INTO ReadingLog (BookId, Type, UserID, Minutes_read, Status, Date)
+VALUES (2, 'Paper', 4, 35, 'Active','08/20/2018');
+INSERT INTO ReadingLog (BookId, Type, UserID, Minutes_read, Status, Date)
+VALUES (3, 'Paper', 4, 95, 'Active','08/19/2018');
 
 INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID)
 VALUES (2, 300, 0, 1, '01/01/2018', '12/30/2018', 1);

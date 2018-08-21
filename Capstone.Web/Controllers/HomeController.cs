@@ -55,9 +55,9 @@ namespace Capstone.Web.Controllers
                 model.UserID = (Session["User"] as User).ID;
             }
 
-            Prize prize = new Prize();
-            prize.FamilyID = ((User)Session["User"]).FamilyID;
-            model.PrizeList = _db.GetPrizesByUser(prize);
+            //User user = ((User)Session["User"]);
+
+            //model.PrizeList = _db.GetPrizesByUser(prize);
 
             return View("UserActivity", model);
         }

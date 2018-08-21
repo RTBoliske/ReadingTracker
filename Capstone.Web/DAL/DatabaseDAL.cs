@@ -623,17 +623,25 @@ namespace Capstone.Web.DAL
                 throw;
             }
         }
-        public List<Prize> GetPrizesByUser (Prize prize)
-        { 
-            string sql = @"SELECT Prize.ID AS ID, Prize.UserType AS UserType, Prize.Goal AS Goal, 
-                           Prize.MaxNumPrize AS MaxNumPrize, Prize.isActive AS isActive,
-                           Prize.StartDate AS StartDate, Prize.EndDate AS EndDate FROM Prize 
-                           JOIN Family ON Prize.FamilyID = Family.ID JOIN Users ON Users.FamilyID = Family.ID 
-                           WHERE Family.ID = @familyID AND @todayDate > Prize.StartDate AND @todayDate < Prize.EndDate 
-                           AND isActive = 1;
-                           SELECT CAST(SCOPE_IDENTITY() as int);";
+        public List<PrizeProgress> GetPrizesByUser (User user)
+        {
+            string sql = @"select p.id AS ID, p.UserType AS UserType, p.MaxNumPrize AS MaxNumPrize, p.Goal AS Goal, r.UserID AS UserID, sum(r.minutes_read) AS Minutes_read, (sum(cast(r.minutes_read as real)) / cast(goal as real)) * 100.0 as percentComplete
+                            from prize p
+                            left join ReadingLog r on p.FamilyID = @familyID
+	                               and @todayDate between p.StartDate and p.EndDate
+                            where p.isActive = 1
+                            and r.UserID = @userID
+                            and p.UserType = @userType
+                            group by p.id, p.Goal, r.UserID, p.UserType, p.MaxNumPrize
+                            order by p.id;";
+            //string sql = @"SELECT Prize.ID AS ID, Prize.UserType AS UserType, Prize.Goal AS Goal, 
+            //               Prize.MaxNumPrize AS MaxNumPrize, Prize.isActive AS isActive,
+            //               Prize.StartDate AS StartDate, Prize.EndDate AS EndDate FROM Prize 
+            //               JOIN Family ON Prize.FamilyID = Family.ID JOIN Users ON Users.FamilyID = Family.ID 
+            //               WHERE Family.ID = @familyID AND @todayDate > Prize.StartDate AND @todayDate < Prize.EndDate 
+            //               AND isActive = 1;";
 
-            List<Prize> prizeList = new List<Prize>();
+            List <PrizeProgress> prizeList = new List<PrizeProgress>();
 
             try
             {
@@ -642,24 +650,26 @@ namespace Capstone.Web.DAL
                     conn.Open();
 
                     SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@familyID", prize.FamilyID);
+                    cmd.Parameters.AddWithValue("@familyID", user.FamilyID);
                     cmd.Parameters.AddWithValue("@todayDate", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@userID", user.ID);
+                    cmd.Parameters.AddWithValue("@userType", user.RoleID);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
-                        Prize prizes = new Prize
+                        PrizeProgress prize = new PrizeProgress
                         {
                             ID = Convert.ToInt32(reader["ID"]),
                             UserType = Convert.ToInt32(reader["UserType"]),
-                            Milestone = Convert.ToInt32(reader["Goal"]),
                             MaxNumPrizes = Convert.ToInt32(reader["MaxNumPrize"]),
-                            isActive = Convert.ToBoolean(reader["isActive"]),
+                            Milestone = Convert.ToInt32(reader["Goal"]),
+                            MinutesRead = Convert.ToInt32(reader["Minutes_read"]),
                             StartDate = Convert.ToDateTime(reader["StartDate"]),
                             EndDate = Convert.ToDateTime(reader["EndDate"]),
                         };
-                        prizeList.Add(prizes);
+                        prizeList.Add(prize);
                     }
                 }
             }
