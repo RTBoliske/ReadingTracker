@@ -4,21 +4,24 @@
 }
 @model UserActivityViewModel
 
-<h1>@Model.UserList[Model.UserID].FirstName's Activity</h1>
+
 
 <section class="mainContent full-width clearfix">
     <div class="container">
+        <div class="sectionTitle text-center">
+            <h3><span>@Model.UserList[Model.UserID].FirstName's Activity</span></h3>
+        </div>
         <div class="row">
-            <div class="col-md-4 col-md-offset-2 col-sm-6 col-xs-12">
+            <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="panel panel-default formPanel">
-                    <div class="panel-heading bg-color-1 border-color-1">
+                    <div class="panel-heading bg-color-4 border-color-4">
                         <h3 class="panel-title">Add reading time</h3>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body border-color-4">
                         <form action="" method="post" role="form">
                             <label for="SelectBook">Select a current Book</label>
                             <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                <button class="btn btn-info btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
                                     Active Books<span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
@@ -31,51 +34,67 @@
                             </div>
                             <div class="form-group formField">
                                 <label for="AddReadingHours">Hours:</label>
-                                @Html.TextBoxFor(m => m.MinutesRead, new { @class = "form-control form-control-sm" })
+                                @Html.TextBoxFor(m => m.MinutesRead, new { @class = "form-control form-control-sm border-color-4" })
                                 @Html.ValidationMessageFor(m => m.MinutesRead)
                             </div>
                             <div class="form-group formField">
                                 <label for="AddReadingMinutes">Minutes:</label>
-                                @Html.TextBoxFor(m => m.MinutesRead, new { @class = "form-control form-control-sm" })
+                                @Html.TextBoxFor(m => m.MinutesRead, new { @class = "form-control form-control-sm border-color-4" })
                                 @Html.ValidationMessageFor(m => m.MinutesRead)
                             </div>
                             <div style="text-align: center;">
-                                <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-sm btn-info">Submit</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
 
-            <h3 class="color-1">Progress</h3>
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 70%">70%</div>
+            <div class="col-md-8 col-sm-6 col-xs-12">
+                <div class="panel panel-default border-color-4">
+
+                    <div class="panel-heading bg-color-4 border-color-4">
+                        <h3 class="panel-title">Progress To Prizes</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-info animated fadeInLeft" role="progressbar" style="width: 70%">70%</div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <h3 class="color-1">Reading Log</h3>
-            <div class="table-responsive">
-                <table class="table table-curved">
-                    <thead>
-                        <tr>
-                            <th class="col-sm-3 bg-color-1">Title</th>
-                            <th class="col-sm-3 bg-color-1">Reading Time</th>
-                            <th class="col-sm-3 bg-color-1">Reading Format</th>
-                            <th class="col-sm-3 bg-color-1">Completed</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>title 1</td>
-                            <td>35 minutes</td>
-                            <td>paper</td>
-                            <td>
-                                <input type="checkbox" value="true" />
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="col-md-8 col-sm-6 col-xs-12">
+                <div class="panel panel-default border-color-4">
+                    <div class="panel-heading bg-color-4 border-color-4">
+                        <h3 class="panel-title">Reading Log</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-curved border-color-4">
+                                <thead>
+                                    <tr class="border-color-4">
+                                        <th class="col-sm-3 bg-color-4 border-color-4">Title</th>
+                                        <th class="col-sm-3 bg-color-4 border-color-4">Reading Time</th>
+                                        <th class="col-sm-3 bg-color-4 border-color-4">Reading Format</th>
+                                        <th class="col-sm-3 bg-color-4 border-color-4">Completed</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="border-color-4">title 1</td>
+                                        <td class="border-color-4">35 minutes</td>
+                                        <td class="border-color-4">paper</td>
+                                        <td class="border-color-4">
+                                            <input type="checkbox" value="true" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
         </div>
     </div>
 </section>
