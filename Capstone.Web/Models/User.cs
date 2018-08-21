@@ -15,8 +15,8 @@ namespace Capstone.Web
         [Display(Name = "First Name:")]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "This field is required")]
-        [Display(Name = "Last Name:")]
+        
+        
         public string LastName { get; set; }
 
         public string FamilyName { get; set; }
