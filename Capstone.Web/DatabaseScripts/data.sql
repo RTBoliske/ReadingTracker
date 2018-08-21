@@ -12,6 +12,19 @@ INSERT INTO Users (First_name, Last_name, FamilyID, Username, Password, Salt, Ro
 VALUES ('Ted', 'Boliske', 2, 'tboliske', 'cQgdTq37FO2vDD+jCr4mhFWBePc=', 'VBZ1VOmoZ08HQ5PJOUHMxw==', 2);
 INSERT INTO Users (First_name, Last_name, FamilyID, Username, Password, Salt, RoleID) 
 VALUES ('Joe', 'Binegar', 3, 'jbinegar', 'ujf3h3kIuzWmJtr8Zti7YoPECN8=', 'bkkKEisi+ah7yJYD8s4tBg==', 2);
+INSERT INTO Users (First_name, Last_name, FamilyID, Username, Password, Salt, RoleID) 
+VALUES ('Nora', 'Young', 2, 'nyoung', 'cQgdTq37FO2vDD+jCr4mhFWBePc=', 'VBZ1VOmoZ08HQ5PJOUHMxw==', 2);
+INSERT INTO Users (First_name, Last_name, FamilyID, Username, Password, Salt, RoleID) 
+VALUES ('Dylan', 'Boliske', 3, 'dboliske', 'ujf3h3kIuzWmJtr8Zti7YoPECN8=', 'bkkKEisi+ah7yJYD8s4tBg==', 3);
+INSERT INTO Users (First_name, Last_name, FamilyID, Username, Password, Salt, RoleID) 
+VALUES ('Joe', 'Binegar', 3, 'jbinegar', 'ujf3h3kIuzWmJtr8Zti7YoPECN8=', 'bkkKEisi+ah7yJYD8s4tBg==', 2);
+INSERT INTO Users (First_name, Last_name, FamilyID, Username, Password, Salt, RoleID) 
+VALUES ('Wes', 'Binegar', 3, 'd1binegar', 'ujf3h3kIuzWmJtr8Zti7YoPECN8=', 'bkkKEisi+ah7yJYD8s4tBg==', 3);
+INSERT INTO Users (First_name, Last_name, FamilyID, Username, Password, Salt, RoleID) 
+VALUES ('Sarah', 'Binegar', 3, 'd2binegar', 'ujf3h3kIuzWmJtr8Zti7YoPECN8=', 'bkkKEisi+ah7yJYD8s4tBg==', 3);
+INSERT INTO Users (First_name, Last_name, FamilyID, Username, Password, Salt, RoleID) 
+VALUES ('Chase', 'Binegar', 3, 'd3binegar', 'ujf3h3kIuzWmJtr8Zti7YoPECN8=', 'bkkKEisi+ah7yJYD8s4tBg==', 3);
+
 
 INSERT INTO Book (FamilyID, Title, Author, ISBN) 
 VALUES (1, 'Screwtape Letters', 'C.S. Lewis', '9781974042333');
@@ -32,18 +45,18 @@ VALUES (2, 'An Infinity of Little Hours', 'Nancy Maguire', '9781283095358');
 INSERT INTO Book (FamilyID, Title, Author, ISBN) 
 VALUES (2, 'Catechism of the Council of Trent', 'Pius IV', '9780895558848');
 
-INSERT INTO ReadingLog (BookID, Type, UserID, FamilyID, Minutes_read, Status, Date)
-VALUES (1, 'Paper', 1, 1, 65, 'Active','08/17/2018');
-INSERT INTO ReadingLog (BookID, Type, UserID, FamilyID, Minutes_read, Status,Date)
-VALUES (1, 'Paper', 1, 1, 35, 'Active','08/20/2018');
-INSERT INTO ReadingLog (BookID, Type, UserID, FamilyID, Minutes_read, Status,Date)
-VALUES (1, 'Paper', 1, 1, 95, 'Active','08/19/2018');
-INSERT INTO ReadingLog (BookID, Type, UserID, FamilyID, Minutes_read, Status, Date)
-VALUES (1, 'Paper', 4, 3, 65, 'Active','08/17/2018');
-INSERT INTO ReadingLog (BookID, Type, UserID, FamilyID, Minutes_read, Status,Date)
-VALUES (1, 'Paper', 4, 3, 35, 'Active','08/20/2018');
-INSERT INTO ReadingLog (BookID, Type, UserID, FamilyID, Minutes_read, Status,Date)
-VALUES (1, 'Paper', 4, 3, 95, 'Active','08/19/2018');
+INSERT INTO ReadingLog (Type, UserID, Minutes_read, Status, Date)
+VALUES ('Paper', 1, 65, 'Active','08/17/2018');
+INSERT INTO ReadingLog (Type, UserID, Minutes_read, Status,Date)
+VALUES ('Paper', 1, 35, 'Active','08/20/2018');
+INSERT INTO ReadingLog (Type, UserID, Minutes_read, Status,Date)
+VALUES ('Paper', 1, 95, 'Active','08/19/2018');
+INSERT INTO ReadingLog (Type, UserID, Minutes_read, Status, Date)
+VALUES ('Paper', 4, 65, 'Active','08/17/2018');
+INSERT INTO ReadingLog (Type, UserID, Minutes_read, Status,Date)
+VALUES ('Paper', 4, 35, 'Active','08/20/2018');
+INSERT INTO ReadingLog (Type, UserID, Minutes_read, Status,Date)
+VALUES ('Paper', 4, 95, 'Active','08/19/2018');
 
 INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID)
 VALUES (2, 300, 0, 1, '01/01/2018', '12/30/2018', 1);
