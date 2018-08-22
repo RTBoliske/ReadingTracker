@@ -354,7 +354,7 @@ namespace Capstone.Web.Controllers
                 log.BookID = model.BookID;
                 log.MinutesRead = model.MinutesRead;
                 log.Status = model.Status;
-                log.Type = model.Format;
+                log.Type = model.Type;
                 //date gets added in DAL
 
                 log = _db.CreateReadingLog(log);
