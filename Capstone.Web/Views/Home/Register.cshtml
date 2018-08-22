@@ -12,34 +12,34 @@
                     <div class="panel-heading bg-color-1 border-color-1">
                         <h3 class="panel-title">Create  an account</h3>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body border-color-1">
                         <form action="/Home/Register" method="post" role="form">
                             <div class="form-group formField">
-                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control form-control-sm form-control-md", placeholder = "First name" })
+                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control form-control-sm form-control-md border-color-1", placeholder = "First name" })
                                 @*<input type="text" class="form-control" placeholder="First name">*@
                             </div>
                             <div class="form-group formField">
-                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control form-control-sm form-control-md", placeholder = "Last name" })
+                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control form-control-sm form-control-md border-color-1", placeholder = "Last name" })
                                 @*<input type="text" class="form-control" placeholder="Last name">*@
                             </div>
                             <div class="form-group formField">
-                                @Html.TextBoxFor(m => m.Username, new { @class = "form-control form-control-sm form-control-md", placeholder = "Username" })
+                                @Html.TextBoxFor(m => m.Username, new { @class = "form-control form-control-sm form-control-md border-color-1", placeholder = "Username" })
                                 @*<input type="text" class="form-control" placeholder="Username">*@
                             </div>
                             <div class="form-group formField">
-                                @Html.TextBoxFor(m => m.FamilyName, new { @class = "form-control form-control-sm form-control-md", placeholder = "Family name" })
+                                @Html.TextBoxFor(m => m.FamilyName, new { @class = "form-control form-control-sm form-control-md border-color-1", placeholder = "Family name" })
                                 @*<input type="text" class="form-control" placeholder="Family Name">*@
                             </div>
                             <div class="form-group formField">
-                                @Html.TextBoxFor(m => m.Password, new { @class = "form-control form-control-sm form-control-md", placeholder = "Password" })
+                                @Html.TextBoxFor(m => m.Password, new { @class = "form-control form-control-sm form-control-md border-color-1", placeholder = "Password" })
                                 @*<input type="password" class="form-control" placeholder="Password">*@
                             </div>
                             <div class="form-group formField">
-                                @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control form-control-sm form-control-md", placeholder = "Re-password" })
+                                @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control form-control-sm form-control-md border-color-1", placeholder = "Re-password" })
                                 @*<input type="password" class="form-control" placeholder="Re-Password">*@
                             </div>
                             <div class="form-group formField">
-                                <input type="submit" class="btn btn-primary btn-block bg-color-3 border-color-3" value="Register">
+                                <input type="submit" class="btn btn-primary btn-block bg-color-4 border-color-4" value="Register">
                             </div>
                             @*<div class="form-group formField">
                                 <p class="help-block">Already have an account? <a href="/Home/Login">Log in</a></p>
@@ -53,18 +53,18 @@
                     <div class="panel-heading bg-color-1 border-color-1">
                         <h3 class="panel-title">Already Registered?</h3>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body border-color-1">
                         <form action="/Home/Login" method="post" role="form">
                             <div class="form-group formField">
-                                @Html.TextBoxFor(m => m.Username, new { @class = "form-control form-control-sm form-control-md", placeholder = "Username" })
+                                @Html.TextBoxFor(m => m.Username, new { @class = "form-control form-control-sm form-control-md border-color-1", placeholder = "Username" })
                                 @*<input type="text" class="form-control" placeholder="Username">*@
                             </div>
                             <div class="form-group formField">
-                                @Html.TextBoxFor(m => m.Password, new { @class = "form-control form-control-sm form-control-md", placeholder = "Password" })
+                                @Html.TextBoxFor(m => m.Password, new { @class = "form-control form-control-sm form-control-md border-color-1", placeholder = "Password" })
                                 @*<input type="password" class="form-control" placeholder="Password">*@
                             </div>
                             <div class="form-group formField">
-                                <input type="submit" class="btn btn-primary btn-block bg-color-3 border-color-3" value="Log in">
+                                <input type="submit" class="btn btn-primary btn-block bg-color-4 border-color-4" value="Log in">
                             </div>
                             @*<div class="form-group formField">
                                 <p class="help-block"><a href="#">Forgot password?</a></p>
