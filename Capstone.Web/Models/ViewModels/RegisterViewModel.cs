@@ -10,23 +10,23 @@ namespace Capstone.Web
     {
         public int ID { get; set; }
         [Required(ErrorMessage = "This field is required")]
-        [Display(Name = "First Name:")]
+        //[Display(Name = "First Name:")]
         public string FirstName { get; set; }
         [Required(ErrorMessage = "This field is required")]
-        [Display(Name = "Last Name:")]
+        //[Display(Name = "Last Name:")]
         public string LastName { get; set; }
         [Required(ErrorMessage = "This field is required")]
-        [Display(Name = "Family Name:")]
+        //[Display(Name = "Family Name:")]
         public string FamilyName { get; set; }
         [Required(ErrorMessage = "This field is required")]
-        [Display(Name = "Username:")]
+        //[Display(Name = "Username:")]
         public string Username { get; set; }
         [Required(ErrorMessage = "This field is required")]
-        [Display(Name = "Password:")]
+        //[Display(Name = "Password:")]
         public string Password { get; set; }
         [Required(ErrorMessage = "This field is required")]
         [Compare("Password", ErrorMessage = "Passwords do not match")]
-        [Display(Name = "Confirm Password:")]
+        //[Display(Name = "Confirm Password:")]
         public string ConfirmPassword { get; set; }
         public int RoleID { get; set; } = 2;
         public int FamilyID { get; set; }

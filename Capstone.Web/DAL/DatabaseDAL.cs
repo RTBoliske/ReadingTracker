@@ -471,15 +471,14 @@ namespace Capstone.Web.DAL
                             Book.FamilyID AS FamilyID, 
                             Book.Title AS Title, 
                             Book.Author AS Author, 
-                            Book.ISBN AS ISBN 
-                            FROM 
-                            Book 
-							JOIN ReadingLog ON ReadingLog.BookID = Book.ID 
-                            JOIN Users ON Users.ID = ReadingLog.UserID 
-                            JOIN Family ON Family.ID = Users.FamilyID
-                            WHERE 
-                            Users.ID = @UserID
-                            AND ReadingLog.Status = 'Active';";
+                            Book.ISBN AS ISBN  FROM ReadingLog A
+                            JOIN Book ON Book.ID = A.BookID
+                            WHERE A.Date = (
+	                            SELECT MAX(Date) FROM ReadingLog B
+	                            WHERE B.BookID = A.BookID
+	                            AND B.UserID = A.UserID)
+                            AND UserID = @userID
+                            AND Status = 'Active';";
 
             try
             {
@@ -488,7 +487,7 @@ namespace Capstone.Web.DAL
                     conn.Open();
 
                     SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@UserID", userID);
+                    cmd.Parameters.AddWithValue("@userID", userID);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -521,15 +520,14 @@ namespace Capstone.Web.DAL
                             Book.FamilyID AS FamilyID, 
                             Book.Title AS Title, 
                             Book.Author AS Author, 
-                            Book.ISBN AS ISBN 
-                            FROM 
-                            Book 
-							JOIN ReadingLog ON ReadingLog.BookID = Book.ID 
-                            JOIN Users ON Users.ID = ReadingLog.UserID 
-                            JOIN Family ON Family.ID = Users.FamilyID
-                            WHERE 
-                            Users.ID = @UserID
-                            AND ReadingLog.Status = 'Active';";
+                            Book.ISBN AS ISBN  FROM ReadingLog A
+                            JOIN Book ON Book.ID = A.BookID
+                            WHERE A.Date = (
+	                            SELECT MAX(Date) FROM ReadingLog B
+	                            WHERE B.BookID = A.BookID
+	                            AND B.UserID = A.UserID)
+                            AND UserID = @UserID
+                            AND Status <> 'Active';";
 
             try
             {
