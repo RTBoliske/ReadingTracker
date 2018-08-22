@@ -16,27 +16,27 @@
                         <form action="/Home/Register" method="post" role="form">
                             <div class="form-group formField">
                                 @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control form-control-sm form-control-md border-color-1", placeholder = "First name" })
-                                @*<input type="text" class="form-control" placeholder="First name">*@
+                                @Html.ValidationMessageFor(m => m.FirstName)
                             </div>
                             <div class="form-group formField">
                                 @Html.TextBoxFor(m => m.LastName, new { @class = "form-control form-control-sm form-control-md border-color-1", placeholder = "Last name" })
-                                @*<input type="text" class="form-control" placeholder="Last name">*@
+                                @Html.ValidationMessageFor(m => m.LastName)
                             </div>
                             <div class="form-group formField">
                                 @Html.TextBoxFor(m => m.Username, new { @class = "form-control form-control-sm form-control-md border-color-1", placeholder = "Username" })
-                                @*<input type="text" class="form-control" placeholder="Username">*@
+                                @Html.ValidationMessageFor(m => m.Username)
                             </div>
                             <div class="form-group formField">
                                 @Html.TextBoxFor(m => m.FamilyName, new { @class = "form-control form-control-sm form-control-md border-color-1", placeholder = "Family name" })
-                                @*<input type="text" class="form-control" placeholder="Family Name">*@
+                                @Html.ValidationMessageFor(m => m.FamilyName)
                             </div>
                             <div class="form-group formField">
                                 @Html.TextBoxFor(m => m.Password, new { @class = "form-control form-control-sm form-control-md border-color-1", placeholder = "Password" })
-                                @*<input type="password" class="form-control" placeholder="Password">*@
+                                @Html.ValidationMessageFor(m => m.Password)
                             </div>
                             <div class="form-group formField">
                                 @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control form-control-sm form-control-md border-color-1", placeholder = "Re-password" })
-                                @*<input type="password" class="form-control" placeholder="Re-Password">*@
+                                @Html.ValidationMessageFor(m => m.ConfirmPassword)
                             </div>
                             <div class="form-group formField">
                                 <input type="submit" class="btn btn-primary btn-block bg-color-4 border-color-4" value="Register">
@@ -57,11 +57,11 @@
                         <form action="/Home/Login" method="post" role="form">
                             <div class="form-group formField">
                                 @Html.TextBoxFor(m => m.Username, new { @class = "form-control form-control-sm form-control-md border-color-1", placeholder = "Username" })
-                                @*<input type="text" class="form-control" placeholder="Username">*@
+                                @Html.ValidationMessageFor(m => m.Username)
                             </div>
                             <div class="form-group formField">
                                 @Html.TextBoxFor(m => m.Password, new { @class = "form-control form-control-sm form-control-md border-color-1", placeholder = "Password" })
-                                @*<input type="password" class="form-control" placeholder="Password">*@
+                                @Html.ValidationMessageFor(m => m.Password)
                             </div>
                             <div class="form-group formField">
                                 <input type="submit" class="btn btn-primary btn-block bg-color-4 border-color-4" value="Log in">

@@ -562,12 +562,12 @@ namespace Capstone.Web.DAL
         }
 
         //Reading Logs
-        public List<ReadingLog> GetReadingLog(int userID)
+        public Stack<ReadingLog> GetReadingLog(int userID)
         {
             string sql = @"SELECT ReadingLog.ID AS ID, ReadingLog.BookID AS BookID, Book.Title AS Title, Users.ID AS UserID, Family.ID AS FamilyID, ReadingLog.Minutes_read AS Minutes_read, ReadingLog.Type AS Type,
                            ReadingLog.Status AS Status, ReadingLog.Date AS Date FROM ReadingLog JOIN BOOK ON Book.ID = ReadingLog.BookID JOIN Users ON Users.ID = ReadingLog.UserID JOIN Family ON Users.FamilyID = Family.ID
 						   WHERE Users.ID = @UserID;";
-            List<ReadingLog> logs = new List<ReadingLog>();
+            Stack<ReadingLog> logs = new Stack<ReadingLog>();
             try
             {
                 using (SqlConnection conn = new SqlConnection(_connectionString))
@@ -592,7 +592,7 @@ namespace Capstone.Web.DAL
                             Status = Convert.ToString(reader["Status"]),
                             Date = Convert.ToDateTime(reader["Date"]),
                         };
-                        logs.Add(log);
+                        logs.Push(log);
                     }
 
                 }

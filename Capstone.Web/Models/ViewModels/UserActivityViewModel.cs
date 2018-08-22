@@ -25,6 +25,6 @@ namespace Capstone.Web
         public List<Book> ActiveBooks { get; set; }
         public List<Book> InactiveBooks { get; set; }
         public List<PrizeProgress> PrizeList { get; set; }
-        public List<ReadingLog> ReadingLogs { get; set; }
+        public Stack<ReadingLog> ReadingLogs { get; set; }
     }
 }
