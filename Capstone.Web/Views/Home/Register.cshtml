@@ -1,6 +1,6 @@
 ﻿@{
     Layout = "~/Views/Shared/_LayoutTheme.cshtml";
-    Html.EnableClientValidation(false);
+    
 }
 @model RegisterViewModel
 
@@ -41,9 +41,9 @@
                             <div class="form-group formField">
                                 <input type="submit" class="btn btn-primary btn-block bg-color-3 border-color-3" value="Register">
                             </div>
-                            <div class="form-group formField">
+                            @*<div class="form-group formField">
                                 <p class="help-block">Already have an account? <a href="/Home/Login">Log in</a></p>
-                            </div>
+                            </div>*@
                         </form>
                     </div>
                 </div>

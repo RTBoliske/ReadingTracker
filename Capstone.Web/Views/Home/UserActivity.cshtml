@@ -1,6 +1,6 @@
 ﻿@{
     Layout = "~/Views/Shared/_LayoutTheme.cshtml";
-    Html.EnableClientValidation(false);
+    //Html.EnableClientValidation(false);
 
     User currentUser = new Capstone.Web.User();
 
@@ -9,7 +9,7 @@
         if (user.ID == Model.UserID)
         {
             currentUser = user;
-        } 
+        }
     }
 
 
@@ -49,10 +49,11 @@
                                     {
                                         <option value="@item.ID">@item.Title</option>
                                     }
-                                    @*@foreach (var item in Model.InactiveBooks)
-                {
-                    <option value="@item.ID">@item.Title</option>
-                }*@
+                                    <option disabled>- - - - Inactive Books - - - -</option>
+                                    @foreach (var item in Model.InactiveBooks)
+                                    {
+                                        <option value="@item.ID">@item.Title</option>
+                                    }
                                 </select>
                             </div>
 
@@ -109,12 +110,22 @@
                     </div>
                     <div class="panel-body">
                         @foreach (var item in Model.PrizeList)
+                        {
+                            if (item.PercentProgress <= 100)
                             {
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-info animated fadeInLeft" 
-                                 role="progressbar" style="width: @item.PercentProgress%">@((item.PercentProgress/100).ToString("P"))</div>
-                        </div>
-                        }
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-info animated fadeInLeft"
+                                         role="progressbar" style="width: @item.PercentProgress%">@((item.PercentProgress / 100).ToString("P"))</div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-success animated fadeInLeft"
+                                             role="progressbar" style="width: 100%">100%</div>
+                                        </div>
+                                    }
+                                }
                     </div>
                 </div>
             </div>
