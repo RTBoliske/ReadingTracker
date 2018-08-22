@@ -52,7 +52,7 @@
                     <div class="panel-heading bg-color-1 border-color-1">
                         <h3 class="panel-title">New Family Member</h3>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body border-color-1">
                         <form action="/Home/AddFamilyMember" method="post" role="form">
 
 
@@ -68,35 +68,35 @@
                             </div>
 
                             <div class="form-group formField">
-                                <label for="FirstName">First Name</label>
-                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control form-control-sm" })
+                                @*<label for="FirstName">First Name</label>*@
+                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control form-control-sm border-color-1", placeholder = "First Name" })
                                 @Html.ValidationMessageFor(m => m.FirstName)
                             </div>
                             <div class="form-group formField">
-                                <label for="LastName">Last Name</label>
-                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control form-control-sm" })
+                                @*<label for="LastName">Last Name</label>*@
+                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control form-control-sm border-color-1", placeholder = "Last Name" })
                                 @Html.ValidationMessageFor(m => m.LastName)
                             </div>
 
                             <div class="form-group formField">
-                                <label for="UserName">User Name</label>
-                                @Html.TextBoxFor(m => m.Username, new { @class = "form-control form-control-sm" })
+                                @*<label for="UserName">User Name</label>*@
+                                @Html.TextBoxFor(m => m.Username, new { @class = "form-control form-control-sm border-color-1", placeholder = "User Name" })
                                 @Html.ValidationMessageFor(m => m.Username)
                             </div>
                             <div class="form-group formField">
-                                <label for="Password">Password</label>
-                                @Html.TextBoxFor(m => m.Password, new { @class = "form-control form-control-sm" })
+                                @*<label for="Password">Password</label>*@
+                                @Html.TextBoxFor(m => m.Password, new { @class = "form-control form-control-sm border-color-1", placeholder = "Password" })
                                 @Html.ValidationMessageFor(m => m.Password)
                             </div>
                             <div class="form-group formField">
-                                <label for="ConfirmPassword">Confirm Password</label>
-                                @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control form-control-sm" })
+                                @*<label for="ConfirmPassword">Confirm Password</label>*@
+                                @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control form-control-sm border-color-1", placeholder = "Confirm" })
                                 @Html.ValidationMessageFor(m => m.ConfirmPassword)
                             </div>
 
 
                             <div style="text-align:center">
-                                <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-sm btn-primary bg-color-4 border-color-4">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -107,13 +107,13 @@
 
             @* Your Family Members Table *@
             <div class="table-responsive ">
-                <table class="table table-curved">
+                <table class="table table-curved border-color-4">
                     <thead>
-                        <tr>
-                            <th class="col-sm-2 bg-color-2">First Name</th>
-                            <th class="col-sm-2 bg-color-6">Last Name</th>
-                            <th class="col-sm-2 bg-color-3">Username</th>
-                            <th class="col-sm-2 bg-color-5">User Role</th>
+                        <tr class="border-color-4" style="color:white;">
+                            <th class="col-sm-2 bg-color-5 border-color-4">First Name</th>
+                            <th class="col-sm-2 bg-color-5 border-color-4">Last Name</th>
+                            <th class="col-sm-2 bg-color-5 border-color-4">Username</th>
+                            <th class="col-sm-2 bg-color-5 border-color-4">User Role</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -122,16 +122,16 @@
 
                             <tr>
 
-                                <td>@item.FirstName</td>
-                                <td>@item.LastName</td>
-                                <td>@item.Username</td>
+                                <td class="border-color-4">@item.FirstName</td>
+                                <td class="border-color-4">@item.LastName</td>
+                                <td class="border-color-4">@item.Username</td>
                                 @if (item.RoleID == 2)
                                 {
-                                    <td>Parent</td>
+                                    <td class="border-color-4">Parent</td>
                                 }
                                 else
                                 {
-                                    <td>Child</td>
+                                    <td class="border-color-4">Child</td>
                                 }
 
                             </tr>
