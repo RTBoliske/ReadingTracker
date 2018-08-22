@@ -607,7 +607,7 @@ namespace Capstone.Web.DAL
         } //need to test
         public ReadingLog CreateReadingLog(ReadingLog log)
         {
-            string sql = @"INSERT INTO ReadingLog ReadingLog (BookID, UserID, FamilyID, Minutes_read, Status, Type, Date)
+            string sql = @"INSERT INTO ReadingLog (BookID, UserID, Minutes_read, Status, Type, Date)
                            VALUES (@BookID, @UserID, @Minutes_read, @Status, @Type, @Date);
                            SELECT CAST(SCOPE_IDENTITY() as int);";
 

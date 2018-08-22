@@ -40,7 +40,7 @@
                         <h3 class="panel-title">Add reading time</h3>
                     </div>
                     <div class="panel-body border-color-4">
-                        <form action="" method="post" role="form">
+                        <form action="/Home/AddReadingLog" method="post" role="form">
                             <label for="SelectBook">Select a current Book</label>
                             <div class="dropGeneral roundOne border-color-2">
                                 <select name="guiest_id17" id="guiest_id17" class="select-drop">
@@ -79,6 +79,13 @@
                                 <label for="AddReadingMinutes">Minutes:</label>
                                 @Html.TextBoxFor(m => m.MinutesRead, new { @class = "form-control form-control-sm border-color-4" })
                                 @Html.ValidationMessageFor(m => m.MinutesRead)
+                            </div>
+                            <div class="dropGeneral roundOne border-color-2">
+                                <select name="guiest_id17" id="guiest_id17" class="select-drop">
+                                    <option value="Active">Active</option>
+                                    <option value="Completed">Completed</option>
+                                    <option value="Inactive">No Longer Reading</option>
+                                </select>
                             </div>
                             <div style="text-align: center;">
                                 <button type="submit" class="btn btn-sm btn-primary">Submit</button>
