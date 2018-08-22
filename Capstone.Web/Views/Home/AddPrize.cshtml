@@ -9,7 +9,7 @@
 @if (Model.AddSuccessState == PrizeViewModel.SuccessState.Success)
 {
     <div class="alert alert-success alert-dismissible" role="alert">
-        <strong>Success!</strong> A new prize has been successfully added!
+        <strong>Success!</strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -107,11 +107,11 @@ else if (Model.AddSuccessState == PrizeViewModel.SuccessState.Failed)
                                         @Html.ValidationMessageFor(m => m.EndDate)
                                     </div>
                                     <div style="text-align:center; display:inline-block">
-                                        <button type="submit" class="btn btn-sm btn-primary">Fuck Your Front Hole</button>
+                                        <button type="submit" class="btn btn-sm btn-primary">Submit</button>
                                     </div>
                                    
                                         <div style="text-align:center; display:inline-block">
-                                            <button type="reset" class="btn btn-sm btn-primary">Cancel</button>
+                                           <a class="button btn btn-sm btn-primary" href="~/Home/AddPrize">Cancel</a>
                                         </div>
                                     
                                 </form>
