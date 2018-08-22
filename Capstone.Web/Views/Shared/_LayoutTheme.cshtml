@@ -31,7 +31,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body class="body-wrapper static">
+<body class="body-wrapper">
     <!-- ====================================
     ——— PRELOADER
     ===================================== -->
@@ -68,17 +68,18 @@
                 </div>
             </div>
             <!-- TOP INFO BAR -->
-            <div class="top-info-bar bg-color-7 hidden-xs">
+            @*<div class="top-info-bar bg-color-7 hidden-xs">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-sm-7">
+                    <div class="row">*@
+                        @*<div class="col-sm-7">
                             <ul class="list-inline topList">
-                               
-                                @*<li><i class="fa fa-clock-o bg-color-6" aria-hidden="true"></i> Open: 9am - 6pm</li>*@
+                                <li><i class="fa fa-envelope bg-color-1" aria-hidden="true"></i> <a href="mailto:austin.delarosa@gmail.com">austin.delarosa@gmail.com</a></li>
+                                <li><i class="fa fa-phone bg-color-2" aria-hidden="true"></i> +1 859 444 8011</li>
+                                <li><i class="fa fa-clock-o bg-color-6" aria-hidden="true"></i> Open: 9am - 6pm</li>
                             </ul>
-                        </div>
-                        <div class="col-sm-5">
-                            <ul class="list-inline functionList">
+                        </div>*@
+                        @*<div class="col-sm-5">
+                            <ul class="list-inline functionList">*@
                                 @*<li><i class="fa fa-globe bg-color-4" aria-hidden="true"></i></li>
         <li class="LanguageList">
             <select name="guiest_id1" id="guiest_id1" class="select-drop">
@@ -88,19 +89,20 @@
                 <option value="3">Hindi</option>
             </select>
         </li>*@
-                                @if (Session["User"] == null)
+                                @*login/register in top bar aove navbar - moving to navbar*@
+                                @*@if (Session["User"] == null)
                                 {
                                     <li>
-                                        <i class="fa fa-unlock-alt bg-color-5" aria-hidden="true"></i> <a href="~/Home/Register" @*'#loginModal'*@ data-toggle="modal">Login</a>
+                                        <i class="fa fa-unlock-alt bg-color-5" aria-hidden="true"></i> <a href="~/Home/Register"  data-toggle="modal">Login</a>
                                         <span>or</span><a href="~/Home/Register" data-toggle="modal">Create an account</a>
                                     </li>
                                 }
                                 else
                                 {
                                     <li>
-                                        <i class="fa fa-lock bg-color-5" aria-hidden="true"></i> <a href="@Url.Action("Logout", "Home")" @*'#loginModal'*@ data-toggle="modal">Logout</a>
+                                        <i class="fa fa-lock bg-color-5" aria-hidden="true"></i> <a href="@Url.Action("Logout", "Home")"  data-toggle="modal">Logout</a>
                                     </li>
-                                }
+                                }*@
                                 @*<li class="cart-dropdown">
             <a href="#" class="bg-color-6 shop-cart">
                 <i class="fa fa-shopping-basket " aria-hidden="true"></i>
@@ -169,13 +171,13 @@
                 </li>
             </ul>
         </li>*@
-                            </ul>
+                            @*</ul>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>*@
             <!-- NAVBAR -->
-            <nav id="menuBar" class="navbar navbar-default lightHeader" role="navigation">
+            <nav id="menuBar" class="navbar navbar-default lightHeader navbar-static-top" role="navigation">
                 <div class="container">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
@@ -185,28 +187,31 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="/Home/Index">
-                            <img src="~/Content/Images/family_illustration01.jpg" style="max-width:70%" @*"assets/img/logo-school.png"*@ alt="Reading Log">
-                        </a>
+                        @*<a class="navbar-brand" href="/Home/Index">
+                            <img src="~/Content/Images/family_illustration01.jpg" style="max-width:70%" alt="Reading Log">
+                        </a>*@
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse navbar-ex1-collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown singleDrop color-1   active ">
-                                <a href="@Url.Action("Index", "Home")" class="navbar-brand" @*data-toggle="dropdown"*@ role="button" aria-haspopup="true" aria-expanded="false">
+                            @*<li class="dropdown singleDrop color-1   active ">
+                                <a href="@Url.Action("Index", "Home")" class="navbar-brand" role="button" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa fa-home bg-color-1" aria-hidden="true"></i> <span class="active">Home</span>
-                                </a>
+                                </a>*@
                                 @*<ul class="dropdown-menu dropdown-menu-left">
                 <li class=" active "><a href="index.html">Kidz School</a></li>
                 <li class=""><a href="index-v2.html">Kidz Store</a></li>
                 <li class=""><a href="index-v3.html">Kidz Daycare</a></li>
                 <li class=""><a href="index-v4.html">Kidz Fashion</a></li>
             </ul>*@
-                            </li>
+                            @*</li>*@
                             @if (Session["User"] != null)
                             {
                                 <li class="dropdown singleDrop color-3 ">
-                                    <a href="@Url.Action("UserActivity", "Home")" class="navbar-brand" @*data-toggle="dropdown"*@ role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-list-ul bg-color-3" aria-hidden="true"></i> <span>Activity</span></a>
+                                    <a href="@Url.Action("UserActivity", "Home")" class="navbar-brand" @*data-toggle="dropdown"*@ role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-list-ul bg-color-3" aria-hidden="true"></i> 
+                                        <span>Activity</span>
+                                    </a>
 
                                     @*<ul class="dropdown-menu dropdown-menu-left">
                                <li class=" "><a href="about_us.html">About</a></li>
@@ -335,7 +340,7 @@
                                 <li class="dropdown singleDrop color-5  ">
                                     <a href="@Url.Action("AddFamilyMember", "Home")" class="navbar-brand" @*data-toggle="dropdown"*@ role="button" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa fa-calendar bg-color-5" aria-hidden="true"></i>
-                                        <span>Add User</span>
+                                        <span>Users</span>
                                     </a>
                                     @*<ul class="dropdown-menu dropdown-menu-right">
                                   <li class="dropdown dropdown-submenu
@@ -385,8 +390,8 @@
                             {
                                 <li class="dropdown singleDrop color-6 ">
                                     <a href="@Url.Action("AddBook", "Home")" class="navbar-brand" @*data-toggle="dropdown"*@ role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-calendar bg-color-6" aria-hidden="true"></i>
-                                        <span>Add A Book</span>
+                                        <i class="fa fa-calendar bg-color-6" aria-hidden="true"></i> 
+                                        <span>Books</span>
                                     </a>
                                     @*<ul class="dropdown-menu dropdown-menu-right">
                     <li class=" "><a href="accordion-toggles.html">Accordions &amp; Toggles</a></li>
@@ -400,6 +405,27 @@
                     <li class=" "><a href="typography.html">Typography</a></li>
                     <li class=" "><a href="responsive-embed.html">Responsive Embed</a></li>
                 </ul>*@
+                                </li>
+                            }
+                            @*moved login/register from top bar*@
+                            @if (Session["User"] == null)
+                            {
+                                <li class="dropdown singleDrop color-1">
+                                    <a href="~/Home/Register" class="navbar-brand" role="button" aria-haspopup="true"aria-expanded="false">
+                                        <i class="fa fa-unlock-alt bg-color-1" aria-hidden="true"></i>
+                                        <span>Login</span>
+                                    </a>
+                                    @*<i class="fa fa-unlock-alt bg-color-5" aria-hidden="true"></i> <a href="~/Home/Register"  data-toggle="modal">Login</a>
+                                    <span>or</span><a href="~/Home/Register" data-toggle="modal">Create an account</a>*@
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="dropdown singleDrop color-1">
+                                    <a href="@Url.Action("Logout", "Home")" class="navbar-brand" @*'#loginModal'*@ data-toggle="modal">
+                                        <i class="fa fa-lock bg-color-1" aria-hidden="true"></i>
+                                        <span>Logout</span>
+                                    </a>
                                 </li>
                             }
                         </ul>
@@ -1312,8 +1338,7 @@
                 </div>
             </div>
             <!-- FOOTER INFO AREA -->
-            <div class="footerInfoArea full-width clearfix" style="background-image: url('../../assets/img/footer/footer-bg-1.png');
-">
+            @*<div class="footerInfoArea full-width clearfix" style="background-image: url('../../assets/img/footer/footer-bg-1.png');">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-3 col-xs-12">
@@ -1416,7 +1441,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>*@
             <!-- COPY RIGHT -->
             <div class="copyRight clearfix">
                 <div class="container">
