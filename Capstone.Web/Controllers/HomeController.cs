@@ -56,6 +56,8 @@ namespace Capstone.Web.Controllers
                 //loading active/inactive books
                 model.ActiveBooks = _db.GetActiveBooks(model.UserID);
                 model.InactiveBooks = _db.GetInactiveBooks(model.UserID);
+                //loading reading log
+                model.ReadingLogs = _db.GetReadingLog(model.UserID);
             } else
             {
                 model.UserID = (Session["User"] as User).ID;
@@ -65,6 +67,8 @@ namespace Capstone.Web.Controllers
                 //Loading active/inactive books
                 model.ActiveBooks = _db.GetActiveBooks(model.UserID);
                 model.InactiveBooks = _db.GetInactiveBooks(model.UserID);
+                //reading logs
+                model.ReadingLogs = _db.GetReadingLog(model.UserID);
             }
             return View("UserActivity", model);
         }
@@ -343,12 +347,14 @@ namespace Capstone.Web.Controllers
             }
             else
             {
+                model.MinutesRead = model.MinutesRead + (model.HoursRead * 60);
 
                 ReadingLog log = new ReadingLog();
                 log.UserID = model.UserID;
-                log.FamilyID = model.FamilyID; //use Session??
+                log.BookID = model.BookID;
                 log.MinutesRead = model.MinutesRead;
                 log.Status = model.Status;
+                log.Type = model.Format;
                 //date gets added in DAL
 
                 log = _db.CreateReadingLog(log);

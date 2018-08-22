@@ -31,7 +31,7 @@ namespace Capstone.Web
         List<Book> GetAllBooksByFamilyID(int familyID);
 
         //Reading Log
-        ReadingLog GetReadingLog(ReadingLog log);
+        List<ReadingLog> GetReadingLog(int userID);
         ReadingLog CreateReadingLog(ReadingLog log);
 
         //Prizes

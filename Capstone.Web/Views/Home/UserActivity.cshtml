@@ -36,14 +36,26 @@
         <div class="row">
             <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="panel panel-default formPanel">
-                    <div class="panel-heading bg-color-4 border-color-4">
+                    <div class="panel-heading bg-color-1 border-color-4">
                         <h3 class="panel-title">Add reading time</h3>
                     </div>
                     <div class="panel-body border-color-4">
                         <form action="" method="post" role="form">
                             <label for="SelectBook">Select a current Book</label>
-                            <div class="dropdown">
-                                <button class="btn btn-info btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+                            <div class="dropGeneral roundOne border-color-2">
+                                <select name="guiest_id17" id="guiest_id17" class="select-drop">
+                                    @foreach (var item in Model.ActiveBooks)
+                                    {
+                                        <option value="@item.ID">@item.Title</option>
+                                    }
+                                    @*@foreach (var item in Model.InactiveBooks)
+                                    {
+                                        <option value="@item.ID">@item.Title</option>
+                                    }*@
+                                </select>
+                            </div>
+                            @*<div class="dropdown">
+                                <button class="btn btn-outline-success btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
                                     Active Books<span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
@@ -57,11 +69,11 @@
                                         <li>@item.Title</li>
                                     }
                                 </ul>
-                            </div>
+                            </div>*@
                             <div class="form-group formField">
                                 <label for="AddReadingHours">Hours:</label>
-                                @Html.TextBoxFor(m => m.MinutesRead, new { @class = "form-control form-control-sm border-color-4" })
-                                @Html.ValidationMessageFor(m => m.MinutesRead)
+                                @Html.TextBoxFor(m => m.HoursRead, new { @class = "form-control form-control-sm border-color-4" })
+                                @Html.ValidationMessageFor(m => m.HoursRead)
                             </div>
                             <div class="form-group formField">
                                 <label for="AddReadingMinutes">Minutes:</label>
@@ -69,7 +81,7 @@
                                 @Html.ValidationMessageFor(m => m.MinutesRead)
                             </div>
                             <div style="text-align: center;">
-                                <button type="submit" class="btn btn-sm btn-info">Submit</button>
+                                <button type="submit" class="btn btn-sm btn-primary">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -79,7 +91,7 @@
             <div class="col-md-8 col-sm-6 col-xs-12">
                 <div class="panel panel-default border-color-4">
 
-                    <div class="panel-heading bg-color-4 border-color-4">
+                    <div class="panel-heading bg-color-2 border-color-4">
                         <h3 class="panel-title">Progress To Prizes</h3>
                     </div>
                     <div class="panel-body">
@@ -95,7 +107,7 @@
 
             <div class="col-md-8 col-sm-6 col-xs-12">
                 <div class="panel panel-default border-color-4">
-                    <div class="panel-heading bg-color-4 border-color-4">
+                    <div class="panel-heading bg-color-3 border-color-4">
                         <h3 class="panel-title">Reading Log</h3>
                     </div>
                     <div class="panel-body">
@@ -103,21 +115,26 @@
                             <table class="table table-curved border-color-4">
                                 <thead>
                                     <tr class="border-color-4">
-                                        <th class="col-sm-3 bg-color-4 border-color-4">Title</th>
-                                        <th class="col-sm-3 bg-color-4 border-color-4">Reading Time</th>
-                                        <th class="col-sm-3 bg-color-4 border-color-4">Reading Format</th>
-                                        <th class="col-sm-3 bg-color-4 border-color-4">Completed</th>
+                                        <th class="col-sm-3 bg-color-1 border-color-1">Title</th>
+                                        <th class="col-sm-3 bg-color-6 border-color-2">Reading Time</th>
+                                        <th class="col-sm-3 bg-color-5 border-color-3">Reading Format</th>
+                                        <th class="col-sm-3 bg-color-4 border-color-3">Reading Date</th>
+                                        <th class="col-sm-3 bg-color-2 border-color-4">Completed</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach (var item in Model.ReadingLogs)
+                                    {
                                     <tr>
-                                        <td class="border-color-4">title 1</td>
-                                        <td class="border-color-4">35 minutes</td>
-                                        <td class="border-color-4">paper</td>
+                                        <td class="border-color-4">@item.Title</td>
+                                        <td class="border-color-4">@item.MinutesRead Minutes</td>
+                                        <td class="border-color-4">@item.Type</td>
+                                        <td class="border-color-4">@item.Date.ToString("M/d/yy")</td>
                                         <td class="border-color-4">
                                             <input type="checkbox" value="true" />
                                         </td>
                                     </tr>
+                                    }
                                 </tbody>
                             </table>
                         </div>

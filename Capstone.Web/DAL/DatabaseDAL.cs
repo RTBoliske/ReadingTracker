@@ -474,11 +474,11 @@ namespace Capstone.Web.DAL
                             Book.ISBN AS ISBN 
                             FROM 
                             Book 
-                            JOIN Family ON Family.ID = Book.FamilyID 
-                            JOIN Users ON Users.FamilyID = Family.ID 
-                            JOIN ReadingLog ON ReadingLog.BookID = Book.ID 
+							JOIN ReadingLog ON ReadingLog.BookID = Book.ID 
+                            JOIN Users ON Users.ID = ReadingLog.UserID 
+                            JOIN Family ON Family.ID = Users.FamilyID
                             WHERE 
-                            Users.ID = @UserID 
+                            Users.ID = @UserID
                             AND ReadingLog.Status = 'Active';";
 
             try
@@ -524,12 +524,12 @@ namespace Capstone.Web.DAL
                             Book.ISBN AS ISBN 
                             FROM 
                             Book 
-                            JOIN Family ON Family.ID = Book.FamilyID 
-                            JOIN Users ON Users.FamilyID = Family.ID 
-                            JOIN ReadingLog ON ReadingLog.BookID = Book.ID 
+							JOIN ReadingLog ON ReadingLog.BookID = Book.ID 
+                            JOIN Users ON Users.ID = ReadingLog.UserID 
+                            JOIN Family ON Family.ID = Users.FamilyID
                             WHERE 
-                            Users.ID = 1 
-                            AND ReadingLog.Status = 'Inactive';";
+                            Users.ID = @UserID
+                            AND ReadingLog.Status = 'Active';";
 
             try
             {
@@ -564,28 +564,29 @@ namespace Capstone.Web.DAL
         }
 
         //Reading Logs
-        public ReadingLog GetReadingLog(ReadingLog log)
+        public List<ReadingLog> GetReadingLog(int userID)
         {
-            string sql = @"SELECT ReadingLog.ID AS ID, ReadingLog.BookID AS BookID, Users.ID AS UserID, Family.ID AS FamilyID, ReadingLog.Minutes_read AS Minutes_read, ReadingLog.Type AS Type,
-                           ReadingLog.Status AS Status, ReadingLog.Date AS Date FROM ReadingLog JOIN BOOK ON Book.ID = ReadingLog.BookID 
-                           JOIN Family ON Family.ID = Users.FamilyID JOIN Users ON Users.FamilyID = Family.ID;";
-
+            string sql = @"SELECT ReadingLog.ID AS ID, ReadingLog.BookID AS BookID, Book.Title AS Title, Users.ID AS UserID, Family.ID AS FamilyID, ReadingLog.Minutes_read AS Minutes_read, ReadingLog.Type AS Type,
+                           ReadingLog.Status AS Status, ReadingLog.Date AS Date FROM ReadingLog JOIN BOOK ON Book.ID = ReadingLog.BookID JOIN Users ON Users.ID = ReadingLog.UserID JOIN Family ON Users.FamilyID = Family.ID
+						   WHERE Users.ID = @UserID;";
+            List<ReadingLog> logs = new List<ReadingLog>();
             try
             {
                 using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@UserID", log.UserID);
+                    cmd.Parameters.AddWithValue("@UserID", userID);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
-                        log = new ReadingLog
+                        ReadingLog log = new ReadingLog
                         {
                             ID = Convert.ToInt32(reader["ID"]),
                             BookID = Convert.ToInt32(reader["BookID"]),
+                            Title = Convert.ToString(reader["Title"]),
                             UserID = Convert.ToInt32(reader["UserID"]),
                             FamilyID = Convert.ToInt32(reader["FamilyID"]),
                             MinutesRead = Convert.ToInt32(reader["Minutes_read"]),
@@ -593,6 +594,7 @@ namespace Capstone.Web.DAL
                             Status = Convert.ToString(reader["Status"]),
                             Date = Convert.ToDateTime(reader["Date"]),
                         };
+                        logs.Add(log);
                     }
 
                 }
@@ -601,7 +603,7 @@ namespace Capstone.Web.DAL
             {
                 throw;
             }
-            return log;
+            return logs;
         } //need to test
         public ReadingLog CreateReadingLog(ReadingLog log)
         {
