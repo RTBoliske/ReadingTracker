@@ -177,8 +177,8 @@
                 </div>
             </div>*@
             <!-- NAVBAR -->
-            <nav id="menuBar" class="navbar navbar-default lightHeader" role="navigation">
-                <div class="container-fluid">
+            <nav id="menuBar" class="navbar navbar-default lightHeader navbar-static-top" role="navigation">
+                <div class="container">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -340,7 +340,7 @@
                                 <li class="dropdown singleDrop color-5  ">
                                     <a href="@Url.Action("AddFamilyMember", "Home")" class="navbar-brand" @*data-toggle="dropdown"*@ role="button" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa fa-calendar bg-color-5" aria-hidden="true"></i>
-                                        <span>Add User</span>
+                                        <span>Users</span>
                                     </a>
                                     @*<ul class="dropdown-menu dropdown-menu-right">
                                   <li class="dropdown dropdown-submenu
@@ -391,7 +391,7 @@
                                 <li class="dropdown singleDrop color-6 ">
                                     <a href="@Url.Action("AddBook", "Home")" class="navbar-brand" @*data-toggle="dropdown"*@ role="button" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa fa-calendar bg-color-6" aria-hidden="true"></i> 
-                                        <span>Add A Book</span>
+                                        <span>Books</span>
                                     </a>
                                     @*<ul class="dropdown-menu dropdown-menu-right">
                     <li class=" "><a href="accordion-toggles.html">Accordions &amp; Toggles</a></li>
@@ -413,7 +413,7 @@
                                 <li class="dropdown singleDrop color-1">
                                     <a href="~/Home/Register" class="navbar-brand" role="button" aria-haspopup="true"aria-expanded="false">
                                         <i class="fa fa-unlock-alt bg-color-1" aria-hidden="true"></i>
-                                        <span>Sign In/Sign Up</span>
+                                        <span>Login</span>
                                     </a>
                                     @*<i class="fa fa-unlock-alt bg-color-5" aria-hidden="true"></i> <a href="~/Home/Register"  data-toggle="modal">Login</a>
                                     <span>or</span><a href="~/Home/Register" data-toggle="modal">Create an account</a>*@
@@ -422,7 +422,7 @@
                             else
                             {
                                 <li class="dropdown singleDrop color-1">
-                                    <a href="@Url.Action("Logout", "Home")" @*'#loginModal'*@ data-toggle="modal">
+                                    <a href="@Url.Action("Logout", "Home")" class="navbar-brand" @*'#loginModal'*@ data-toggle="modal">
                                         <i class="fa fa-lock bg-color-1" aria-hidden="true"></i>
                                         <span>Logout</span>
                                     </a>
@@ -1338,7 +1338,7 @@
                 </div>
             </div>
             <!-- FOOTER INFO AREA -->
-            <div class="footerInfoArea full-width clearfix" style="background-image: url('../../assets/img/footer/footer-bg-1.png');">
+            @*<div class="footerInfoArea full-width clearfix" style="background-image: url('../../assets/img/footer/footer-bg-1.png');">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-3 col-xs-12">
@@ -1441,7 +1441,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>*@
             <!-- COPY RIGHT -->
             <div class="copyRight clearfix">
                 <div class="container">
