@@ -38,7 +38,7 @@ namespace Capstone.Web
         List<Prize> GetPrizes(int familyID);
         Prize AddPrize(Prize prize);
         List<PrizeProgress> GetPrizesByUser(User user);
-
-
+        bool EditPrize(Prize prize);
+        Prize GetPrizeById(int id);
     }
 }

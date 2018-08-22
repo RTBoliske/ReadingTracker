@@ -52,29 +52,29 @@
                     <div class="panel-heading bg-color-1 border-color-1">
                         <h3 class="panel-title">New Book</h3>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body border-color-1">
                         <form action="/Home/AddBook" method="post" role="form">
 
                             <div class="form-group formField">
                                 <label for="Title">Title</label>
-                                @Html.TextBoxFor(m => m.Title, new { @class = "form-control form-control-sm" })
+                                @Html.TextBoxFor(m => m.Title, new { @class = "form-control form-control-sm border-color-1" })
                                 @Html.ValidationMessageFor(m => m.Title)
                             </div>
 
 
                             <div class="form-group formField">
                                 <label for="Author">Author</label>
-                                @Html.TextBoxFor(m => m.Author, new { @class = "form-control form-control-sm" })
+                                @Html.TextBoxFor(m => m.Author, new { @class = "form-control form-control-sm border-color-1" })
                                 @Html.ValidationMessageFor(m => m.Author)
                             </div>
                             <div class="form-group formField">
                                 <label for="ISBN">ISBN</label>
-                                @Html.TextBoxFor(m => m.ISBN, new { @class = "form-control form-control-sm" })
+                                @Html.TextBoxFor(m => m.ISBN, new { @class = "form-control form-control-sm border-color-1" })
                                 @Html.ValidationMessageFor(m => m.ISBN)
                             </div>
                             
                             <div style="text-align:center">
-                                <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-sm btn-primary bg-color-4 border-color-4">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -85,21 +85,21 @@
 
             @* Your Family Members Table *@
             <div class="table-responsive ">
-                <table class="table table-curved">
+                <table class="table table-curved border-color-5">
                     <thead>
-                        <tr>
-                            <th class="col-sm-2 bg-color-2">Title</th>
-                            <th class="col-sm-2 bg-color-6">Author</th>
-                            <th class="col-sm-2 bg-color-3">ISBN</th>
+                        <tr class="border-color-4">
+                            <th class="col-sm-2 bg-color-5 border-color-4">Title</th>
+                            <th class="col-sm-2 bg-color-5 border-color-4">Author</th>
+                            <th class="col-sm-2 bg-color-5 border-color-4">ISBN</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model.BookList)
                         {
                             <tr>
-                                <td>@item.Title</td>
-                                <td>@item.Author</td>
-                                <td>@item.ISBN</td>
+                                <td class="border-color-4">@item.Title</td>
+                                <td class="border-color-4">@item.Author</td>
+                                <td class="border-color-4">@item.ISBN</td>
                             </tr>
                         }
                     </tbody>
