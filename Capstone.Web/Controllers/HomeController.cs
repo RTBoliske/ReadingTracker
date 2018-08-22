@@ -91,10 +91,26 @@ namespace Capstone.Web.Controllers
             return View("AddFamilyMember", model);
         }
 
-        public ActionResult AddPrize()
+        public ActionResult AddPrize(int? id)
         {
-            //need to add method to call allPrizes
+
             PrizeViewModel model = new PrizeViewModel();
+
+            if (id.HasValue)
+            {
+                Prize prize = _db.GetPrizeById(id.Value);
+
+                model.PrizeId = prize.ID;
+                model.Milestone = prize.Milestone;
+                model.UserType = prize.UserType;
+                model.isActive = prize.isActive;
+                model.MaxNumPrizes = prize.MaxNumPrizes;
+                model.StartDate = prize.StartDate;
+                model.EndDate = prize.EndDate;
+                model.FamilyId = prize.FamilyID;
+            }
+
+            //need to add method to call allPrizes
             model.PrizeList = _db.GetPrizes(((User)Session["User"]).FamilyID);
             if (TempData.ContainsKey("AddSuccessState"))
             {
@@ -106,7 +122,7 @@ namespace Capstone.Web.Controllers
             }
             return View("AddPrize", model);
         }
-
+        
         public ActionResult AddBook()
         {
             List<Book> bookList = new List<Book>();
@@ -124,9 +140,18 @@ namespace Capstone.Web.Controllers
             return View("AddBook", model);
         }
 
+        //public ActionResult UpdatePrize(int id)
+        //{
+        //    Prize prize = _db.GetPrizeById(id);
+
+        //    PrizeViewModel pvm = new PrizeViewModel();
+        //    pvm.PrizeId = prize.ID;
+        //    pvm.Milestone = prize.Milestone;
+            
+        //    return View("AddPrize", pvm);
+        //}
 
 
-        
         [HttpPost]
         public ActionResult Login(LoginViewModel model)
         {
@@ -406,16 +431,13 @@ namespace Capstone.Web.Controllers
 
                     prize = _db.AddPrize(prize);
 
-                    // book does not exist or ISBN is wrong
+                   
                     if (prize == null)
                     {
                         ModelState.AddModelError("invalid-credentials", "An invalid prize was attempted");
                         result = View("AddPrize", model);
                     }
-                    //else
-                    //{
-                    //    Session["Book"] = book; //not sure if needed... yet?
-                    //}
+                    
                     if (((User)Session["User"]).RoleID == 2)
                     {
                         TempData["AddSuccessState"] = AddFamilyMemberViewModel.SuccessState.Success;
@@ -435,13 +457,60 @@ namespace Capstone.Web.Controllers
             return result;
         }
 
-        //public ActionResult EditPrize (Prize model)
-        //{
-           
+        [HttpPost]
+        public ActionResult EditPrize(PrizeViewModel model)
+        {
+            ActionResult result = null;
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    result = View("AddPrize", model);
+                }
+                else
+                {
+
+                    Prize prize = new Prize();
+                    prize.ID = model.PrizeId;
+                    prize.FamilyID = ((User)Session["User"]).FamilyID;
+                    prize.UserType = model.UserType;
+                    prize.Milestone = model.Milestone;
+                    prize.MaxNumPrizes = model.MaxNumPrizes;
+                    prize.isActive = model.isActive;
+                    prize.StartDate = model.StartDate;
+                    prize.EndDate = model.EndDate;
 
 
-        //    return 
-        //}
+                    _db.EditPrize(prize);
+
+                    result =RedirectToAction("AddPrize",model);
+                    if (prize == null)
+                    {
+                        ModelState.AddModelError("invalid-credentials", "An invalid prize was attempted");
+                        result = View("AddPrize", model);
+                    }
+                    
+                    if (((User)Session["User"]).RoleID == 2)
+                    {
+                        TempData["AddSuccessState"] = AddFamilyMemberViewModel.SuccessState.Success;
+                        result = RedirectToAction("AddPrize", model);
+                    }
+                    else if (((User)Session["User"]).RoleID == 3)
+                    {
+                        result = RedirectToAction("AddPrize", "Home");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                TempData["AddSuccessState"] = AddFamilyMemberViewModel.SuccessState.Failed;
+                throw;
+            }
+            return result;
+        }
+
 
     }
+
+
 }

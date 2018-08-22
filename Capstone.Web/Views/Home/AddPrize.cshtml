@@ -1,5 +1,6 @@
 ﻿@{
     Layout = "~/Views/Shared/_LayoutTheme.cshtml";
+    Html.EnableClientValidation(false);
 }
 @model PrizeViewModel
 
@@ -8,7 +9,7 @@
 @if (Model.AddSuccessState == PrizeViewModel.SuccessState.Success)
 {
     <div class="alert alert-success alert-dismissible" role="alert">
-        <strong>Success!</strong> A new family member has been successfully added!
+        <strong>Success!</strong> A new prize has been successfully added!
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -33,7 +34,7 @@ else if (Model.AddSuccessState == PrizeViewModel.SuccessState.Failed)
                     <div class="sectionTitle text-center">
                         <h2>
                             <span class="shape shape-left bg-color-4"></span>
-                            <span>Add A Prize</span>
+                            <span>Prizes</span>
                             <span class="shape shape-right bg-color-4"></span>
                         </h2>
                     </div>
@@ -45,52 +46,129 @@ else if (Model.AddSuccessState == PrizeViewModel.SuccessState.Failed)
                 <div class="col-md-4 col-md col-sm-6 col-xs-12">
                     <div class="panel panel-default formPanel">
                         <div class="panel-heading bg-color-1 border-color-1">
-                            <h3 class="panel-title">Create  a new prize</h3>
+                            @if (Model.PrizeId > 0)
+                            {
+                                <h3 class="panel-title" id="formHeader">Edit a prize</h3>
+                            }
+                            else
+                            {
+                                <h3 class="panel-title" id="formHeader">Create a new prize</h3>
+                            }
+
                         </div>
                         <div class="panel-body">
-                            <form action="/Home/AddPrize" method="post" role="form">
-                                <label for="UserRole">User's Role</label>
-                                <div class="form-check form-check-inline">
-                                    <input type="radio" class="form-check-input" name="UserType" id="inlineCheckbox1" value="3" checked>
-                                    <label class="form-check-label" for="inlineCheckbox1">Child</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input type="radio" class="form-check-input" name="UserType" id="inlineCheckbox1" value="2">
-                                    <label class="form-check-label" for="inlineCheckbox1">Parent</label>
-                                </div>
-                                <div class="form-group formField">
-                                    <label for="Milestone">Reading Goal (in minutes)</label>
-                                    @Html.TextBoxFor(m => m.Milestone, new { @class = "form-control form-control-sm" })
-                                    @Html.ValidationMessageFor(m => m.Milestone)
-                                </div>
-                                <div class="form-group formField">
-                                    <label for="MaxNumPrizes">Max # of Prizes</label>
-                                    @Html.TextBoxFor(m => m.MaxNumPrizes, new { @class = "form-control form-control-sm" })
-                                    @Html.ValidationMessageFor(m => m.MaxNumPrizes)
-                                </div>
-                                <label for="UserRole">Is the Goal Active?</label>
-                                <div class="form-check form-check-inline">
-                                    <input type="radio" class="form-check-input" name="UserType" id="inlineCheckbox1" value="0" checked>
-                                    <label class="form-check-label" for="inlineCheckbox1">False</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input type="radio" class="form-check-input" name="UserType" id="inlineCheckbox1" value="1">
-                                    <label class="form-check-label" for="inlineCheckbox1">True</label>
-                                </div>
-                                <div class="form-group formField">
-                                    <label for="StartDate">Start Date</label>
-                                    @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control form-control-sm" })
-                                    @Html.ValidationMessageFor(m => m.StartDate)
-                                </div>
-                                <div class="form-group formField">
-                                    <label for="EndDate">End Date</label>
-                                    @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control form-control-sm" })
-                                    @Html.ValidationMessageFor(m => m.EndDate)
-                                </div>
-                                <div style="text-align:center">
-                                    <button type="submit" class="btn btn-sm btn-primary">Submit</button>
-                                </div>
-                            </form>
+
+                            @* Edit Prize Form *@
+
+                            @if (Model.PrizeId > 0)
+                            {
+                                <form action="/Home/EditPrize" method="post" role="form">
+                                    <input type="hidden" value="@Model.PrizeId" name="PrizeId" />
+                                    <label for="UserRole">User's Role</label>
+                                    <div class="form-check form-check-inline">
+                                        @Html.RadioButtonFor(m => m.UserType, 3, new { @class = "form-check-input", id = "inlineCheckbox1" })
+
+                                        <label class="form-check-label" for="inlineCheckbox1">Child</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        @Html.RadioButtonFor(m => m.UserType, 2, new { @class = "form-check-input", id = "inlineCheckbox2" })
+
+                                        <label class="form-check-label" for="inlineCheckbox2">Parent</label>
+                                    </div>
+                                    <div class="form-group formField">
+                                        <label for="Milestone">Reading Goal (in minutes)</label>
+                                        @Html.TextBoxFor(m => m.Milestone, new { @class = "form-control form-control-sm" })
+                                        @Html.ValidationMessageFor(m => m.Milestone)
+                                    </div>
+                                    <div class="form-group formField">
+                                        <label for="MaxNumPrizes">Max # of Prizes</label>
+                                        @Html.TextBoxFor(m => m.MaxNumPrizes, new { @class = "form-control form-control-sm" })
+                                        @Html.ValidationMessageFor(m => m.MaxNumPrizes)
+                                    </div>
+                                    <label for="UserRole">Is the Goal Active?</label>
+                                    <div class="form-check form-check-inline">
+                                        @Html.RadioButtonFor(m => m.isActive, false, new { @class = "form-check-input", id = "inlineCheckbox3" })
+
+                                        <label class="form-check-label" for="inlineCheckbox3">False</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        @Html.RadioButtonFor(m => m.isActive, true, new { @class = "form-check-input", id = "inlineCheckbox4" })
+
+                                        <label class="form-check-label" for="inlineCheckbox4">True</label>
+                                    </div>
+                                    <div class="form-group formField">
+                                        <label for="StartDate">Start Date</label>
+                                        @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control form-control-sm" })
+                                        @Html.ValidationMessageFor(m => m.StartDate)
+                                    </div>
+                                    <div class="form-group formField">
+                                        <label for="EndDate">End Date</label>
+                                        @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control form-control-sm" })
+                                        @Html.ValidationMessageFor(m => m.EndDate)
+                                    </div>
+                                    <div style="text-align:center; display:inline-block">
+                                        <button type="submit" class="btn btn-sm btn-primary">Fuck Your Front Hole</button>
+                                    </div>
+                                   
+                                        <div style="text-align:center; display:inline-block">
+                                            <button type="reset" class="btn btn-sm btn-primary">Cancel</button>
+                                        </div>
+                                    
+                                </form>
+                            }
+                            else
+                            {
+                                @* Add Prize Form *@
+                                <form action="/Home/AddPrize" method="post" role="form">
+                                    @Html.HiddenFor(m => m.PrizeId)
+                                    <label for="UserRole">User's Role</label>
+                                    <div class="form-check form-check-inline">
+                                        @Html.RadioButtonFor(m => m.UserType, 3, new { @class = "form-check-input", id = "inlineCheckbox1" })
+
+                                        <label class="form-check-label" for="inlineCheckbox1">Child</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        @Html.RadioButtonFor(m => m.UserType, 2, new { @class = "form-check-input", id = "inlineCheckbox2" })
+
+                                        <label class="form-check-label" for="inlineCheckbox2">Parent</label>
+                                    </div>
+                                    <div class="form-group formField">
+                                        <label for="Milestone">Reading Goal (in minutes)</label>
+                                        @Html.TextBoxFor(m => m.Milestone, new { @class = "form-control form-control-sm" })
+                                        @Html.ValidationMessageFor(m => m.Milestone)
+                                    </div>
+                                    <div class="form-group formField">
+                                        <label for="MaxNumPrizes">Max # of Prizes</label>
+                                        @Html.TextBoxFor(m => m.MaxNumPrizes, new { @class = "form-control form-control-sm" })
+                                        @Html.ValidationMessageFor(m => m.MaxNumPrizes)
+                                    </div>
+                                    <label for="UserRole">Is the Goal Active?</label>
+                                    <div class="form-check form-check-inline">
+                                        @Html.RadioButtonFor(m => m.isActive, false, new { @class = "form-check-input", id = "inlineCheckbox3" })
+
+                                        <label class="form-check-label" for="inlineCheckbox3">False</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        @Html.RadioButtonFor(m => m.isActive, true, new { @class = "form-check-input", id = "inlineCheckbox4" })
+
+                                        <label class="form-check-label" for="inlineCheckbox4">True</label>
+                                    </div>
+                                    <div class="form-group formField">
+                                        <label for="StartDate">Start Date</label>
+                                        @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control form-control-sm" })
+                                        @Html.ValidationMessageFor(m => m.StartDate)
+                                    </div>
+                                    <div class="form-group formField">
+                                        <label for="EndDate">End Date</label>
+                                        @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control form-control-sm" })
+                                        @Html.ValidationMessageFor(m => m.EndDate)
+                                    </div>
+                                    <div style="text-align:center; display:inline-block">
+                                        <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                                    </div>
+                                  
+                                </form>
+                            }
                         </div>
                     </div>
                 </div>
@@ -99,12 +177,13 @@ else if (Model.AddSuccessState == PrizeViewModel.SuccessState.Failed)
                     <table class="table table-curved">
                         <thead>
                             <tr>
-                                <th class="col-sm-2 bg-color-1">Available To:</th>
-                                <th class="col-sm-2 bg-color-2">Goal:</th>
-                                <th class="col-sm-2 bg-color-3">Max # Prizes</th>
-                                <th class="col-sm-2 bg-color-4">Active?</th>
-                                <th class="col-sm-2 bg-color-5">Start Date</th>
-                                <th class="col-sm-2 bg-color-6">End Date</th>
+                                <th class="col-sm-2 bg-color-2" style="color:white">Available To:</th>
+                                <th class="col-sm-2 bg-color-3" style="color:white">Goal:</th>
+                                <th class="col-sm-2 bg-color-4" style="color:white">Max # Prizes</th>
+                                <th class="col-sm-2 bg-color-5" style="color:white">Active?</th>
+                                <th class="col-sm-2 bg-color-6" style="color:white">Start Date</th>
+                                <th class="col-sm-2 bg-color-1" style="color:white">End Date</th>
+                                <th class="col-sm-2 bg-color-2" style="color:white">Edit</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -139,6 +218,9 @@ else if (Model.AddSuccessState == PrizeViewModel.SuccessState.Failed)
                                     <td>
                                         <span class="color-6"></span>
                                         @item.EndDate
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Update", "AddPrize", new { id = item.ID })
                                     </td>
                                 </tr>
                             }

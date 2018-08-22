@@ -767,6 +767,90 @@ namespace Capstone.Web.DAL
             return prizeList;
         }
 
+        public Prize GetPrizeById(int id)
+        {
+            Prize result = new Prize();
+            string sql = " Select ID, UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate from Prize where ID = @ID";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@ID", id);
+
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Prize prize = new Prize
+                        {
+                            ID = Convert.ToInt32(reader["ID"]),
+                            UserType = Convert.ToInt32(reader["UserType"]),
+                            Milestone = Convert.ToInt32(reader["Goal"]),
+                            MaxNumPrizes = Convert.ToInt32(reader["MaxNumPrize"]),
+                            isActive = Convert.ToBoolean(reader["isActive"]),
+                            StartDate = Convert.ToDateTime(reader["StartDate"]),
+                            EndDate = Convert.ToDateTime(reader["EndDate"]),
+                            //FamilyID = Convert.ToInt32(reader["FamilyID"]),
+                        };
+                        result = prize;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+
+            return result;
+        }
+
+        public bool EditPrize(Prize prize)
+        {
+            bool wasSuccessful = true;
+            string sql = "Update Prize " +
+                         "Set UserType = @UserType, Goal = @Goal, MaxNumPrize = @MaxNumPrize, isActive = @isActive, StartDate = @StartDate, EndDate = @EndDate " +
+                         "Where ID = @ID";
+                        
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@ID", prize.ID);
+                    cmd.Parameters.AddWithValue("@UserType", prize.UserType);
+                    cmd.Parameters.AddWithValue("@Goal", prize.Milestone);
+                    cmd.Parameters.AddWithValue("@MaxNumPrize", prize.MaxNumPrizes);
+                    cmd.Parameters.AddWithValue("@isActive", prize.isActive);
+                    cmd.Parameters.AddWithValue("@StartDate", prize.StartDate);
+                    cmd.Parameters.AddWithValue("@EndDate", prize.EndDate);
+                    
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    if(rowsAffected == 0)
+                    {
+                        wasSuccessful = false;
+                    }
+
+                }
+                
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+
+            return wasSuccessful;
+        }
+
 
         //Mappers
         private User MapRowToUsers(SqlDataReader reader)
