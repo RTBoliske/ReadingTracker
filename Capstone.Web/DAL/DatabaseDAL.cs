@@ -471,15 +471,14 @@ namespace Capstone.Web.DAL
                             Book.FamilyID AS FamilyID, 
                             Book.Title AS Title, 
                             Book.Author AS Author, 
-                            Book.ISBN AS ISBN 
-                            FROM 
-                            Book 
-							JOIN ReadingLog ON ReadingLog.BookID = Book.ID 
-                            JOIN Users ON Users.ID = ReadingLog.UserID 
-                            JOIN Family ON Family.ID = Users.FamilyID
-                            WHERE 
-                            Users.ID = @UserID
-                            AND ReadingLog.Status = 'Active';";
+                            Book.ISBN AS ISBN  FROM ReadingLog A
+                            JOIN Book ON Book.ID = A.BookID
+                            WHERE A.Date = (
+	                            SELECT MAX(Date) FROM ReadingLog B
+	                            WHERE B.BookID = A.BookID
+	                            AND B.UserID = A.UserID)
+                            AND UserID = @userID
+                            AND Status = 'Active';";
 
             try
             {
@@ -488,7 +487,7 @@ namespace Capstone.Web.DAL
                     conn.Open();
 
                     SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@UserID", userID);
+                    cmd.Parameters.AddWithValue("@userID", userID);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -521,15 +520,14 @@ namespace Capstone.Web.DAL
                             Book.FamilyID AS FamilyID, 
                             Book.Title AS Title, 
                             Book.Author AS Author, 
-                            Book.ISBN AS ISBN 
-                            FROM 
-                            Book 
-							JOIN ReadingLog ON ReadingLog.BookID = Book.ID 
-                            JOIN Users ON Users.ID = ReadingLog.UserID 
-                            JOIN Family ON Family.ID = Users.FamilyID
-                            WHERE 
-                            Users.ID = @UserID
-                            AND ReadingLog.Status = 'Active';";
+                            Book.ISBN AS ISBN  FROM ReadingLog A
+                            JOIN Book ON Book.ID = A.BookID
+                            WHERE A.Date = (
+	                            SELECT MAX(Date) FROM ReadingLog B
+	                            WHERE B.BookID = A.BookID
+	                            AND B.UserID = A.UserID)
+                            AND UserID = @UserID
+                            AND Status <> 'Active';";
 
             try
             {
@@ -564,12 +562,12 @@ namespace Capstone.Web.DAL
         }
 
         //Reading Logs
-        public List<ReadingLog> GetReadingLog(int userID)
+        public Stack<ReadingLog> GetReadingLog(int userID)
         {
             string sql = @"SELECT ReadingLog.ID AS ID, ReadingLog.BookID AS BookID, Book.Title AS Title, Users.ID AS UserID, Family.ID AS FamilyID, ReadingLog.Minutes_read AS Minutes_read, ReadingLog.Type AS Type,
                            ReadingLog.Status AS Status, ReadingLog.Date AS Date FROM ReadingLog JOIN BOOK ON Book.ID = ReadingLog.BookID JOIN Users ON Users.ID = ReadingLog.UserID JOIN Family ON Users.FamilyID = Family.ID
 						   WHERE Users.ID = @UserID;";
-            List<ReadingLog> logs = new List<ReadingLog>();
+            Stack<ReadingLog> logs = new Stack<ReadingLog>();
             try
             {
                 using (SqlConnection conn = new SqlConnection(_connectionString))
@@ -594,7 +592,7 @@ namespace Capstone.Web.DAL
                             Status = Convert.ToString(reader["Status"]),
                             Date = Convert.ToDateTime(reader["Date"]),
                         };
-                        logs.Add(log);
+                        logs.Push(log);
                     }
 
                 }
