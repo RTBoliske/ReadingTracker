@@ -50,15 +50,22 @@ namespace Capstone.Web.Controllers
             if (id.HasValue)
             {
                 model.UserID = id.Value;
+                //loading up the list of Prizes & Progress
+                User user = _db.GetUserByID(model.UserID);
+                model.PrizeList = _db.GetPrizesByUser(user);
+                //loading active/inactive books
+                model.ActiveBooks = _db.GetActiveBooks(model.UserID);
+                model.InactiveBooks = _db.GetInactiveBooks(model.UserID);
             } else
             {
                 model.UserID = (Session["User"] as User).ID;
+                //loading up the list of Prizes & Progress
+                User user = _db.GetUserByID(model.UserID);
+                model.PrizeList = _db.GetPrizesByUser(user);
+                //Loading active/inactive books
+                model.ActiveBooks = _db.GetActiveBooks(model.UserID);
+                model.InactiveBooks = _db.GetInactiveBooks(model.UserID);
             }
-
-            //User user = ((User)Session["User"]);
-
-            //model.PrizeList = _db.GetPrizesByUser(prize);
-
             return View("UserActivity", model);
         }
 
@@ -127,7 +134,7 @@ namespace Capstone.Web.Controllers
             }
             else
             {
-                User user = _db.GetUser(model.Username);
+                User user = _db.GetUserByUsername(model.Username);
 
                 if (user.Username == null || user.Password == null)
                 {

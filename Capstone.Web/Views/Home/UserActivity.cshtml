@@ -9,7 +9,7 @@
         if (user.ID == Model.UserID)
         {
             currentUser = user;
-        }
+        } 
     }
 
 
@@ -47,11 +47,15 @@
                                     Active Books<span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li>active book 1</li>
-                                    <li>active book 2</li>
+                                    @foreach (var item in Model.ActiveBooks)
+                                    {
+                                        <li>@item.Title</li>
+                                    }
                                     <li class="divider"></li>
-                                    <li>inactive book 1</li>
-                                    <li>inactive book 2</li>
+                                    @foreach (var item in Model.InactiveBooks)
+                                    {
+                                        <li>@item.Title</li>
+                                    }
                                 </ul>
                             </div>
                             <div class="form-group formField">
@@ -79,12 +83,12 @@
                         <h3 class="panel-title">Progress To Prizes</h3>
                     </div>
                     <div class="panel-body">
-                        @*@foreach (var item in Model.PrizeList)
-                            {*@
+                        @foreach (var item in Model.PrizeList)
+                            {
                         <div class="progress">
-                            <div class="progress-bar progress-bar-info animated fadeInLeft" role="progressbar" style="width: 70%">70%</div>
+                            <div class="progress-bar progress-bar-info animated fadeInLeft" role="progressbar" style="width: @item.PercentProgress%">@item.PercentProgress%</div>
                         </div>
-                        @*}*@
+                        }
                     </div>
                 </div>
             </div>

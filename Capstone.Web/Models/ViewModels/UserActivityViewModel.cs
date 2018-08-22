@@ -23,6 +23,6 @@ namespace Capstone.Web
         public List<User> UserList { get; set; }
         public List<Book> ActiveBooks { get; set; }
         public List<Book> InactiveBooks { get; set; }
-        public List<Prize> PrizeList { get; set; }
+        public List<PrizeProgress> PrizeList { get; set; }
     }
 }

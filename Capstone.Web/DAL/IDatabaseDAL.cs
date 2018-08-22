@@ -12,7 +12,8 @@ namespace Capstone.Web
 
         //User
         List<User> GetAllUsers();
-        User GetUser(string username);
+        User GetUserByUsername(string username);
+        User GetUserByID(int id);
         User CreateUser(User newUser);
 
         //Family
