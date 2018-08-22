@@ -99,8 +99,8 @@ else if (Model.AddSuccessState == PrizeViewModel.SuccessState.Failed)
                     <table class="table table-curved">
                         <thead>
                             <tr>
-                                <th class="col-sm-2 bg-color-1">User Type <i class="fa fa-arrow-down" aria-hidden="true"></i></th>
-                                <th class="col-sm-2 bg-color-2">Goal!</th>
+                                <th class="col-sm-2 bg-color-1">Available To:</th>
+                                <th class="col-sm-2 bg-color-2">Goal:</th>
                                 <th class="col-sm-2 bg-color-3">Max # Prizes</th>
                                 <th class="col-sm-2 bg-color-4">Active?</th>
                                 <th class="col-sm-2 bg-color-5">Start Date</th>
@@ -111,25 +111,33 @@ else if (Model.AddSuccessState == PrizeViewModel.SuccessState.Failed)
                             @foreach (var item in Model.PrizeList)
                             {
                                 <tr>
-                                    <td>@item.UserType</td>
+                                     @if (item.UserType == 2)
+                                {
+                                    <td>Parents</td>
+                                }
+                                else
+                                {
+                                    <td>Children</td>
+                                }
+
                                     <td>
-                                        <span class="color-2">Num Minutes</span>
-                                        @item.Milestone
+                                        <span class="color-2"></span>
+                                        @item.Milestone Minutes
                                     </td>
                                     <td>
-                                        <span class="color-3">Math</span>
+                                        <span class="color-3"></span>
                                         @item.MaxNumPrizes
                                     </td>
                                     <td>
-                                        <span class="color-4">Geography</span>
+                                        <span class="color-4"></span>
                                         @item.isActive
                                     </td>
                                     <td>
-                                        <span class="color-5">English</span>
+                                        <span class="color-5"></span>
                                         @item.StartDate
                                     </td>
                                     <td>
-                                        <span class="color-6">Art</span>
+                                        <span class="color-6"></span>
                                         @item.EndDate
                                     </td>
                                 </tr>

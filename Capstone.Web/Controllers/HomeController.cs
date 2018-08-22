@@ -434,5 +434,14 @@ namespace Capstone.Web.Controllers
             }
             return result;
         }
+
+        //public ActionResult EditPrize (Prize model)
+        //{
+           
+
+
+        //    return 
+        //}
+
     }
 }

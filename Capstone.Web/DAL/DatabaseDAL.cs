@@ -767,6 +767,7 @@ namespace Capstone.Web.DAL
             return prizeList;
         }
 
+
         //Mappers
         private User MapRowToUsers(SqlDataReader reader)
         {
