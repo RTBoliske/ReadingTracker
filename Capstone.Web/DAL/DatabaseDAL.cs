@@ -42,7 +42,7 @@ namespace Capstone.Web.DAL
                 throw;
             }
         }
-        public User GetUser(string username)
+        public User GetUserByUsername(string username)
         {
             User user = new User();
 
@@ -57,6 +57,47 @@ namespace Capstone.Web.DAL
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@username", username);
                     //cmd.Parameters.AddWithValue("@password", password);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        user = new User
+                        {
+                            ID = Convert.ToInt32(reader["ID"]),
+                            FirstName = Convert.ToString(reader["First_name"]),
+                            LastName = Convert.ToString(reader["Last_name"]),
+                            FamilyID = Convert.ToInt32(reader["FamilyID"]),
+                            Username = Convert.ToString(reader["Username"]),
+                            Password = Convert.ToString(reader["Password"]),
+                            Salt = Convert.ToString(reader["Salt"]),
+                            RoleID = Convert.ToInt32(reader["RoleID"]),
+                        };
+                    }
+
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+
+            return user;
+        }
+        public User GetUserByID(int id)
+        {
+            User user = new User();
+
+            string sql = @"SELECT TOP 1 * FROM Users WHERE ID = @id";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@id", id);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -353,7 +394,7 @@ namespace Capstone.Web.DAL
         }
         public Book CreateBook(Book book)
         {
-            string sql = @"INSERT INTO Book (FamilyID, Title, Author, ISBN) VALUES (@ID, @FamilyID, @Title, @Author, @ISBN);
+            string sql = @"INSERT INTO Book (FamilyID, Title, Author, ISBN) VALUES (@FamilyID, @Title, @Author, @ISBN);
                            SELECT CAST(SCOPE_IDENTITY() as int);";
 
             try
@@ -380,22 +421,64 @@ namespace Capstone.Web.DAL
             }
 
         }
+
+        public List<Book> GetAllBooksByFamilyID(int familyID)
+        {
+            List<Book> bookList = new List<Book>();
+            string sql = @"SELECT Book.Title As Title,
+                                  Book.Author As Author,
+                                  Book.ISBN As ISBN
+                                  From Book
+                                  Where Book.FamilyID = @FamilyID;";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@FamilyID", familyID);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while(reader.Read())
+                    {
+                        Book book = new Book
+                        {
+                            //ID = Convert.ToInt32(reader["ID"]),
+                            Title = Convert.ToString(reader["Title"]),
+                            Author = Convert.ToString(reader["Author"]),
+                            ISBN = Convert.ToString(reader["ISBN"]),
+                            //FamilyID = Convert.ToInt32(reader["FamilyID"]),
+                        };
+                        bookList.Add(book);
+                    }
+                }
+            }
+            catch(SqlException)
+            {
+                throw;
+            }
+            
+            return bookList;
+        }
+        
         public List<Book> GetActiveBooks(int userID)
         {
             List<Book> bookList = new List<Book>();
-            string sql = @"SELECT Users.ID AS UserID, 
-                            Book.ID AS BookID, 
+            string sql = @"SELECT Book.ID AS ID, 
                             Book.FamilyID AS FamilyID, 
                             Book.Title AS Title, 
                             Book.Author AS Author, 
                             Book.ISBN AS ISBN 
                             FROM 
                             Book 
-                            JOIN Family ON Family.ID = Book.FamilyID 
-                            JOIN Users ON Users.FamilyID = Family.ID 
-                            JOIN ReadingLog ON ReadingLog.BookID = Book.ID 
+							JOIN ReadingLog ON ReadingLog.BookID = Book.ID 
+                            JOIN Users ON Users.ID = ReadingLog.UserID 
+                            JOIN Family ON Family.ID = Users.FamilyID
                             WHERE 
-                            Users.ID = @UserID 
+                            Users.ID = @UserID
                             AND ReadingLog.Status = 'Active';";
 
             try
@@ -414,10 +497,10 @@ namespace Capstone.Web.DAL
                         Book book = new Book
                         {
                             ID = Convert.ToInt32(reader["ID"]),
+                            FamilyID = Convert.ToInt32(reader["FamilyID"]),
                             Title = Convert.ToString(reader["Title"]),
                             Author = Convert.ToString(reader["Author"]),
                             ISBN = Convert.ToString(reader["ISBN"]),
-                            FamilyID = Convert.ToInt32(reader["FamilyID"]),
                         };
                         bookList.Add(book);
                     }
@@ -429,23 +512,24 @@ namespace Capstone.Web.DAL
             }
             return bookList;
         }
+
+
         public List<Book> GetInactiveBooks(int userID)
         {
             List<Book> bookList = new List<Book>();
-            string sql = @"SELECT Users.ID AS UserID, 
-                            Book.ID AS BookID, 
+            string sql = @"SELECT Book.ID AS ID, 
                             Book.FamilyID AS FamilyID, 
                             Book.Title AS Title, 
                             Book.Author AS Author, 
                             Book.ISBN AS ISBN 
                             FROM 
                             Book 
-                            JOIN Family ON Family.ID = Book.FamilyID 
-                            JOIN Users ON Users.FamilyID = Family.ID 
-                            JOIN ReadingLog ON ReadingLog.BookID = Book.ID 
+							JOIN ReadingLog ON ReadingLog.BookID = Book.ID 
+                            JOIN Users ON Users.ID = ReadingLog.UserID 
+                            JOIN Family ON Family.ID = Users.FamilyID
                             WHERE 
-                            Users.ID = 1 
-                            AND ReadingLog.Status = 'Inactive';";
+                            Users.ID = @UserID
+                            AND ReadingLog.Status = 'Active';";
 
             try
             {
@@ -463,10 +547,10 @@ namespace Capstone.Web.DAL
                         Book book = new Book
                         {
                             ID = Convert.ToInt32(reader["ID"]),
+                            FamilyID = Convert.ToInt32(reader["FamilyID"]),
                             Title = Convert.ToString(reader["Title"]),
                             Author = Convert.ToString(reader["Author"]),
                             ISBN = Convert.ToString(reader["ISBN"]),
-                            FamilyID = Convert.ToInt32(reader["FamilyID"]),
                         };
                         bookList.Add(book);
                     }
@@ -480,28 +564,29 @@ namespace Capstone.Web.DAL
         }
 
         //Reading Logs
-        public ReadingLog GetReadingLog(ReadingLog log)
+        public List<ReadingLog> GetReadingLog(int userID)
         {
-            string sql = @"SELECT ReadingLog.BookID AS BookID, Users.ID AS ID, Family.ID AS FamilyID, ReadingLog.Minutes_read AS Minutes_read, ReadingLog.Type AS Type,
-                           ReadingLog.Status AS Status, ReadingLog.Date AS Date FROM ReadingLog JOIN BOOK ON Book.ID = ReadingLog.BookID 
-                           JOIN Family ON Family.ID = Users.FamilyID JOIN Users ON Users.FamilyID = Family.ID;";
-
+            string sql = @"SELECT ReadingLog.ID AS ID, ReadingLog.BookID AS BookID, Book.Title AS Title, Users.ID AS UserID, Family.ID AS FamilyID, ReadingLog.Minutes_read AS Minutes_read, ReadingLog.Type AS Type,
+                           ReadingLog.Status AS Status, ReadingLog.Date AS Date FROM ReadingLog JOIN BOOK ON Book.ID = ReadingLog.BookID JOIN Users ON Users.ID = ReadingLog.UserID JOIN Family ON Users.FamilyID = Family.ID
+						   WHERE Users.ID = @UserID;";
+            List<ReadingLog> logs = new List<ReadingLog>();
             try
             {
                 using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@UserID", log.UserID);
+                    cmd.Parameters.AddWithValue("@UserID", userID);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
-                        log = new ReadingLog
+                        ReadingLog log = new ReadingLog
                         {
                             ID = Convert.ToInt32(reader["ID"]),
                             BookID = Convert.ToInt32(reader["BookID"]),
+                            Title = Convert.ToString(reader["Title"]),
                             UserID = Convert.ToInt32(reader["UserID"]),
                             FamilyID = Convert.ToInt32(reader["FamilyID"]),
                             MinutesRead = Convert.ToInt32(reader["Minutes_read"]),
@@ -509,6 +594,7 @@ namespace Capstone.Web.DAL
                             Status = Convert.ToString(reader["Status"]),
                             Date = Convert.ToDateTime(reader["Date"]),
                         };
+                        logs.Add(log);
                     }
 
                 }
@@ -517,11 +603,11 @@ namespace Capstone.Web.DAL
             {
                 throw;
             }
-            return log;
+            return logs;
         } //need to test
         public ReadingLog CreateReadingLog(ReadingLog log)
         {
-            string sql = @"INSERT INTO ReadingLog ReadingLog (BookID, UserID, FamilyID, Minutes_read, Status, Type, Date)
+            string sql = @"INSERT INTO ReadingLog (BookID, UserID, Minutes_read, Status, Type, Date)
                            VALUES (@BookID, @UserID, @Minutes_read, @Status, @Type, @Date);
                            SELECT CAST(SCOPE_IDENTITY() as int);";
 
@@ -623,7 +709,7 @@ namespace Capstone.Web.DAL
                 throw;
             }
         }
-        public List<PrizeProgress> GetPrizesByUser (User user)
+        public List<PrizeProgress> GetPrizesByUser (User user)  //not passing back in new USERID for children
         {
             string sql = @"select p.id AS ID, p.UserType AS UserType, p.MaxNumPrize AS MaxNumPrize, p.Goal AS Goal, r.UserID AS UserID, sum(r.minutes_read) AS Minutes_read, (sum(cast(r.minutes_read as real)) / cast(goal as real)) * 100.0 as percentComplete
                             from prize p
@@ -665,9 +751,9 @@ namespace Capstone.Web.DAL
                             UserType = Convert.ToInt32(reader["UserType"]),
                             MaxNumPrizes = Convert.ToInt32(reader["MaxNumPrize"]),
                             Milestone = Convert.ToInt32(reader["Goal"]),
+                            UserID = Convert.ToInt32(reader["UserID"]),
                             MinutesRead = Convert.ToInt32(reader["Minutes_read"]),
-                            StartDate = Convert.ToDateTime(reader["StartDate"]),
-                            EndDate = Convert.ToDateTime(reader["EndDate"]),
+                            PercentProgress = Convert.ToDecimal(reader["percentComplete"]),
                         };
                         prizeList.Add(prize);
                     }

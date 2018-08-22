@@ -12,7 +12,8 @@ namespace Capstone.Web
 
         //User
         List<User> GetAllUsers();
-        User GetUser(string username);
+        User GetUserByUsername(string username);
+        User GetUserByID(int id);
         User CreateUser(User newUser);
 
         //Family
@@ -27,9 +28,10 @@ namespace Capstone.Web
         Book CreateBook(Book book);
         List<Book> GetActiveBooks(int userID);
         List<Book> GetInactiveBooks(int userID);
+        List<Book> GetAllBooksByFamilyID(int familyID);
 
         //Reading Log
-        ReadingLog GetReadingLog(ReadingLog log);
+        List<ReadingLog> GetReadingLog(int userID);
         ReadingLog CreateReadingLog(ReadingLog log);
 
         //Prizes

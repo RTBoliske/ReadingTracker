@@ -50,15 +50,26 @@ namespace Capstone.Web.Controllers
             if (id.HasValue)
             {
                 model.UserID = id.Value;
+                //loading up the list of Prizes & Progress
+                User user = _db.GetUserByID(model.UserID);
+                model.PrizeList = _db.GetPrizesByUser(user);
+                //loading active/inactive books
+                model.ActiveBooks = _db.GetActiveBooks(model.UserID);
+                model.InactiveBooks = _db.GetInactiveBooks(model.UserID);
+                //loading reading log
+                model.ReadingLogs = _db.GetReadingLog(model.UserID);
             } else
             {
                 model.UserID = (Session["User"] as User).ID;
+                //loading up the list of Prizes & Progress
+                User user = _db.GetUserByID(model.UserID);
+                model.PrizeList = _db.GetPrizesByUser(user);
+                //Loading active/inactive books
+                model.ActiveBooks = _db.GetActiveBooks(model.UserID);
+                model.InactiveBooks = _db.GetInactiveBooks(model.UserID);
+                //reading logs
+                model.ReadingLogs = _db.GetReadingLog(model.UserID);
             }
-
-            //User user = ((User)Session["User"]);
-
-            //model.PrizeList = _db.GetPrizesByUser(prize);
-
             return View("UserActivity", model);
         }
 
@@ -98,7 +109,19 @@ namespace Capstone.Web.Controllers
 
         public ActionResult AddBook()
         {
-            return View("AddBook");
+            List<Book> bookList = new List<Book>();
+            bookList = _db.GetAllBooksByFamilyID(((User)Session["User"]).FamilyID);
+            AddBookViewModel model = new AddBookViewModel();
+            if (TempData.ContainsKey("AddSuccessState"))
+            {
+                model.AddSuccessState = (AddBookViewModel.SuccessState)TempData["AddSuccessState"];
+            }
+            else
+            {
+                model.AddSuccessState = AddBookViewModel.SuccessState.None;
+            }
+            model.BookList = bookList;
+            return View("AddBook", model);
         }
 
 
@@ -115,7 +138,7 @@ namespace Capstone.Web.Controllers
             }
             else
             {
-                User user = _db.GetUser(model.Username);
+                User user = _db.GetUserByUsername(model.Username);
 
                 if (user.Username == null || user.Password == null)
                 {
@@ -260,41 +283,55 @@ namespace Capstone.Web.Controllers
         public ActionResult AddBook(Book model)
         {
             ActionResult result = null;
-
-            if (!ModelState.IsValid)
-            {
-                result = View("AddBook", model);
-            }
-            else
+            try
             {
 
-                Book book = new Book();
-                book.ID = model.ID;
-                book.FamilyID = ((User)Session["User"]).FamilyID;
-                book.Title = model.Title;
-                book.Author = model.Author;
-                book.ISBN = model.ISBN;
 
-                book = _db.CreateBook(book);
-
-                // book does not exist or ISBN is wrong
-                if (book == null || book.ISBN == null)
+                if (!ModelState.IsValid)
                 {
-                    ModelState.AddModelError("invalid-credentials", "An invalid book title or ISBN was provided");
                     result = View("AddBook", model);
                 }
                 else
                 {
-                    Session["Book"] = book; //not sure if needed... yet?
+
+                    Book book = new Book();
+                    book.ID = model.ID;
+                    book.FamilyID = ((User)Session["User"]).FamilyID;
+                    book.Title = model.Title;
+                    book.Author = model.Author;
+                    book.ISBN = model.ISBN;
+
+                    book = _db.CreateBook(book);
+
+                    if (((User)Session["User"]).RoleID == 2)
+                    {
+                        TempData["AddSuccessState"] = AddBookViewModel.SuccessState.Success;
+                        result = RedirectToAction("AddBook", "Home");
+                    }
+                    // book does not exist or ISBN is wrong
+                    //if (book == null || book.ISBN == null)
+                    //{
+                    //    ModelState.AddModelError("invalid-credentials", "An invalid book title or ISBN was provided");
+                    //    result = View("AddBook", model);
+                    //}
+                    //else
+                    //{
+                    //    Session["Book"] = book; //not sure if needed... yet?
+                    //}
+                    //if (((User)Session["User"]).RoleID == 2)
+                    //{
+                    //    result = RedirectToAction("UserActivity", "Home");
+                    //}
+                    //else if (((User)Session["User"]).RoleID == 3)
+                    //{
+                    //    result = RedirectToAction("UserActivity", "Home");
+                    //}
                 }
-                if (((User)Session["User"]).RoleID == 2)
-                {
-                    result = RedirectToAction("UserActivity", "Home");
-                }
-                else if (((User)Session["User"]).RoleID == 3)
-                {
-                    result = RedirectToAction("UserActivity", "Home");
-                }
+            }
+            catch(Exception)
+            {
+                TempData["AddSuccessState"] = AddBookViewModel.SuccessState.Failed;
+                result = RedirectToAction("AddBook", "Home");
             }
             return result;
         }
@@ -310,12 +347,14 @@ namespace Capstone.Web.Controllers
             }
             else
             {
+                model.MinutesRead = model.MinutesRead + (model.HoursRead * 60);
 
                 ReadingLog log = new ReadingLog();
                 log.UserID = model.UserID;
-                log.FamilyID = model.FamilyID; //use Session??
+                log.BookID = model.BookID;
                 log.MinutesRead = model.MinutesRead;
                 log.Status = model.Status;
+                log.Type = model.Format;
                 //date gets added in DAL
 
                 log = _db.CreateReadingLog(log);

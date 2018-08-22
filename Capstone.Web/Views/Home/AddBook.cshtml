@@ -1,0 +1,112 @@
+﻿@{
+    ViewBag.Title = "AddFamilyMember";
+    Layout = "~/Views/Shared/_LayoutTheme.cshtml";
+}
+@model AddBookViewModel
+
+<section class="mainContent full-width clearfix">
+    <div class="container">
+
+
+        @* Success/Failure Alerts *@
+        @if (Model.AddSuccessState == AddBookViewModel.SuccessState.Success)
+        {
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <strong>Success!</strong> A new book has been successfully added!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+        else if (Model.AddSuccessState == AddBookViewModel.SuccessState.Failed)
+        {
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <strong>Oops!</strong> Something went wrong.  Please try again.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+
+
+        @*Page Header *@
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="sectionTitle text-center">
+                    <h2>
+                        <span class="shape shape-left bg-color-4"></span>
+                        <span>Add A Book</span>
+                        <span class="shape shape-right bg-color-4"></span>
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        @* Add Book Form *@
+        <div class="row">
+            <div class="col-md-4 col-md col-sm-6 col-xs-12">
+                <div class="panel panel-default formPanel">
+                    <div class="panel-heading bg-color-1 border-color-1">
+                        <h3 class="panel-title">New Book</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form action="/Home/AddBook" method="post" role="form">
+
+                            <div class="form-group formField">
+                                <label for="Title">Title</label>
+                                @Html.TextBoxFor(m => m.Title, new { @class = "form-control form-control-sm" })
+                                @Html.ValidationMessageFor(m => m.Title)
+                            </div>
+
+
+                            <div class="form-group formField">
+                                <label for="Author">Author</label>
+                                @Html.TextBoxFor(m => m.Author, new { @class = "form-control form-control-sm" })
+                                @Html.ValidationMessageFor(m => m.Author)
+                            </div>
+                            <div class="form-group formField">
+                                <label for="ISBN">ISBN</label>
+                                @Html.TextBoxFor(m => m.ISBN, new { @class = "form-control form-control-sm" })
+                                @Html.ValidationMessageFor(m => m.ISBN)
+                            </div>
+                            
+                            <div style="text-align:center">
+                                <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
+            @* Your Family Members Table *@
+            <div class="table-responsive ">
+                <table class="table table-curved">
+                    <thead>
+                        <tr>
+                            <th class="col-sm-2 bg-color-2">Title</th>
+                            <th class="col-sm-2 bg-color-6">Author</th>
+                            <th class="col-sm-2 bg-color-3">ISBN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.BookList)
+                        {
+                            <tr>
+                                <td>@item.Title</td>
+                                <td>@item.Author</td>
+                                <td>@item.ISBN</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+</section>

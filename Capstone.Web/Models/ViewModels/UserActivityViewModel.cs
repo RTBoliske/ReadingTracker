@@ -17,12 +17,14 @@ namespace Capstone.Web
         public string Format { get; set; }
         public string ISBN { get; set; }
         public int MinutesRead { get; set; }
+        public int HoursRead { get; set; }
         public string Status { get; set; }
         public string Type { get; set; }
         public bool BookActive { get; set; }
         public List<User> UserList { get; set; }
         public List<Book> ActiveBooks { get; set; }
         public List<Book> InactiveBooks { get; set; }
-        public List<Prize> PrizeList { get; set; }
+        public List<PrizeProgress> PrizeList { get; set; }
+        public List<ReadingLog> ReadingLogs { get; set; }
     }
 }

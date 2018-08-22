@@ -626,6 +626,7 @@
     <Compile Include="Models\Prize.cs" />
     <Compile Include="Models\PrizeProgress.cs" />
     <Compile Include="Models\ReadingLog.cs" />
+    <Compile Include="Models\ViewModels\AddBookViewModel.cs" />
     <Compile Include="Models\ViewModels\AddFamilyMemberViewModel.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Models\Roles.cs" />
@@ -659,7 +660,7 @@
     <Content Include="Views\Home\FamilyActivity.cshtml" />
     <Content Include="Views\Shared\_LayoutTheme.cshtml" />
     <Content Include="Views\Home\AddPrize.cshtml" />
-    <Content Include="Views\Home\AddABook.cshtml" />
+    <Content Include="Views\Home\AddBook.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
