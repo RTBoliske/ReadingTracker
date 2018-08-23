@@ -30,8 +30,8 @@ namespace Capstone.Web
         public string Type { get; set; }
         public bool BookActive { get; set; }
         public List<User> UserList { get; set; }
-        public List<Book> ActiveBooks { get; set; }
-        public List<Book> InactiveBooks { get; set; }
+        public HashSet<Book> ActiveBooks { get; set; }
+        public HashSet<Book> InactiveBooks { get; set; }
         public List<PrizeProgress> PrizeList { get; set; }
         public Stack<ReadingLog> ReadingLogs { get; set; }
 
