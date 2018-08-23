@@ -8,6 +8,14 @@ namespace Capstone.Web
 {
     public class UserActivityViewModel
     {
+        private IDatabaseSvc _db = null;
+        public UserActivityViewModel()
+        {
+        }
+        public UserActivityViewModel(IDatabaseSvc db)
+        {
+            _db = db;
+        }
         public int ReadingLogID { get; set; }
         public int BookID { get; set; }
         public int UserID { get; set; }
@@ -26,5 +34,16 @@ namespace Capstone.Web
         public List<Book> InactiveBooks { get; set; }
         public List<PrizeProgress> PrizeList { get; set; }
         public Stack<ReadingLog> ReadingLogs { get; set; }
+
+        public int MinutesReadByUser(int userId)
+        {
+            int minutes = _db.GetTotalMinutesReadByUser(userId);
+            return minutes;
+        }
+        public Book MostCurrentBook(int userId)
+        {
+            Book book = _db.GetMostCurrentBook(userId);
+            return book;
+        }
     }
 }

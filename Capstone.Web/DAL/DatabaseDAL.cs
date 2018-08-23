@@ -357,7 +357,11 @@ namespace Capstone.Web.DAL
         public Book GetMostCurrentBook(int userID)
         {
 
-            string sql = @"SELECT TOP 1 * FROM Book WHERE Title = @title AND ISBN = @ISBN";
+            string sql = @"SELECT TOP 1 * FROM Book JOIN ReadingLog A ON Book.ID = A.BookID 
+                            WHERE A.UserID = @userID AND A.Date = (
+	                        SELECT MAX(Date) FROM ReadingLog B
+	                        WHERE B.BookID = A.BookID
+	                        AND B.UserID = A.UserID)";
 
             Book book = new Book();
 
@@ -367,8 +371,7 @@ namespace Capstone.Web.DAL
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@title", book.Title);
-                    cmd.Parameters.AddWithValue("@ISBN", book.ISBN);
+                    cmd.Parameters.AddWithValue("@userID", userID);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -391,6 +394,43 @@ namespace Capstone.Web.DAL
                 throw;
             }
             return book;
+        }
+        public int GetTotalMinutesReadByUser(int id)
+        {
+            string sql = @"SELECT SUM(ReadingLog.Minutes_read) AS TotalMinutes FROM ReadingLog WHERE ReadingLog.UserID = @userID;";
+
+            int minutes = 0;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@userID", id);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        if (reader["TotalMinutes"] == null || reader["TotalMinutes"] == DBNull.Value)
+                        {
+                            minutes = 0;
+                        }
+                        else
+                        {
+                            minutes = Convert.ToInt32(reader["TotalMinutes"]);
+                        }
+                            
+                    }
+
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return minutes;
         }
         public Book CreateBook(Book book)
         {
@@ -623,7 +663,7 @@ namespace Capstone.Web.DAL
                     cmd.Parameters.AddWithValue("@Status", log.Status);
                     cmd.Parameters.AddWithValue("@Type", log.Type);
                     cmd.Parameters.AddWithValue("@Date", DateTime.Now);
-                    var bookID = (int)cmd.ExecuteScalar();
+                    log.ID = (int)cmd.ExecuteScalar();
 
                     return log;
                 }
@@ -764,7 +804,7 @@ namespace Capstone.Web.DAL
 
             return prizeList;
         }
-
+        
         public Prize GetPrizeById(int id)
         {
             Prize result = new Prize();

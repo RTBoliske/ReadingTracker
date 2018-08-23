@@ -32,11 +32,11 @@ namespace Capstone.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult FamilyActivity()
+        public ActionResult FamilyActivity(int? id)
         {
             List<User> userList = new List<User>();
             userList = _db.GetAllUsersFromFamilyID(((User)Session["User"]).FamilyID);
-            UserActivityViewModel model = new UserActivityViewModel();
+            UserActivityViewModel model = new UserActivityViewModel(_db);
             model.UserList = userList;
             return View("FamilyActivity", model);
         }
@@ -45,7 +45,7 @@ namespace Capstone.Web.Controllers
         {
             List<User> userList = new List<User>();
             userList = _db.GetAllUsersFromFamilyID(((User)Session["User"]).FamilyID);
-            UserActivityViewModel model = new UserActivityViewModel();
+            UserActivityViewModel model = new UserActivityViewModel(_db);
             model.UserList = userList;
             if (id.HasValue)
             {

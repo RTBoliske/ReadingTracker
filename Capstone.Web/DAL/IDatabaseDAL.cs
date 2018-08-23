@@ -29,6 +29,7 @@ namespace Capstone.Web
         List<Book> GetActiveBooks(int userID);
         List<Book> GetInactiveBooks(int userID);
         List<Book> GetAllBooksByFamilyID(int familyID);
+        int GetTotalMinutesReadByUser(int id);
 
         //Reading Log
         Stack<ReadingLog> GetReadingLog(int userID);

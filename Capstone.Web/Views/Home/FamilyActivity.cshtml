@@ -59,14 +59,15 @@
                                 @user.FirstName
                             </h4>
 
+                            <input type="hidden" value="@user.ID" />
                             <div class="totaltime">
                                 <span><b>Total Reading Time: </b></span><br />
-                                <span><i>@Model.MinutesRead</i></span>
+                                <span><i>@Model.MinutesReadByUser(user.ID)</i></span>
                             </div>
 
                             <div class="currentlyreading">
                                 <span><b>Currently Reading:</b></span><br />
-                                <span><i>Book Title @Model.Title</i></span>
+                                <span><i>@Model.MostCurrentBook(user.ID).Title</i></span>
                             </div>
 
                         </div>
