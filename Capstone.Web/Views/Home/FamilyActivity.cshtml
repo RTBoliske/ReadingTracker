@@ -62,8 +62,29 @@
 
                                 <input type="hidden" value="@user.ID" />
                                 <div class="totaltime">
-                                    <span><b> Reading Time (All Books): </b></span><br />
-                                    <span><i>@Model.MinutesReadByUser(user.ID)</i></span>
+                                    <span><b>Lifetime Reading Counter: </b></span><br />
+                                    @{ var totalTime = Model.MinutesReadByUser(user.ID);
+                                        var hoursRead = 0;
+                                        var minutesRead = 0;
+                                        //var daysRead = 0;
+                                        if (totalTime < 60)
+                                        {
+                                            <span><i>@totalTime Minutes</i></span>
+                                        }
+                                        else if (totalTime > 60)
+                                        {
+                                            hoursRead = totalTime / 60;
+                                            minutesRead = totalTime % 60;
+                                            <span><i>@hoursRead Hours, @minutesRead Minutes</i></span>
+                                        }
+                                        //else if (totalTime >= 1440)
+                                        //{
+                                        //    daysRead = totalTime / 1440;
+                                        //    hoursRead = (totalTime / 1440.0) / 60;
+                                        //    minutesRead =
+                                        //}
+                                    }
+
                                 </div>
 
                                 <div class="currentlyreading">
@@ -94,10 +115,35 @@
                                 </h4>
 
                                 <input type="hidden" value="@user.ID" />
-                                <div class="totaltime">
+                                @*<div class="totaltime">
                                     <span><b> Reading Time (All Books): </b></span><br />
-                                    <span><i>@Model.MinutesReadByUser(user.ID)</i></span>
-                                </div>
+                                    <span><i>@Model.MinutesReadByUser(user.ID)</i></span>*@
+                                    <div class="totaltime">
+                                        <span><b>Lifetime Reading Counter: </b></span><br />
+                                        @{ var totalTime = Model.MinutesReadByUser(user.ID);
+                                            var hoursRead = 0;
+                                            var minutesRead = 0;
+                                            //var daysRead = 0;
+                                            if (totalTime < 60)
+                                            {
+                                                <span><i>@totalTime Minutes</i></span>
+                                            }
+                                            else if (totalTime > 60)
+                                            {
+                                                hoursRead = totalTime / 60;
+                                                minutesRead = totalTime % 60;
+                                                <span><i>@hoursRead Hours, @minutesRead Minutes</i></span>
+                                            }
+                                            //else if (totalTime >= 1440)
+                                            //{
+                                            //    daysRead = totalTime / 1440;
+                                            //    hoursRead = (totalTime / 1440.0) / 60;
+                                            //    minutesRead =
+                                            //}
+                                        }
+
+                                    </div>
+                                @*</div>*@
 
                                 <div class="currentlyreading">
                                     <span><b>Currently Reading:</b></span><br />
