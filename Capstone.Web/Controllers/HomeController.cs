@@ -273,6 +273,11 @@ namespace Capstone.Web.Controllers
                     throw new Exception();
 
                 }
+                else if(((User)Session["User"]).RoleID == 3)
+                {
+                    TempData["AddSuccessState"] = AddFamilyMemberViewModel.SuccessState.NotAuthorized;
+                    result = RedirectToAction("AddFamilyMember", "Home");
+                }
                 else
                 {
                     PasswordHash ph = new PasswordHash(model.Password);
@@ -295,6 +300,7 @@ namespace Capstone.Web.Controllers
                         TempData["AddSuccessState"] = AddFamilyMemberViewModel.SuccessState.Success;
                         result = RedirectToAction("AddFamilyMember", "Home");
                     }
+                    
                 }
             }
             catch(Exception)
