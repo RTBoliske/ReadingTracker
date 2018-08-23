@@ -108,6 +108,7 @@ namespace Capstone.Web.Controllers
                 model.StartDate = prize.StartDate;
                 model.EndDate = prize.EndDate;
                 model.FamilyId = prize.FamilyID;
+                model.Title = prize.Title;
             }
 
             //need to add method to call allPrizes
@@ -427,6 +428,7 @@ namespace Capstone.Web.Controllers
                     prize.isActive = model.isActive;
                     prize.StartDate = model.StartDate;
                     prize.EndDate = model.EndDate;
+                    prize.Title = model.Title;
 
 
                     prize = _db.AddPrize(prize);
@@ -479,6 +481,7 @@ namespace Capstone.Web.Controllers
                     prize.isActive = model.isActive;
                     prize.StartDate = model.StartDate;
                     prize.EndDate = model.EndDate;
+                    prize.Title = model.Title;
 
 
                     _db.EditPrize(prize);

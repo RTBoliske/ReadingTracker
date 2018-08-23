@@ -704,6 +704,7 @@ namespace Capstone.Web.DAL
                             StartDate = Convert.ToDateTime(reader["StartDate"]),
                             EndDate = Convert.ToDateTime(reader["EndDate"]),
                             FamilyID = Convert.ToInt32(reader["FamilyID"]),
+                            Title = Convert.ToString("Title"),
                         };
                         prizeList.Add(prize);
                     }
@@ -718,8 +719,8 @@ namespace Capstone.Web.DAL
         }
         public Prize AddPrize (Prize prize)
         {
-            string sql = @"INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID) 
-                           VALUES (@UserType, @Goal, @MaxNumPrize, @isActive, @StartDate, @EndDate, @FamilyID);
+            string sql = @"INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID, Title) 
+                           VALUES (@UserType, @Goal, @MaxNumPrize, @isActive, @StartDate, @EndDate, @FamilyID, @Title);
                            SELECT CAST(SCOPE_IDENTITY() as int);";
 
             try
@@ -737,6 +738,7 @@ namespace Capstone.Web.DAL
                     cmd.Parameters.AddWithValue("@StartDate", prize.StartDate);
                     cmd.Parameters.AddWithValue("@EndDate", prize.EndDate);
                     cmd.Parameters.AddWithValue("@FamilyID", prize.FamilyID);
+                    cmd.Parameters.AddWithValue("@Title", prize.Title);
                     var prizeID = (int)cmd.ExecuteScalar();
 
                     return prize;
@@ -749,22 +751,17 @@ namespace Capstone.Web.DAL
         }
         public List<PrizeProgress> GetPrizesByUser (User user)  //not passing back in new USERID for children
         {
-            string sql = @"select p.id AS ID, p.UserType AS UserType, p.MaxNumPrize AS MaxNumPrize, p.Goal AS Goal, r.UserID AS UserID, sum(r.minutes_read) AS Minutes_read, (sum(cast(r.minutes_read as real)) / cast(goal as real)) * 100.0 as percentComplete
+            string sql = @"select p.id AS ID, p.UserType AS UserType, p.MaxNumPrize AS MaxNumPrize, p.Goal AS Goal, r.UserID AS UserID, 
+                           sum(r.minutes_read) AS Minutes_read, (sum(cast(r.minutes_read as real)) / cast(goal as real)) * 100.0 as percentComplete,
+                           p.title AS Title
                             from prize p
                             left join ReadingLog r on p.FamilyID = @familyID
 	                               and @todayDate between p.StartDate and p.EndDate
                             where p.isActive = 1
                             and r.UserID = @userID
                             and p.UserType = @userType
-                            group by p.id, p.Goal, r.UserID, p.UserType, p.MaxNumPrize
+                            group by p.id, p.Goal, r.UserID, p.UserType, p.MaxNumPrize, p.Title
                             order by p.id;";
-            //string sql = @"SELECT Prize.ID AS ID, Prize.UserType AS UserType, Prize.Goal AS Goal, 
-            //               Prize.MaxNumPrize AS MaxNumPrize, Prize.isActive AS isActive,
-            //               Prize.StartDate AS StartDate, Prize.EndDate AS EndDate FROM Prize 
-            //               JOIN Family ON Prize.FamilyID = Family.ID JOIN Users ON Users.FamilyID = Family.ID 
-            //               WHERE Family.ID = @familyID AND @todayDate > Prize.StartDate AND @todayDate < Prize.EndDate 
-            //               AND isActive = 1;";
-
             List <PrizeProgress> prizeList = new List<PrizeProgress>();
 
             try
@@ -792,6 +789,7 @@ namespace Capstone.Web.DAL
                             UserID = Convert.ToInt32(reader["UserID"]),
                             MinutesRead = Convert.ToInt32(reader["Minutes_read"]),
                             PercentProgress = Convert.ToDecimal(reader["percentComplete"]),
+                            Title = Convert.ToString(reader["Title"]),
                         };
                         prizeList.Add(prize);
                     }

@@ -66,6 +66,7 @@ CREATE TABLE Prize(
 	StartDate Date,
 	EndDate Date,
 	FamilyID int NOT NULL,
+	Title varchar (100),
 );
 
 ALTER TABLE Users ADD FOREIGN KEY (FamilyID) REFERENCES Family(ID);
