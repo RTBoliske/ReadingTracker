@@ -54,8 +54,8 @@ namespace Capstone.Web.Controllers
                 User user = _db.GetUserByID(model.UserID);
                 model.PrizeList = _db.GetPrizesByUser(user);
                 //loading active/inactive books
-                model.ActiveBooks = _db.GetActiveBooks(user.FamilyID);
-                model.InactiveBooks = _db.GetInactiveBooks(model.UserID);
+                model.ActiveBooks = _db.GetAllBooksByFamilyID(user.FamilyID);
+                //model.InactiveBooks = _db.GetInactiveBooks(model.UserID);
                 //loading reading log
                 model.ReadingLogs = _db.GetReadingLog(model.UserID);
             } else
@@ -65,8 +65,8 @@ namespace Capstone.Web.Controllers
                 User user = _db.GetUserByID(model.UserID);
                 model.PrizeList = _db.GetPrizesByUser(user);
                 //Loading active/inactive books
-                model.ActiveBooks = _db.GetActiveBooks(user.FamilyID);
-                model.InactiveBooks = _db.GetInactiveBooks(model.UserID);
+                model.ActiveBooks = _db.GetAllBooksByFamilyID(user.FamilyID);
+                //model.InactiveBooks = _db.GetInactiveBooks(model.UserID);
                 //reading logs
                 model.ReadingLogs = _db.GetReadingLog(model.UserID);
             }

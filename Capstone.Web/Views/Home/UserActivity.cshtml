@@ -16,7 +16,12 @@
 }
 @model UserActivityViewModel
 
-
+<style>
+    option:disabled {
+        color: red;
+        font-weight: bold;
+    }
+</style>
 
 <section class="mainContent full-width clearfix">
     <div class="container">
@@ -49,11 +54,11 @@
                                     {
                                         <option value="@item.ID">@item.Title</option>
                                     }
-                                    <option disabled>- - - - Inactive Books - - - -</option>
-                                    @foreach (var item in Model.InactiveBooks)
+                                    @*<option disabled>- - - - Inactive Books - - - -</option>*@
+                                    @*@foreach (var item in Model.InactiveBooks)
                                     {
                                         <option value="@item.ID">@item.Title</option>
-                                    }
+                                    }*@
                                 </select>
                             </div>
 
@@ -146,7 +151,7 @@
                                         <th class="col-sm-3 bg-color-6 border-color-4">Reading Time</th>
                                         <th class="col-sm-3 bg-color-6 border-color-4">Reading Format</th>
                                         <th class="col-sm-3 bg-color-6 border-color-4">Reading Date</th>
-                                        <th class="col-sm-3 bg-color-6 border-color-4">Completed</th>
+                                        <th class="col-sm-3 bg-color-6 border-color-4">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
