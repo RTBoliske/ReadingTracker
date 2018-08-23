@@ -465,7 +465,8 @@ namespace Capstone.Web.DAL
         public List<Book> GetAllBooksByFamilyID(int familyID)
         {
             List<Book> bookList = new List<Book>();
-            string sql = @"SELECT Book.Title As Title,
+            string sql = @"SELECT Book.ID AS ID,
+                                  Book.Title As Title,
                                   Book.Author As Author,
                                   Book.ISBN As ISBN
                                   From Book
@@ -486,7 +487,7 @@ namespace Capstone.Web.DAL
                     {
                         Book book = new Book
                         {
-                            //ID = Convert.ToInt32(reader["ID"]),
+                            ID = Convert.ToInt32(reader["ID"]),
                             Title = Convert.ToString(reader["Title"]),
                             Author = Convert.ToString(reader["Author"]),
                             ISBN = Convert.ToString(reader["ISBN"]),
