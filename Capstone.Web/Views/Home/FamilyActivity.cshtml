@@ -67,7 +67,15 @@
 
                             <div class="currentlyreading">
                                 <span><b>Currently Reading:</b></span><br />
-                                <span><i>@Model.MostCurrentBook(user.ID).Title</i></span>
+                                @if (Model.MostCurrentBook(user.ID).Title == null)
+                                {
+                                    <span><i>None</i></span>
+                                }
+                                else
+                                {
+                                    <span><i>@Model.MostCurrentBook(user.ID).Title</i></span>
+                                }
+
                             </div>
 
                         </div>
