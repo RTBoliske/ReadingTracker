@@ -179,7 +179,7 @@ else if (Model.AddSuccessState == PrizeViewModel.SuccessState.Failed)
                             <tr>
                                 <th class="col-sm-2 bg-color-2" style="color:white">Available To:</th>
                                 <th class="col-sm-2 bg-color-3" style="color:white">Goal:</th>
-                                <th class="col-sm-2 bg-color-4" style="color:white">Max # Prizes</th>
+                                @*<th class="col-sm-2 bg-color-4" style="color:white">Max # Prizes</th>*@
                                 <th class="col-sm-2 bg-color-5" style="color:white">Active?</th>
                                 <th class="col-sm-2 bg-color-6" style="color:white">Start Date</th>
                                 <th class="col-sm-2 bg-color-1" style="color:white">End Date</th>
@@ -203,21 +203,21 @@ else if (Model.AddSuccessState == PrizeViewModel.SuccessState.Failed)
                                         <span class="color-2"></span>
                                         @item.Milestone Minutes
                                     </td>
-                                    <td>
+                                    @*<td>
                                         <span class="color-3"></span>
                                         @item.MaxNumPrizes
-                                    </td>
+                                    </td>*@
                                     <td>
                                         <span class="color-4"></span>
                                         @item.isActive
                                     </td>
                                     <td>
                                         <span class="color-5"></span>
-                                        @item.StartDate
+                                        @item.StartDate.ToString("M/d/yy")
                                     </td>
                                     <td>
                                         <span class="color-6"></span>
-                                        @item.EndDate
+                                        @item.EndDate.ToString("M/d/yy")
                                     </td>
                                     <td>
                                         @Html.ActionLink("Update", "AddPrize", new { id = item.ID })

@@ -16,7 +16,7 @@ USE [dbfamilyreader]
 CREATE TABLE Users(
 	ID int IDENTITY(1,1),
 	First_name varchar(50) NOT NULL,
-	Last_name varchar(50) NOT NULL,
+	Last_name varchar(50),
 	FamilyID int NOT NULL,
 	Username varchar(50) NOT NULL UNIQUE,
 	Password varchar(50) NOT NULL,
