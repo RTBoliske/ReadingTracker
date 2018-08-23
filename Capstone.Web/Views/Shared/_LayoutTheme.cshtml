@@ -208,59 +208,94 @@
                             @*</li>*@
                             @if (Session["User"] != null)
                             {
-                                <li>
-                                    <a href="@Url.Action("UserActivity", "Home")" class="navbar-brand" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-bar-chart bg-color-1" aria-hidden="true"></i>
-                                        <span>Activity</span>
-                                        
-                                    </a>
-                                </li>
+                                if (((User)Session["User"]).RoleID != 3)
+                                {
+                                    <li>
+                                        <a href="@Url.Action("UserActivity", "Home")" class="navbar-brand" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-bar-chart bg-color-1" aria-hidden="true"></i>
+                                            <span>Activity</span>
 
-                                <li>
-                                    <a href="@Url.Action("FamilyActivity", "Home")" class="navbar-brand" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-group bg-color-2" aria-hidden="true"></i>
-                                        <span>Family</span>
-                                    </a>
-                                </li>
+                                        </a>
+                                    </li>
 
-                                <li>
-                                    <a href="@Url.Action("AddPrize", "Home")" class="navbar-brand" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-trophy bg-color-4" aria-hidden="true"></i>
-                                        <span>Prizes</span>
-                                    </a>
-                                </li>
+                                    <li>
+                                        <a href="@Url.Action("FamilyActivity", "Home")" class="navbar-brand" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-group bg-color-2" aria-hidden="true"></i>
+                                            <span>Family</span>
+                                        </a>
+                                    </li>
 
-                                <li>
-                                    <a href="@Url.Action("AddFamilyMember", "Home")" class="navbar-brand" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-child bg-color-5" aria-hidden="true"></i>
-                                        <span>Users</span>
-                                    </a>
-                                </li>
+                                    <li>
+                                        <a href="@Url.Action("AddPrize", "Home")" class="navbar-brand" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-trophy bg-color-4" aria-hidden="true"></i>
+                                            <span>Prizes</span>
+                                        </a>
+                                    </li>
 
-                                <li>
-                                    <a href="@Url.Action("AddBook", "Home")" class="navbar-brand" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-book bg-color-6" aria-hidden="true"></i>
-                                        <span>Books</span>
-                                    </a>
-                                </li>
+                                    <li>
+                                        <a href="@Url.Action("AddFamilyMember", "Home")" class="navbar-brand" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-child bg-color-5" aria-hidden="true"></i>
+                                            <span>Users</span>
+                                        </a>
+                                    </li>
 
-                                <li>
-                                    <a href="@Url.Action("Logout", "Home")" class="navbar-brand" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-lock bg-color-3" aria-hidden="true"></i>
-                                        <span>Logout</span>
-                                    </a>
-                                </li>
+                                    <li>
+                                        <a href="@Url.Action("AddBook", "Home")" class="navbar-brand" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-book bg-color-6" aria-hidden="true"></i>
+                                            <span>Books</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="@Url.Action("Logout", "Home")" class="navbar-brand" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-lock bg-color-3" aria-hidden="true"></i>
+                                            <span>Logout</span>
+                                        </a>
+                                    </li>
                                 }
                                 else
                                 {
+                                    <li>
+                                        <a href="@Url.Action("UserActivity", "Home")" class="navbar-brand" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-bar-chart bg-color-1" aria-hidden="true"></i>
+                                            <span>Activity</span>
+
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="@Url.Action("FamilyActivity", "Home")" class="navbar-brand" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-group bg-color-2" aria-hidden="true"></i>
+                                            <span>Family</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="@Url.Action("AddBook", "Home")" class="navbar-brand" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-book bg-color-6" aria-hidden="true"></i>
+                                            <span>Books</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="@Url.Action("Logout", "Home")" class="navbar-brand" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-lock bg-color-3" aria-hidden="true"></i>
+                                            <span>Logout</span>
+                                        </a>
+                                    </li>
+                                }
+
+                            }
+                            else
+                            {
                                 <li>
                                     <a href="@Url.Action("Register", "Home")" class="navbar-brand" role="button" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa fa-unlock-alt bg-color-3" aria-hidden="true"></i>
                                         <span>Login</span>
                                     </a>
                                 </li>
-                                }
-                            </ul>
+                            }
+                        </ul>
                     </div>
                     @*<ul class="dropdown-menu dropdown-menu-left">
                        <li class=" "><a href="about_us.html">About</a></li>
