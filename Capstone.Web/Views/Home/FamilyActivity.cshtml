@@ -50,39 +50,75 @@
                 var user = Model.UserList[i];
 
             <div class="col-md-3 col-xs-6" id="FamilyMembersContainer">
-               
-                <div class="box bg-color-@(((i % 4) + 1) == 3 ? 6 : (i % 4) + 1)" id="box">
-                    <a href='@Url.Action("UserActivity", "Home", new {id = user.ID})'>
-                        <div class="box-info">
+                @if (((User)Session["User"]).RoleID == 3)
+                {
+                    <div class="box bg-color-@(((i % 4) + 1) == 3 ? 6 : (i % 4) + 1)" id="box">
+                        
+                            <div class="box-info">
 
-                            <h4>
-                                @user.FirstName
-                            </h4>
+                                <h4>
+                                    @user.FirstName
+                                </h4>
 
-                            <input type="hidden" value="@user.ID" />
-                            <div class="totaltime">
-                                <span><b>Total Reading Time: </b></span><br />
-                                <span><i>@Model.MinutesReadByUser(user.ID)</i></span>
+                                <input type="hidden" value="@user.ID" />
+                                <div class="totaltime">
+                                    <span><b> Reading Time (All Books): </b></span><br />
+                                    <span><i>@Model.MinutesReadByUser(user.ID)</i></span>
+                                </div>
+
+                                <div class="currentlyreading">
+                                    <span><b>Currently Reading:</b></span><br />
+                                    @if (Model.MostCurrentBook(user.ID).Title == null)
+                                    {
+                                        <span><i>None</i></span>
+                                    }
+                                    else
+                                    {
+                                        <span><i>@Model.MostCurrentBook(user.ID).Title</i></span>
+                                    }
+
+                                </div>
+
                             </div>
+                        
+                    </div>
+                }
+                else
+                {
+                    <div class="box bg-color-@(((i % 4) + 1) == 3 ? 6 : (i % 4) + 1)" id="box">
+                        <a href='@Url.Action("UserActivity", "Home", new {id = user.ID})'>
+                            <div class="box-info">
 
-                            <div class="currentlyreading">
-                                <span><b>Currently Reading:</b></span><br />
-                                @if (Model.MostCurrentBook(user.ID).Title == null)
-                                {
-                                    <span><i>None</i></span>
-                                }
-                                else
-                                {
-                                    <span><i>@Model.MostCurrentBook(user.ID).Title</i></span>
-                                }
+                                <h4>
+                                    @user.FirstName
+                                </h4>
+
+                                <input type="hidden" value="@user.ID" />
+                                <div class="totaltime">
+                                    <span><b> Reading Time (All Books): </b></span><br />
+                                    <span><i>@Model.MinutesReadByUser(user.ID)</i></span>
+                                </div>
+
+                                <div class="currentlyreading">
+                                    <span><b>Currently Reading:</b></span><br />
+                                    @if (Model.MostCurrentBook(user.ID).Title == null)
+                                    {
+                                        <span><i>None</i></span>
+                                    }
+                                    else
+                                    {
+                                        <span><i>@Model.MostCurrentBook(user.ID).Title</i></span>
+                                    }
+
+                                </div>
 
                             </div>
+                        </a>
+                    </div>
+                }
 
-                        </div>
-                    </a>
-                </div>
-                
-                </div>
+
+            </div>
             }
         </div>
 
