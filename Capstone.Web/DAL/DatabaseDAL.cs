@@ -504,9 +504,9 @@ namespace Capstone.Web.DAL
             return bookList;
         }
         
-        public List<Book> GetActiveBooks(int userID)
+        public HashSet<Book> GetActiveBooks(int userID)
         {
-            List<Book> bookList = new List<Book>();
+            HashSet<Book> bookList = new HashSet<Book>();
             string sql = @"SELECT Book.ID AS ID, 
                             Book.FamilyID AS FamilyID, 
                             Book.Title AS Title, 
@@ -553,9 +553,9 @@ namespace Capstone.Web.DAL
         }
 
 
-        public List<Book> GetInactiveBooks(int userID)
+        public HashSet<Book> GetInactiveBooks(int userID)
         {
-            List<Book> bookList = new List<Book>();
+            HashSet<Book> bookList = new HashSet<Book>();
             string sql = @"SELECT Book.ID AS ID, 
                             Book.FamilyID AS FamilyID, 
                             Book.Title AS Title, 
