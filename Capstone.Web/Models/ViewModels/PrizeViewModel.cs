@@ -38,6 +38,9 @@ namespace Capstone.Web
         [Required(ErrorMessage = "This field is required.")]
         public DateTime EndDate { get; set; } = DateTime.Now;
 
+        [Required(ErrorMessage = "This field is required.")]
+        public string Title { get; set; }
+
 
         public SuccessState AddSuccessState { get; set; }
 

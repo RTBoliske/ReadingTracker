@@ -18,5 +18,6 @@ namespace Capstone.Web
         public DateTime EndDate { get; set; }
         public int MinutesRead { get; set; }
         public decimal PercentProgress { get; set; }
+        public string Title { get; set; }
     }
 }

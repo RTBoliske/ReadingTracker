@@ -30,5 +30,7 @@ namespace Capstone.Web
 
         [Required(ErrorMessage = "This field is required.")]
         public DateTime EndDate { get; set; } = DateTime.Today;
+
+        public string Title { get; set; }
     }
 }

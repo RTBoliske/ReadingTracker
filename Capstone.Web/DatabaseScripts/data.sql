@@ -100,25 +100,25 @@ INSERT INTO ReadingLog (BookId, Type, UserID, Minutes_read, Status,Date)
 VALUES (16, 'Read-Aloud(Listener)', 2, 35, 'Active','08/20/2018');
 
 
-INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID)
-VALUES (2, 300, 0, 1, '01/01/2018', '12/30/2018', 1);
-INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID)
-VALUES (3, 300, 0, 1, '01/01/2018', '12/30/2018', 1);
-INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID)
-VALUES (3, 300, 0, 1, '01/01/2018', '12/30/2018', 3);
-INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID)
-VALUES (3, 300, 0, 1, '01/01/2018', '12/30/2018', 3);
-INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID)
-VALUES (2, 300, 0, 1, '01/01/2018', '12/30/2018', 2);
-INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID)
-VALUES (2, 300, 0, 1, '01/01/2018', '12/30/2018', 2);
-INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID)
-VALUES (2, 300, 0, 1, '01/01/2018', '12/30/2018', 3);
-INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID)
-VALUES (2, 300, 0, 1, '01/01/2018', '12/30/2018', 3);
-INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID)
-VALUES (2, 1000, 1, 0, '08/01/2018', '09/01/2018', 2);
-INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID)
-VALUES (3, 1000, 1, 0, '08/01/2018', '09/01/2018', 2);
-INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID)
-VALUES (3, 500, 1, 0, '08/01/2018', '09/01/2018', 2);
+INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID, Title)
+VALUES (2, 300, 0, 1, '01/01/2018', '12/30/2018', 1, 'Read for 300 minutes!');
+INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID, Title)
+VALUES (3, 300, 0, 1, '01/01/2018', '12/30/2018', 1, 'Read for 300 minutes!');
+INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID, Title)
+VALUES (3, 300, 0, 1, '01/01/2018', '12/30/2018', 3, 'Read for 300 minutes!');
+INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID, Title)
+VALUES (3, 300, 0, 1, '01/01/2018', '12/30/2018', 3, 'Read for 300 minutes!');
+INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID, Title)
+VALUES (2, 300, 0, 1, '01/01/2018', '12/30/2018', 2, 'Read for 300 minutes!');
+INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID, Title)
+VALUES (2, 300, 0, 1, '01/01/2018', '12/30/2018', 2, 'Read for 300 minutes!');
+INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID, Title)
+VALUES (2, 300, 0, 1, '01/01/2018', '12/30/2018', 3, 'Read for 300 minutes!');
+INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID, Title)
+VALUES (2, 300, 0, 1, '01/01/2018', '12/30/2018', 3, 'Read for 300 minutes!');
+INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID, Title)
+VALUES (2, 1000, 1, 0, '08/01/2018', '09/01/2018', 2, 'Read for 1000 minutes!');
+INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID, Title)
+VALUES (3, 1000, 1, 0, '08/01/2018', '09/01/2018', 2, 'Read for 1000 minutes!');
+INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID, Title)
+VALUES (3, 500, 1, 0, '08/01/2018', '09/01/2018', 2, 'Read for 500 minutes!');
