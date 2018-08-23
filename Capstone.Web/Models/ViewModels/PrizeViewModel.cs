@@ -12,7 +12,8 @@ namespace Capstone.Web
         {
             None = 0,
             Failed = 1,
-            Success = 2
+            Success = 2,
+            Incomplete = 3
         }
 
         
@@ -21,9 +22,11 @@ namespace Capstone.Web
         public int FamilyId { get; set; }
 
         [Required(ErrorMessage = "This field is required.")]
+        [Display(Name = "User Type")]
         public int UserType { get; set; }
 
         [Required(ErrorMessage = "This field is required.")]
+        [Display(Name = "Milestone")]
         public int Milestone { get; set; }
 
         [Required(ErrorMessage = "This field is required.")]
@@ -33,12 +36,15 @@ namespace Capstone.Web
         public bool isActive { get; set; }
 
         [Required(ErrorMessage = "This field is required.")]
-        public DateTime StartDate { get; set; } = DateTime.Today;
+        [Display(Name = "Start Date")]
+        public DateTime StartDate { get; set; }
 
         [Required(ErrorMessage = "This field is required.")]
-        public DateTime EndDate { get; set; } = DateTime.Now;
+        [Display(Name = "End Date")]
+        public DateTime EndDate { get; set; }
 
         [Required(ErrorMessage = "This field is required.")]
+        [Display(Name = "Title")]
         public string Title { get; set; }
 
 

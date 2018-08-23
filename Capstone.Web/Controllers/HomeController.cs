@@ -414,19 +414,20 @@ namespace Capstone.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddPrize(Prize model)
+        public ActionResult AddPrize(PrizeViewModel model)
         {
             ActionResult result = null;
             try {
                 if (!ModelState.IsValid)
                 {
+                    model.PrizeList = _db.GetPrizes(((User)Session["User"]).FamilyID);
                     result = View("AddPrize", model);
                 }
                 else
                 {
 
                     Prize prize = new Prize();
-                    prize.ID = model.ID;
+                    prize.ID = model.PrizeId;
                     prize.FamilyID = ((User)Session["User"]).FamilyID;
                     prize.UserType = model.UserType;
                     prize.Milestone = model.Milestone;
@@ -459,8 +460,9 @@ namespace Capstone.Web.Controllers
             }
             catch (Exception)
             {
-                TempData["AddSuccessState"] = AddFamilyMemberViewModel.SuccessState.Failed;
-                throw;
+                TempData["AddSuccessState"] = PrizeViewModel.SuccessState.Incomplete;
+                result = RedirectToAction("AddPrize", "Home");
+                //throw;
             }
             return result;
         }

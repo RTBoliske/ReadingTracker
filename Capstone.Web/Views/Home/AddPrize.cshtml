@@ -1,67 +1,78 @@
 ﻿@{
     Layout = "~/Views/Shared/_LayoutTheme.cshtml";
-    Html.EnableClientValidation(false);
+    //Html.EnableClientValidation(false);
 }
 @model PrizeViewModel
 
 
 
-@if (Model.AddSuccessState == PrizeViewModel.SuccessState.Success)
-{
-    <div class="alert alert-success alert-dismissible" role="alert">
-        <strong>Success!</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-}
-else if (Model.AddSuccessState == PrizeViewModel.SuccessState.Failed)
-{
-    <div class="alert alert-danger alert-dismissible" role="alert">
-        <strong>Oops!</strong> Something went wrong.  Please try again.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-}
 
-    <section class="mainContent full-width clearfix">
-        <div class="container">
 
-            @*Add Prize Header *@
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="sectionTitle text-center">
-                        <h2>
-                            <span class="shape shape-left bg-color-4"></span>
-                            <span>Prizes</span>
-                            <span class="shape shape-right bg-color-4"></span>
-                        </h2>
-                    </div>
+<section class="mainContent full-width clearfix">
+    <div class="container">
+
+        @if (Model.AddSuccessState == PrizeViewModel.SuccessState.Success)
+        {
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <strong>Success!</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+        else if (Model.AddSuccessState == PrizeViewModel.SuccessState.Failed)
+        {
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <strong>Oops!</strong> Something went wrong.  Please try again.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+        else if (Model.AddSuccessState == PrizeViewModel.SuccessState.Incomplete)
+        {
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <strong>Incomplete Form!</strong> Please fill out all form fields.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+
+        @*Add Prize Header *@
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="sectionTitle text-center">
+                    <h2>
+                        <span class="shape shape-left bg-color-4"></span>
+                        <span>Prizes</span>
+                        <span class="shape shape-right bg-color-4"></span>
+                    </h2>
                 </div>
             </div>
+        </div>
 
 
-            <div class="row">
-                <div class="col-md-4 col-md col-sm-6 col-xs-12">
-                    <div class="panel panel-default formPanel">
-                        <div class="panel-heading bg-color-1 border-color-1">
-                            @if (Model.PrizeId > 0)
-                            {
-                                <h3 class="panel-title" id="formHeader">Edit a prize</h3>
-                            }
-                            else
-                            {
-                                <h3 class="panel-title" id="formHeader">Create a new prize</h3>
-                            }
+        <div class="row">
+            <div class="col-md-4 col-md col-sm-6 col-xs-12">
+                <div class="panel panel-default formPanel">
+                    <div class="panel-heading bg-color-1 border-color-1">
+                        @if (Model.PrizeId > 0)
+                        {
+                            <h3 class="panel-title" id="formHeader">Edit a prize</h3>
+                        }
+                        else
+                        {
+                            <h3 class="panel-title" id="formHeader">Create a new prize</h3>
+                        }
 
-                        </div>
-                        <div class="panel-body border-color-1">
+                    </div>
+                    <div class="panel-body border-color-1">
 
-                            @* Edit Prize Form *@
+                        @* Edit Prize Form *@
 
-                            @if (Model.PrizeId > 0)
-                            {
+                        @if (Model.PrizeId > 0)
+                        {
                             <form action="/Home/EditPrize" method="post" role="form">
                                 <input type="hidden" value="@Model.PrizeId" name="PrizeId" />
                                 <label for="UserRole">User's Role</label>
@@ -77,13 +88,14 @@ else if (Model.AddSuccessState == PrizeViewModel.SuccessState.Failed)
                                 </div>
                                 <div class="form-group formField">
                                     <label for="Title">Prize Title)</label>
+                                    <span class="help-block" style="margin-top:0">@Html.ValidationMessageFor(m => m.Title)</span>
                                     @Html.TextBoxFor(m => m.Title, new { @class = "form-control form-control-sm border-color-4" })
-                                    @Html.ValidationMessageFor(m => m.Title)
+                                    @*<span class="help-block">@Html.ValidationMessageFor(m => m.Title)</span>*@
                                 </div>
                                 <div class="form-group formField">
                                     <label for="Milestone">Reading Goal (in minutes)</label>
                                     @Html.TextBoxFor(m => m.Milestone, new { @class = "form-control form-control-sm border-color-4" })
-                                    @Html.ValidationMessageFor(m => m.Milestone)
+                                    <span class="help-block"> @Html.ValidationMessageFor(m => m.Milestone)</span>
                                 </div>
 
                                 <label for="UserRole">Is the Goal Active?</label>
@@ -100,12 +112,12 @@ else if (Model.AddSuccessState == PrizeViewModel.SuccessState.Failed)
                                 <div class="form-group formField">
                                     <label for="StartDate">Start Date</label>
                                     @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control form-control-sm border-color-4" })
-                                    @Html.ValidationMessageFor(m => m.StartDate)
+                                    <span class="help-block" style="margin-top: 0">@Html.ValidationMessageFor(m => m.StartDate)</span>
                                 </div>
                                 <div class="form-group formField">
                                     <label for="EndDate">End Date</label>
                                     @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control form-control-sm border-color-4" })
-                                    @Html.ValidationMessageFor(m => m.EndDate)
+                                    <span class="help-block"> @Html.ValidationMessageFor(m => m.EndDate)</span>
                                 </div>
                                 <div style="text-align:center; padding-bottom: 5px">
                                     <button type="submit" class="btn-block btn btn-sm btn-success">Submit</button>
@@ -118,15 +130,15 @@ else if (Model.AddSuccessState == PrizeViewModel.SuccessState.Failed)
 
 
                             </form>
-                            }
-                            else
-                            {
-                                @* Add Prize Form *@
+                        }
+                        else
+                        {
+                            @* Add Prize Form *@
                             <form action="/Home/AddPrize" method="post" role="form">
                                 @Html.HiddenFor(m => m.PrizeId)
                                 <label for="UserRole">User's Role</label>
                                 <div class="form-check form-check-inline">
-                                    @Html.RadioButtonFor(m => m.UserType, 3, new { @class = "form-check-input", id = "inlineCheckbox1" })
+                                    @Html.RadioButtonFor(m => m.UserType, 3, new { @class = "form-check-input", id = "inlineCheckbox1", @checked = "true" })
 
                                     <label class="form-check-label" for="inlineCheckbox1">Child</label>
                                 </div>
@@ -138,67 +150,65 @@ else if (Model.AddSuccessState == PrizeViewModel.SuccessState.Failed)
                                 <div class="form-group formField">
                                     <label for="Title">Prize Title)</label>
                                     @Html.TextBoxFor(m => m.Title, new { @class = "form-control form-control-sm border-color-4" })
-                                    @Html.ValidationMessageFor(m => m.Title)
+                                    <span class="help-block">@Html.ValidationMessageFor(m => m.Title)</span>
                                 </div>
                                 <div class="form-group formField">
                                     <label for="Milestone">Reading Goal (in minutes)</label>
                                     @Html.TextBoxFor(m => m.Milestone, new { @class = "form-control form-control-sm border-color-4" })
-                                    @Html.ValidationMessageFor(m => m.Milestone)
+                                    <span class="help-block"> @Html.ValidationMessageFor(m => m.Milestone)</span>
                                 </div>
                                 @*<div class="form-group formField">
-            <label for="MaxNumPrizes">Max # of Prizes</label>
-            @Html.TextBoxFor(m => m.MaxNumPrizes, new { @class = "form-control form-control-sm border-color-4" })
-            @Html.ValidationMessageFor(m => m.MaxNumPrizes)
-        </div>*@
+                                    <label for="MaxNumPrizes">Max # of Prizes</label>
+                                    @Html.TextBoxFor(m => m.MaxNumPrizes, new { @class = "form-control form-control-sm border-color-4" })
+                                    @Html.ValidationMessageFor(m => m.MaxNumPrizes)
+                                </div>*@
                                 <label for="UserRole">Is the Goal Active?</label>
                                 <div class="form-check form-check-inline">
                                     @Html.RadioButtonFor(m => m.isActive, false, new { @class = "form-check-input", id = "inlineCheckbox3" })
-
-                                    <label class="form-check-label" for="inlineCheckbox3">False</label>
+                                    <label class="form-check-label" for="inlineCheckbox3">No</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    @Html.RadioButtonFor(m => m.isActive, true, new { @class = "form-check-input", id = "inlineCheckbox4" })
-
-                                    <label class="form-check-label" for="inlineCheckbox4">True</label>
+                                    @Html.RadioButtonFor(m => m.isActive, true, new { @class = "form-check-input", id = "inlineCheckbox4", @checked = "true" })
+                                    <label class="form-check-label" for="inlineCheckbox4">Yes</label>
                                 </div>
                                 <div class="form-group formField">
                                     <label for="StartDate">Start Date</label>
-                                    @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control form-control-sm border-color-4" })
-                                    @Html.ValidationMessageFor(m => m.StartDate)
+                                    @Html.TextBoxFor(m => m.StartDate, new { placeholder = "MM/DD/YYY", @class = "form-control form-control-sm border-color-4" })
+                                    <span class="help-block" style="margin-top: 0">@Html.ValidationMessageFor(m => m.StartDate)</span>
                                 </div>
                                 <div class="form-group formField">
                                     <label for="EndDate">End Date</label>
-                                    @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control form-control-sm border-color-4" })
-                                    @Html.ValidationMessageFor(m => m.EndDate)
+                                    @Html.TextBoxFor(m => m.EndDate, new { placeholder = "MM/DD/YYY", @class = "form-control form-control-sm border-color-4" })
+                                    <span class="help-block"> @Html.ValidationMessageFor(m => m.EndDate)</span>
                                 </div>
                                 <div style="text-align:center;">
                                     <button type="submit" class="btn btn-md btn-primary">Submit</button>
                                 </div>
 
                             </form>
-                            }
-                        </div>
+                        }
                     </div>
                 </div>
+            </div>
 
-                <div class="table-responsive">
-                    <table class="table table-curved">
-                        <thead>
+            <div class="table-responsive">
+                <table class="table table-curved">
+                    <thead>
+                        <tr>
+                            <th class="col-sm-2 bg-color-2" style="color:white">Available To:</th>
+                            <th class="col-sm-2 bg-color-3" style="color:white">Goal:</th>
+                            <th class="col-sm-2 bg-color-4" style="color:white">Prize Title</th>
+                            <th class="col-sm-2 bg-color-5" style="color:white">Active?</th>
+                            <th class="col-sm-2 bg-color-6" style="color:white">Start Date</th>
+                            <th class="col-sm-2 bg-color-1" style="color:white">End Date</th>
+                            <th class="col-sm-2 bg-color-2" style="color:white">Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.PrizeList)
+                        {
                             <tr>
-                                <th class="col-sm-2 bg-color-2" style="color:white">Available To:</th>
-                                <th class="col-sm-2 bg-color-3" style="color:white">Goal:</th>
-                                <th class="col-sm-2 bg-color-4" style="color:white">Prize Title</th>
-                                <th class="col-sm-2 bg-color-5" style="color:white">Active?</th>
-                                <th class="col-sm-2 bg-color-6" style="color:white">Start Date</th>
-                                <th class="col-sm-2 bg-color-1" style="color:white">End Date</th>
-                                <th class="col-sm-2 bg-color-2" style="color:white">Edit</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model.PrizeList)
-                            {
-                                <tr>
-                                     @if (item.UserType == 2)
+                                @if (item.UserType == 2)
                                 {
                                     <td>Parents</td>
                                 }
@@ -207,39 +217,39 @@ else if (Model.AddSuccessState == PrizeViewModel.SuccessState.Failed)
                                     <td>Children</td>
                                 }
 
-                                    <td>
-                                        <span class="color-2"></span>
-                                        @item.Milestone Minutes
-                                    </td>
-                                    <td>
-                                        <span class="color-3"></span>
-                                        @item.Title
-                                    </td>
-                                    <td>
-                                        <span class="color-4"></span>
-                                        @item.isActive
-                                    </td>
-                                    <td>
-                                        <span class="color-5"></span>
-                                        @item.StartDate.ToString("M/d/yy")
-                                    </td>
-                                    <td>
-                                        <span class="color-6"></span>
-                                        @item.EndDate.ToString("M/d/yy")
-                                    </td>
-                                    <td>
-                                        <a href="@Url.Action("AddPrize", "Home", new { id = item.ID })"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                                        @*@Html.ActionLink("Edit", "AddPrize", new { id = item.ID }, htmlAttributes: new { @class = "fa fa-edit" })*@ 
-                                        
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
+                                <td>
+                                    <span class="color-2"></span>
+                                    @item.Milestone Minutes
+                                </td>
+                                <td>
+                                    <span class="color-3"></span>
+                                    @item.Title
+                                </td>
+                                <td>
+                                    <span class="color-4"></span>
+                                    @item.isActive
+                                </td>
+                                <td>
+                                    <span class="color-5"></span>
+                                    @item.StartDate.ToString("M/d/yy")
+                                </td>
+                                <td>
+                                    <span class="color-6"></span>
+                                    @item.EndDate.ToString("M/d/yy")
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("AddPrize", "Home", new { id = item.ID })"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                    @*@Html.ActionLink("Edit", "AddPrize", new { id = item.ID }, htmlAttributes: new { @class = "fa fa-edit" })*@
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 @*</div>*@
 
 
