@@ -26,8 +26,8 @@ namespace Capstone.Web
         //Book
         Book GetMostCurrentBook(int userID);
         Book CreateBook(Book book);
-        List<Book> GetActiveBooks(int userID);
-        List<Book> GetInactiveBooks(int userID);
+        HashSet<Book> GetActiveBooks(int userID);
+        HashSet<Book> GetInactiveBooks(int userID);
         List<Book> GetAllBooksByFamilyID(int familyID);
         int GetTotalMinutesReadByUser(int id);
 

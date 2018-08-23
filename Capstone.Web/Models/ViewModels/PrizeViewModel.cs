@@ -36,7 +36,7 @@ namespace Capstone.Web
         public DateTime StartDate { get; set; } = DateTime.Today;
 
         [Required(ErrorMessage = "This field is required.")]
-        public DateTime EndDate { get; set; } = DateTime.Today;
+        public DateTime EndDate { get; set; } = DateTime.Now;
 
 
         public SuccessState AddSuccessState { get; set; }
