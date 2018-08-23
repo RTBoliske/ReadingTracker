@@ -15,60 +15,54 @@
                     <div class="panel-body border-color-1">
                         <form action="/Home/Register" method="post" role="form">
                             <div class="form-group formField">
-                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control form-control-sm form-control-md border-color-1", placeholder = "First name" })
+                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control form-control-sm form-control-md border-color-4", placeholder = "First name" })
                                 @Html.ValidationMessageFor(m => m.FirstName)
                             </div>
                             <div class="form-group formField">
-                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control form-control-sm form-control-md border-color-1", placeholder = "Last name" })
+                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control form-control-sm form-control-md border-color-4", placeholder = "Last name" })
                                 @Html.ValidationMessageFor(m => m.LastName)
                             </div>
                             <div class="form-group formField">
-                                @Html.TextBoxFor(m => m.Username, new { @class = "form-control form-control-sm form-control-md border-color-1", placeholder = "Username" })
+                                @Html.TextBoxFor(m => m.Username, new { @class = "form-control form-control-sm form-control-md border-color-4", placeholder = "Username" })
                                 @Html.ValidationMessageFor(m => m.Username)
                             </div>
                             <div class="form-group formField">
-                                @Html.TextBoxFor(m => m.FamilyName, new { @class = "form-control form-control-sm form-control-md border-color-1", placeholder = "Family name" })
+                                @Html.TextBoxFor(m => m.FamilyName, new { @class = "form-control form-control-sm form-control-md border-color-4", placeholder = "Family name" })
                                 @Html.ValidationMessageFor(m => m.FamilyName)
                             </div>
                             <div class="form-group formField">
-                                @Html.TextBoxFor(m => m.Password, new { @class = "form-control form-control-sm form-control-md border-color-1", placeholder = "Password" })
+                                @Html.TextBoxFor(m => m.Password, new { @class = "form-control form-control-sm form-control-md border-color-4", placeholder = "Password" })
                                 @Html.ValidationMessageFor(m => m.Password)
                             </div>
                             <div class="form-group formField">
-                                @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control form-control-sm form-control-md border-color-1", placeholder = "Re-password" })
+                                @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control form-control-sm form-control-md border-color-4", placeholder = "Re-password" })
                                 @Html.ValidationMessageFor(m => m.ConfirmPassword)
                             </div>
                             <div class="form-group formField">
-                                <input type="submit" class="btn btn-primary btn-block bg-color-4 border-color-4" value="Register">
+                                <input type="submit" class="btn btn-primary btn-block bg-color-3 border-color-3" value="Register">
                             </div>
-                            @*<div class="form-group formField">
-                                <p class="help-block">Already have an account? <a href="/Home/Login">Log in</a></p>
-                            </div>*@
                         </form>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="panel panel-default formPanel">
-                    <div class="panel-heading bg-color-1 border-color-1">
+                    <div class="panel-heading bg-color-2 border-color-2">
                         <h3 class="panel-title">Already Registered?</h3>
                     </div>
-                    <div class="panel-body border-color-1">
+                    <div class="panel-body border-color-2">
                         <form action="/Home/Login" method="post" role="form">
                             <div class="form-group formField">
-                                @Html.TextBoxFor(m => m.Username, new { @class = "form-control form-control-sm form-control-md border-color-1", placeholder = "Username" })
+                                @Html.TextBoxFor(m => m.Username, new { @class = "form-control form-control-sm form-control-md border-color-4", placeholder = "Username" })
                                 @Html.ValidationMessageFor(m => m.Username)
                             </div>
                             <div class="form-group formField">
-                                @Html.TextBoxFor(m => m.Password, new { @class = "form-control form-control-sm form-control-md border-color-1", placeholder = "Password" })
+                                @Html.TextBoxFor(m => m.Password, new { @class = "form-control form-control-sm form-control-md border-color-4", placeholder = "Password" })
                                 @Html.ValidationMessageFor(m => m.Password)
                             </div>
                             <div class="form-group formField">
-                                <input type="submit" class="btn btn-primary btn-block bg-color-4 border-color-4" value="Log in">
+                                <input type="submit" class="btn btn-primary btn-block bg-color-3 border-color-3" value="Log in">
                             </div>
-                            @*<div class="form-group formField">
-                                <p class="help-block"><a href="#">Forgot password?</a></p>
-                            </div>*@
                         </form>
                     </div>
                 </div>
@@ -76,91 +70,3 @@
         </div>
     </div>
 </section>
-
-@*<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-8 col-md-8 col-sm-8">
-            <div class="card">
-                <h5 class="card-header id="register_header"">Register</h5>
-                
-                    <div id="register_family">
-                        <form class="form-inline" action="/Home/Register" method="post">
-                            <div class="card-body">
-                                <div class="card-text">
-                                    <div class="form-group">
-                                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control form-control-sm form-control-md", placeholder = "First name" })
-                                    </div>
-                                    <div class="form-group">
-                                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control form-control-sm form-control-md", placeholder = "Last name" })
-                                    </div>
-                                    <div class="form-group">
-                                        @Html.TextBoxFor(m => m.Username, new { @class = "form-control form-control-sm form-control-md", placeholder = "User name" })
-                                    </div>
-                                    <div class="form-group">
-                                        @Html.TextBoxFor(m => m.FamilyName, new { @class = "form-control form-control-sm form-control-md", placeholder = "Family name" })
-                                    </div>
-                                    <div class="form-group">
-                                        @Html.TextBoxFor(m => m.Password, new { @class = "form-control form-control-sm form-control-md", placeholder = "Password" })
-                                    </div>
-                                    <div class="form-group">
-                                        @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control form-control-sm form-control-md", placeholder = "Confirm password" })
-                                    </div>
-                                    <div class="form-group">
-                                        <button class="btn btn-sm btn-primary">Submit</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card-footer">
-                                <p>Have an account?<br />
-                                   Log in <a href='@Url.Action("Index", "Home")' class="card-link">here</a>.
-                                </p>
-                            </div>
-                        </form>
-                      </div>
-             </div>
-        </div>
-    </div>
-</div>*@
-
-
-
-
-@*<div id="register_title" class="col-md-12">
-    <h5>Create your Family Reading Account</h5>
-    <br />
-</div>
-<div id="register_text" class="col-sm-8">
-    
-    <p>To start, create a family account with a Family Name.</p>
-    <p>The Family Name may be your family's name or something fun!</p>
-    <br />
-</div>
-
-<div id="register_family" class="col-sm-3">
-    <form action="/Home/Register" method="post">
-        <div class="form-group">
-            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control form-control-sm", placeholder = "First name" })
-        </div>
-        <div class="form-group">
-            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control form-control-sm", placeholder = "Last name" })
-        </div>
-        <div class="form-group">
-            @Html.TextBoxFor(m => m.Username, new { @class = "form-control form-control-sm", placeholder = "User name" })
-        </div>
-        <div class="form-group">
-            @Html.TextBoxFor(m => m.FamilyName, new { @class = "form-control form-control-sm", placeholder = "Family name" })
-        </div>
-        <div class="form-group">
-            @Html.TextBoxFor(m => m.Password, new { @class = "form-control form-control-sm", placeholder = "Password" })
-        </div>
-        <div class="form-group">
-            @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control form-control-sm", placeholder = "Confirm password" })
-        </div>
-        
-        <div class="form-group">
-            <button class="btn btn-sm btn-primary">Submit</button>
-        </div>
-        
-    </form>
-</div>*@
