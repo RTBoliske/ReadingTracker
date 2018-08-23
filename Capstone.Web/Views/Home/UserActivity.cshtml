@@ -157,15 +157,30 @@
                                 <tbody>
                                     @foreach (var item in Model.ReadingLogs)
                                     {
+                                        var hoursRead = item.MinutesRead / 60;
+                                        var minRead = item.MinutesRead % 60;
                                     <tr>
                                         <td class="border-color-4">@item.Title</td>
-                                        <td class="border-color-4">@item.MinutesRead Minutes</td>
-                                        <td class="border-color-4">@item.Type</td>
-                                        <td class="border-color-4">@item.Date.ToString("M/d/yy")</td>
-                                        <td class="border-color-4">
-                                            @item.Status
-                                        </td>
-                                    </tr>
+                                        @if (@item.MinutesRead >= 60)
+                                        {
+                                            <td class="border-color-4">
+                                                @hoursRead Hours
+                                                @minRead Minutes
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td class="border-color-4">
+                                                @item.MinutesRead Minutes
+                                            </td>
+                                        }
+                                            
+                                            <td class="border-color-4">@item.Type</td>
+                                            <td class="border-color-4">@item.Date.ToString("M/d/yy")</td>
+                                            <td class="border-color-4">
+                                                @item.Status
+                                            </td>
+                                        </tr>
                                     }
                                 </tbody>
                             </table>
