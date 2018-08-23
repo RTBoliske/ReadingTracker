@@ -112,7 +112,7 @@ namespace Capstone.Web.Tests.Integration
 
             User newUser = readerDAL.CreateUser(user);
 
-            user = readerDAL.GetUser(newUser.Username, user.Password);
+            user = readerDAL.GetUserByUsername(newUser.Username);
 
             Assert.AreEqual(user.FamilyID, family.ID);
         }
