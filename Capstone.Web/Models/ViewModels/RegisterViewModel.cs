@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Capstone.Web
 {
-    public class RegisterViewModel
+    public class RegisterViewModel : LoginViewModel
     {
         public int ID { get; set; }
         [Required(ErrorMessage = "This field is required")]
@@ -18,12 +18,12 @@ namespace Capstone.Web
         [Required(ErrorMessage = "This field is required")]
         //[Display(Name = "Family Name:")]
         public string FamilyName { get; set; }
-        [Required(ErrorMessage = "This field is required")]
-        //[Display(Name = "Username:")]
-        public string Username { get; set; }
-        [Required(ErrorMessage = "This field is required")]
-        //[Display(Name = "Password:")]
-        public string Password { get; set; }
+        //[Required(ErrorMessage = "This field is required")]
+        ////[Display(Name = "Username:")]
+        //public string Username { get; set; }
+        //[Required(ErrorMessage = "This field is required")]
+        ////[Display(Name = "Password:")]
+        //public string Password { get; set; }
         [Required(ErrorMessage = "This field is required")]
         [Compare("Password", ErrorMessage = "Passwords do not match")]
         //[Display(Name = "Confirm Password:")]
