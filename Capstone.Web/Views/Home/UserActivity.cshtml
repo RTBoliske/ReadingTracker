@@ -41,10 +41,10 @@
         <div class="row">
             <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="panel panel-default formPanel">
-                    <div class="panel-heading bg-color-1 border-color-1">
+                    <div class="panel-heading bg-color-3 border-color-3">
                         <h3 class="panel-title">Add Reading Log</h3>
                     </div>
-                    <div class="panel-body border-color-1">
+                    <div class="panel-body border-color-3">
                         <form action="/Home/AddReadingLog" method="post" role="form">
                             <label for="SelectBook">Select a Current Book</label>
                             <div class="dropGeneral roundOne border-color-2">
@@ -66,14 +66,14 @@
                                 <div class="col-xs-6">
                                     <div class="form-group formField">
                                         <label for="AddReadingHours">Hours:</label>
-                                        @Html.TextBoxFor(m => m.HoursRead, new { @class = "form-control form-control-sm border-color-4" })
+                                        @Html.TextBoxFor(m => m.HoursRead, new { @class = "form-control form-control-sm border-color-2" })
                                         @Html.ValidationMessageFor(m => m.HoursRead)
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
                                     <div class="form-group formField">
                                         <label for="AddReadingMinutes">Minutes:</label>
-                                        @Html.TextBoxFor(m => m.MinutesRead, new { @class = "form-control form-control-sm border-color-4" })
+                                        @Html.TextBoxFor(m => m.MinutesRead, new { @class = "form-control form-control-sm border-color-2" })
                                         @Html.ValidationMessageFor(m => m.MinutesRead)
                                     </div>
                                 </div>
@@ -118,7 +118,7 @@
                         {
                             if (item.PercentProgress <= 100)
                             {
-                                <div>@item.Title</div>
+                        <div>@item.Title</div>
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-info progress-bar-striped active animated fadeInLeft"
                                          role="progressbar" style="width: @item.PercentProgress%">@((item.PercentProgress / 100).ToString("P"))</div>
@@ -157,15 +157,30 @@
                                 <tbody>
                                     @foreach (var item in Model.ReadingLogs)
                                     {
+                                        var hoursRead = item.MinutesRead / 60;
+                                        var minRead = item.MinutesRead % 60;
                                     <tr>
                                         <td class="border-color-4">@item.Title</td>
-                                        <td class="border-color-4">@item.MinutesRead Minutes</td>
-                                        <td class="border-color-4">@item.Type</td>
-                                        <td class="border-color-4">@item.Date.ToString("M/d/yy")</td>
-                                        <td class="border-color-4">
-                                            @item.Status
-                                        </td>
-                                    </tr>
+                                        @if (@item.MinutesRead >= 60)
+                                        {
+                                            <td class="border-color-4">
+                                                @hoursRead Hours
+                                                @minRead Minutes
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td class="border-color-4">
+                                                @item.MinutesRead Minutes
+                                            </td>
+                                        }
+                                            
+                                            <td class="border-color-4">@item.Type</td>
+                                            <td class="border-color-4">@item.Date.ToString("M/d/yy")</td>
+                                            <td class="border-color-4">
+                                                @item.Status
+                                            </td>
+                                        </tr>
                                     }
                                 </tbody>
                             </table>

@@ -53,21 +53,21 @@
         </div>
 
 
-        <div class="row">
-            <div class="col-md-4 col-md col-sm-6 col-xs-12">
-                <div class="panel panel-default formPanel">
-                    <div class="panel-heading bg-color-1 border-color-1">
-                        @if (Model.PrizeId > 0)
-                        {
-                            <h3 class="panel-title" id="formHeader">Edit a prize</h3>
-                        }
-                        else
-                        {
-                            <h3 class="panel-title" id="formHeader">Create a new prize</h3>
-                        }
+            <div class="row">
+                <div class="col-md-4 col-md col-sm-6 col-xs-12">
+                    <div class="panel panel-default formPanel">
+                        <div class="panel-heading bg-color-3 border-color-3">
+                            @if (Model.PrizeId > 0)
+                            {
+                                <h3 class="panel-title" id="formHeader">Edit a prize</h3>
+                            }
+                            else
+                            {
+                                <h3 class="panel-title" id="formHeader">Create a new prize</h3>
+                            }
 
-                    </div>
-                    <div class="panel-body border-color-1">
+                        </div>
+                        <div class="panel-body border-color-3">
 
                         @* Edit Prize Form *@
 
@@ -217,39 +217,39 @@
                                     <td>Children</td>
                                 }
 
-                                <td>
-                                    <span class="color-2"></span>
-                                    @item.Milestone Minutes
-                                </td>
-                                <td>
-                                    <span class="color-3"></span>
-                                    @item.Title
-                                </td>
-                                <td>
-                                    <span class="color-4"></span>
-                                    @item.isActive
-                                </td>
-                                <td>
-                                    <span class="color-5"></span>
-                                    @item.StartDate.ToString("M/d/yy")
-                                </td>
-                                <td>
-                                    <span class="color-6"></span>
-                                    @item.EndDate.ToString("M/d/yy")
-                                </td>
-                                <td>
-                                    <a href="@Url.Action("AddPrize", "Home", new { id = item.ID })"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                                    @*@Html.ActionLink("Edit", "AddPrize", new { id = item.ID }, htmlAttributes: new { @class = "fa fa-edit" })*@
-
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                                    <td>
+                                        <span class="color-2"></span>
+                                        @item.Milestone Minutes
+                                    </td>
+                                    <td>
+                                        <span class="color-3"></span>
+                                        @item.Title
+                                    </td>
+                                    <td>
+                                        <span class="color-4"></span>
+                                        @item.isActive
+                                    </td>
+                                    <td>
+                                        <span class="color-5"></span>
+                                        @item.StartDate.ToString("M/d/yy")
+                                    </td>
+                                    <td>
+                                        <span class="color-6"></span>
+                                        @item.EndDate.ToString("M/d/yy")
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action("AddPrize", "Home", new { id = item.ID })"><i class="fa fa-edit fa-2x" aria-hidden="true"></i></a>
+                                        @*@Html.ActionLink("Edit", "AddPrize", new { id = item.ID }, htmlAttributes: new { @class = "fa fa-edit" })*@ 
+                                        
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 @*</div>*@
 
 
