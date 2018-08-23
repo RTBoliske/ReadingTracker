@@ -329,11 +329,11 @@ namespace Capstone.Web.Controllers
 
                     book = _db.CreateBook(book);
 
-                    if (((User)Session["User"]).RoleID == 2)
-                    {
+                    //if (((User)Session["User"]).RoleID == 2 || ((User)Session["User"]).RoleID == 3)
+                    //{
                         TempData["AddSuccessState"] = AddBookViewModel.SuccessState.Success;
                         result = RedirectToAction("AddBook", "Home");
-                    }
+                    //}
                     // book does not exist or ISBN is wrong
                     //if (book == null || book.ISBN == null)
                     //{
