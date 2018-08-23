@@ -12,7 +12,8 @@ namespace Capstone.Web
         {
             None = 0,
             Failed = 1,
-            Success = 2
+            Success = 2,
+            NotAuthorized = 3
         }
 
         public int ID { get; set; }

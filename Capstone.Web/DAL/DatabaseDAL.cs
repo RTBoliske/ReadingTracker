@@ -704,7 +704,7 @@ namespace Capstone.Web.DAL
                             StartDate = Convert.ToDateTime(reader["StartDate"]),
                             EndDate = Convert.ToDateTime(reader["EndDate"]),
                             FamilyID = Convert.ToInt32(reader["FamilyID"]),
-                            Title = Convert.ToString("Title"),
+                            Title = Convert.ToString(reader["Title"]),
                         };
                         prizeList.Add(prize);
                     }
@@ -806,7 +806,7 @@ namespace Capstone.Web.DAL
         public Prize GetPrizeById(int id)
         {
             Prize result = new Prize();
-            string sql = " Select ID, UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate from Prize where ID = @ID";
+            string sql = " Select ID, UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, Title from Prize where ID = @ID";
 
             try
             {
@@ -831,6 +831,7 @@ namespace Capstone.Web.DAL
                             isActive = Convert.ToBoolean(reader["isActive"]),
                             StartDate = Convert.ToDateTime(reader["StartDate"]),
                             EndDate = Convert.ToDateTime(reader["EndDate"]),
+                            Title = Convert.ToString(reader["Title"]),
                             //FamilyID = Convert.ToInt32(reader["FamilyID"]),
                         };
                         result = prize;
@@ -849,7 +850,7 @@ namespace Capstone.Web.DAL
         {
             bool wasSuccessful = true;
             string sql = "Update Prize " +
-                         "Set UserType = @UserType, Goal = @Goal, MaxNumPrize = @MaxNumPrize, isActive = @isActive, StartDate = @StartDate, EndDate = @EndDate " +
+                         "Set UserType = @UserType, Goal = @Goal, MaxNumPrize = @MaxNumPrize, isActive = @isActive, StartDate = @StartDate, EndDate = @EndDate, Title = @Title " +
                          "Where ID = @ID";
                         
 
@@ -867,7 +868,8 @@ namespace Capstone.Web.DAL
                     cmd.Parameters.AddWithValue("@isActive", prize.isActive);
                     cmd.Parameters.AddWithValue("@StartDate", prize.StartDate);
                     cmd.Parameters.AddWithValue("@EndDate", prize.EndDate);
-                    
+                    cmd.Parameters.AddWithValue("@Title", prize.Title);
+
 
                     int rowsAffected = cmd.ExecuteNonQuery();
 
