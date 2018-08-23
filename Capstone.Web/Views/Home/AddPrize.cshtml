@@ -228,8 +228,8 @@ else if (Model.AddSuccessState == PrizeViewModel.SuccessState.Failed)
                                         @item.EndDate.ToString("M/d/yy")
                                     </td>
                                     <td>
-                                        @*<i class="fa fa-edit" aria-hidden="true"></i>*@
-                                        @Html.ActionLink("Edit", "AddPrize", new { id = item.ID }, htmlAttributes: new { @class = "fa fa-edit" }) 
+                                        <a href="@Url.Action("AddPrize", "Home", new { id = item.ID })"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                        @*@Html.ActionLink("Edit", "AddPrize", new { id = item.ID }, htmlAttributes: new { @class = "fa fa-edit" })*@ 
                                         
                                     </td>
                                 </tr>
