@@ -56,7 +56,7 @@ else if (Model.AddSuccessState == PrizeViewModel.SuccessState.Failed)
                             }
 
                         </div>
-                        <div class="panel-body">
+                        <div class="panel-body border-color-1">
 
                             @* Edit Prize Form *@
 
@@ -77,12 +77,12 @@ else if (Model.AddSuccessState == PrizeViewModel.SuccessState.Failed)
                                     </div>
                                     <div class="form-group formField">
                                         <label for="Milestone">Reading Goal (in minutes)</label>
-                                        @Html.TextBoxFor(m => m.Milestone, new { @class = "form-control form-control-sm" })
+                                        @Html.TextBoxFor(m => m.Milestone, new { @class = "form-control form-control-sm border-color-4" })
                                         @Html.ValidationMessageFor(m => m.Milestone)
                                     </div>
                                     <div class="form-group formField">
                                         <label for="MaxNumPrizes">Max # of Prizes</label>
-                                        @Html.TextBoxFor(m => m.MaxNumPrizes, new { @class = "form-control form-control-sm" })
+                                        @Html.TextBoxFor(m => m.MaxNumPrizes, new { @class = "form-control form-control-sm border-color-4" })
                                         @Html.ValidationMessageFor(m => m.MaxNumPrizes)
                                     </div>
                                     <label for="UserRole">Is the Goal Active?</label>
@@ -98,20 +98,20 @@ else if (Model.AddSuccessState == PrizeViewModel.SuccessState.Failed)
                                     </div>
                                     <div class="form-group formField">
                                         <label for="StartDate">Start Date</label>
-                                        @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control form-control-sm" })
+                                        @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control form-control-sm border-color-4" })
                                         @Html.ValidationMessageFor(m => m.StartDate)
                                     </div>
                                     <div class="form-group formField">
                                         <label for="EndDate">End Date</label>
-                                        @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control form-control-sm" })
+                                        @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control form-control-sm border-color-4" })
                                         @Html.ValidationMessageFor(m => m.EndDate)
                                     </div>
                                     <div style="text-align:center; display:inline-block">
                                         <button type="submit" class="btn btn-sm btn-primary">Submit</button>
                                     </div>
                                    
-                                        <div style="text-align:center; display:inline-block">
-                                           <a class="button btn btn-sm btn-primary" href="~/Home/AddPrize">Cancel</a>
+                                        <div style="text-align:center;">
+                                           <a class="button btn btn-md btn-primary" href="~/Home/AddPrize">Cancel</a>
                                         </div>
                                     
                                 </form>
@@ -134,12 +134,12 @@ else if (Model.AddSuccessState == PrizeViewModel.SuccessState.Failed)
                                     </div>
                                     <div class="form-group formField">
                                         <label for="Milestone">Reading Goal (in minutes)</label>
-                                        @Html.TextBoxFor(m => m.Milestone, new { @class = "form-control form-control-sm" })
+                                        @Html.TextBoxFor(m => m.Milestone, new { @class = "form-control form-control-sm border-color-4" })
                                         @Html.ValidationMessageFor(m => m.Milestone)
                                     </div>
                                     <div class="form-group formField">
                                         <label for="MaxNumPrizes">Max # of Prizes</label>
-                                        @Html.TextBoxFor(m => m.MaxNumPrizes, new { @class = "form-control form-control-sm" })
+                                        @Html.TextBoxFor(m => m.MaxNumPrizes, new { @class = "form-control form-control-sm border-color-4" })
                                         @Html.ValidationMessageFor(m => m.MaxNumPrizes)
                                     </div>
                                     <label for="UserRole">Is the Goal Active?</label>
@@ -155,16 +155,16 @@ else if (Model.AddSuccessState == PrizeViewModel.SuccessState.Failed)
                                     </div>
                                     <div class="form-group formField">
                                         <label for="StartDate">Start Date</label>
-                                        @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control form-control-sm" })
+                                        @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control form-control-sm border-color-4" })
                                         @Html.ValidationMessageFor(m => m.StartDate)
                                     </div>
                                     <div class="form-group formField">
                                         <label for="EndDate">End Date</label>
-                                        @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control form-control-sm" })
+                                        @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control form-control-sm border-color-4" })
                                         @Html.ValidationMessageFor(m => m.EndDate)
                                     </div>
-                                    <div style="text-align:center; display:inline-block">
-                                        <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                                    <div style="text-align:center;">
+                                        <button type="submit" class="btn btn-md btn-primary">Submit</button>
                                     </div>
                                   
                                 </form>
