@@ -195,13 +195,13 @@
                 <table class="table table-curved border-color-5">
                     <thead>
                         <tr>
-                            <th class="col-sm-2 bg-color-5 border-color-5" style="color:white">Available To:</th>
-                            <th class="col-sm-2 bg-color-5 border-color-5" style="color:white">Goal:</th>
-                            <th class="col-sm-2 bg-color-5 border-color-5" style="color:white">Prize Title</th>
-                            <th class="col-sm-2 bg-color-5 border-color-5" style="color:white">Active?</th>
-                            <th class="col-sm-2 bg-color-5 border-color-5" style="color:white">Start Date</th>
-                            <th class="col-sm-2 bg-color-5 border-color-5" style="color:white">End Date</th>
-                            <th class="col-sm-2 bg-color-5 border-color-5" style="color:white">Edit</th>
+                            <th class="col-sm-2 bg-color-4 border-color-4" style="color:white">Available To:</th>
+                            <th class="col-sm-2 bg-color-4 border-color-4" style="color:white">Goal:</th>
+                            <th class="col-sm-2 bg-color-4 border-color-4" style="color:white">Prize Title</th>
+                            <th class="col-sm-2 bg-color-4 border-color-4" style="color:white">Active?</th>
+                            <th class="col-sm-2 bg-color-4 border-color-4" style="color:white">Start Date</th>
+                            <th class="col-sm-2 bg-color-4 border-color-4" style="color:white">End Date</th>
+                            <th class="col-sm-2 bg-color-4 border-color-4" style="color:white">Edit</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -210,34 +210,34 @@
                             <tr>
                                 @if (item.UserType == 2)
                                 {
-                                    <td class="border-color-5">Parents</td>
+                                    <td class="border-color-4">Parents</td>
                                 }
                                 else
                                 {
-                                    <td class="border-color-5">Children</td>
+                                    <td class="border-color-4">Children</td>
                                 }
 
-                                    <td class="border-color-5">
+                                    <td class="border-color-4">
                                         <span class="color-2"></span>
                                         @item.Milestone Minutes
                                     </td>
-                                    <td class="border-color-5">
+                                    <td class="border-color-4">
                                         <span class="color-3"></span>
                                         @item.Title
                                     </td>
-                                    <td class="border-color-5">
+                                    <td class="border-color-4">
                                         <span class="color-4"></span>
                                         @item.isActive
                                     </td>
-                                    <td class="border-color-5">
+                                    <td class="border-color-4">
                                         <span class="color-5"></span>
                                         @item.StartDate.ToString("M/d/yy")
                                     </td>
-                                    <td class="border-color-5">
+                                    <td class="border-color-4">
                                         <span class="color-6"></span>
                                         @item.EndDate.ToString("M/d/yy")
                                     </td>
-                                    <td class="border-color-5">
+                                    <td class="border-color-4">
                                         <a href="@Url.Action("AddPrize", "Home", new { id = item.ID })"><i class="fa fa-edit fa-2x" aria-hidden="true"></i></a>
                                         @*@Html.ActionLink("Edit", "AddPrize", new { id = item.ID }, htmlAttributes: new { @class = "fa fa-edit" })*@ 
                                         
