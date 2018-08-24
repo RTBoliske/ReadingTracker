@@ -390,7 +390,7 @@ namespace Capstone.Web.Controllers
                 //date gets added in DAL
 
                 log = _db.CreateReadingLog(log);
-
+                var testID = TempData["RoleID"];
                 // book does not exist or ISBN is wrong
                 if (log.ID == 0)
                 {

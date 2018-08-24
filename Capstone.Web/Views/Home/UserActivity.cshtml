@@ -49,6 +49,7 @@
                             <label for="SelectBook">Select a Current Book</label>
                             <div class="dropGeneral roundOne border-color-2">
                                 <input type="hidden" name="UserID" value="@currentUser.ID">
+                                @{TempData["UserID"] = currentUser.RoleID;}
                                 <select name="BookID" id="BookID" class="select-drop">
                                     @foreach (var item in Model.ActiveBooks)
                                     {

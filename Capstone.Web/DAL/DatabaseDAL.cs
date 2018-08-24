@@ -15,7 +15,11 @@ namespace Capstone.Web.DAL
             _connectionString = connectionString;
         }
 
-        //User
+        #region User Scripts
+        /// <summary>
+        /// Gets list of all users from database
+        /// </summary>
+        /// <returns>List of user models</returns>
         public List<User> GetAllUsers()
         {
             List<User> allUsers = new List<User>();
@@ -42,6 +46,11 @@ namespace Capstone.Web.DAL
                 throw;
             }
         }
+        /// <summary>
+        /// Returns a user by searching database with username
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns>User model</returns>
         public User GetUserByUsername(string username)
         {
             User user = new User();
@@ -84,6 +93,11 @@ namespace Capstone.Web.DAL
 
             return user;
         }
+        /// <summary>
+        /// Returns a user by a given user ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>User model</returns>
         public User GetUserByID(int id)
         {
             User user = new User();
@@ -125,6 +139,11 @@ namespace Capstone.Web.DAL
 
             return user;
         }
+        /// <summary>
+        /// Creates a user within the family of currently logged-in user
+        /// </summary>
+        /// <param name="newUser"></param>
+        /// <returns>User model</returns>
         public User CreateUser(User newUser)
         {
             string sql = @"INSERT INTO Users (First_name, Last_name, FamilyID, Username, Password, Salt, RoleID) 
@@ -169,6 +188,11 @@ namespace Capstone.Web.DAL
                 throw;
             }
         }
+        /// <summary>
+        /// Creates a new family member using the parameters specified by the logged-in user
+        /// </summary>
+        /// <param name="newUser"></param>
+        /// <returns>User model</returns>
         public User CreateFamilyMember(User newUser)
         {
             string sql = @"INSERT INTO Users (First_name, Last_name, FamilyID, Username, Password, Salt, RoleID) 
@@ -213,8 +237,14 @@ namespace Capstone.Web.DAL
                 throw;
             }
         }
+        #endregion
 
-        //Family
+        #region Family Scripts
+        /// <summary>
+        /// Return family by using the id of family to search database
+        /// </summary>
+        /// <param name="familyID"></param>
+        /// <returns>Family name</returns>
         public string GetFamilyFromFamilyID(int familyID)
         {
             Family family = new Family();
@@ -250,6 +280,11 @@ namespace Capstone.Web.DAL
 
             return family.FamilyName;
         }
+        /// <summary>
+        /// Gets a user based upon the family ID
+        /// </summary>
+        /// <param name="familyID"></param>
+        /// <returns>User model</returns>
         public User GetUserByFamily(int familyID)
         {
             User user = new User();
@@ -291,6 +326,11 @@ namespace Capstone.Web.DAL
 
             return user;
         }
+        /// <summary>
+        /// Gets a list of users from a family ID
+        /// </summary>
+        /// <param name="familyID"></param>
+        /// <returns>List of User models</returns>
         public List<User> GetAllUsersFromFamilyID(int familyID)
         {
             List<User> userList = new List<User>();
@@ -332,6 +372,11 @@ namespace Capstone.Web.DAL
 
             return userList;
         }
+        /// <summary>
+        /// Creates a new family
+        /// </summary>
+        /// <param name="newFamily"></param>
+        /// <returns>Family ID number</returns>
         public int CreateFamily(Family newFamily)
         {
             try
@@ -352,8 +397,14 @@ namespace Capstone.Web.DAL
                 throw;
             }
         }
+        #endregion
 
-        //Books
+        #region Book Scripts
+        /// <summary>
+        /// Returns the last read book (based upon reading log entries) for a user
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns>Book model</returns>
         public Book GetMostCurrentBook(int userID)
         {
 
@@ -395,6 +446,11 @@ namespace Capstone.Web.DAL
             }
             return book;
         }
+        /// <summary>
+        /// Returns the total number of minutes a user has logged/read
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Minutes read as integer</returns>
         public int GetTotalMinutesReadByUser(int id)
         {
             string sql = @"SELECT SUM(ReadingLog.Minutes_read) AS TotalMinutes FROM ReadingLog WHERE ReadingLog.UserID = @userID;";
@@ -432,6 +488,11 @@ namespace Capstone.Web.DAL
             }
             return minutes;
         }
+        /// <summary>
+        /// Creates a new book
+        /// </summary>
+        /// <param name="book"></param>
+        /// <returns>Returns a book model</returns>
         public Book CreateBook(Book book)
         {
             string sql = @"INSERT INTO Book (FamilyID, Title, Author, ISBN) VALUES (@FamilyID, @Title, @Author, @ISBN);
@@ -461,7 +522,11 @@ namespace Capstone.Web.DAL
             }
 
         }
-
+        /// <summary>
+        /// Returns a list of books for a family
+        /// </summary>
+        /// <param name="familyID"></param>
+        /// <returns>List of book models</returns>
         public List<Book> GetAllBooksByFamilyID(int familyID)
         {
             List<Book> bookList = new List<Book>();
@@ -504,7 +569,11 @@ namespace Capstone.Web.DAL
             
             return bookList;
         }
-        
+        /// <summary>
+        /// Returns a list of all active books for a user
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns>A hashset of books</returns>
         public HashSet<Book> GetActiveBooks(int userID)
         {
             HashSet<Book> bookList = new HashSet<Book>();
@@ -552,8 +621,11 @@ namespace Capstone.Web.DAL
             }
             return bookList;
         }
-
-
+        /// <summary>
+        /// Returns a list of all active books for a user
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns>A hashset of books</returns>
         public HashSet<Book> GetInactiveBooks(int userID)
         {
             HashSet<Book> bookList = new HashSet<Book>();
@@ -601,8 +673,14 @@ namespace Capstone.Web.DAL
             }
             return bookList;
         }
+        #endregion
 
-        //Reading Logs
+        #region Reading Log Scripts
+        /// <summary>
+        /// Returns a list of reading logs for a user
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns>A stack of reading logs</returns>
         public Stack<ReadingLog> GetReadingLog(int userID)
         {
             string sql = @"SELECT ReadingLog.ID AS ID, ReadingLog.BookID AS BookID, Book.Title AS Title, Users.ID AS UserID, Family.ID AS FamilyID, ReadingLog.Minutes_read AS Minutes_read, ReadingLog.Type AS Type,
@@ -643,7 +721,12 @@ namespace Capstone.Web.DAL
                 throw;
             }
             return logs;
-        } //need to test
+        }
+        /// <summary>
+        /// Creates a new reading log for a user
+        /// </summary>
+        /// <param name="log"></param>
+        /// <returns>A newly created reading log</returns>
         public ReadingLog CreateReadingLog(ReadingLog log)
         {
             string sql = @"INSERT INTO ReadingLog (BookID, UserID, Minutes_read, Status, Type, Date)
@@ -673,9 +756,15 @@ namespace Capstone.Web.DAL
             {
                 throw;
             }
-        } //need to test
-        
-        //Prizes
+        }
+        #endregion
+
+        #region Prize Scripts
+        /// <summary>
+        /// Gets all the prizes available to a family
+        /// </summary>
+        /// <param name="familyID"></param>
+        /// <returns>List of prize models</returns>
         public List<Prize> GetPrizes (int familyID)
         {
             List<Prize> prizeList = new List<Prize>();
@@ -718,6 +807,11 @@ namespace Capstone.Web.DAL
 
             return prizeList;
         }
+        /// <summary>
+        /// Adds a new prize for a family
+        /// </summary>
+        /// <param name="prize"></param>
+        /// <returns>Prize model</returns>
         public Prize AddPrize (Prize prize)
         {
             string sql = @"INSERT INTO Prize (UserType, Goal, MaxNumPrize, isActive, StartDate, EndDate, FamilyID, Title) 
@@ -750,7 +844,12 @@ namespace Capstone.Web.DAL
                 throw;
             }
         }
-        public List<PrizeProgress> GetPrizesByUser (User user)  //not passing back in new USERID for children
+        /// <summary>
+        /// Gets the progress of a user towards a created prize
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>List of PrizeProgress models</returns>
+        public List<PrizeProgress> GetPrizesByUser (User user)
         {
             string sql = @"select p.id AS ID, p.UserType AS UserType, p.MaxNumPrize AS MaxNumPrize, p.Goal AS Goal, r.UserID AS UserID, 
                            sum(r.minutes_read) AS Minutes_read, (sum(cast(r.minutes_read as real)) / cast(goal as real)) * 100.0 as percentComplete,
@@ -803,7 +902,11 @@ namespace Capstone.Web.DAL
 
             return prizeList;
         }
-        
+        /// <summary>
+        /// Gets a prize by a user's ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Prize model</returns>
         public Prize GetPrizeById(int id)
         {
             Prize result = new Prize();
@@ -889,7 +992,7 @@ namespace Capstone.Web.DAL
 
             return wasSuccessful;
         }
-
+        #endregion
 
         //Mappers
         private User MapRowToUsers(SqlDataReader reader)
