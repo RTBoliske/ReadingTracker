@@ -144,7 +144,7 @@
                     </div>
                     <div class="panel-body">*@
                         <div class="table-responsive">
-                            <table class="table table-curved border-color-4">
+                            <table class="table table-curved border-color-1">
                                 <thead>
                                     <tr class="border-color-4" style="color:white;">
                                         <th class="col-sm-3 bg-color-1 border-color-1">Title</th>
@@ -160,24 +160,24 @@
                                         var hoursRead = item.MinutesRead / 60;
                                         var minRead = item.MinutesRead % 60;
                                     <tr>
-                                        <td class="border-color-4">@item.Title</td>
+                                        <td class="border-color-1">@item.Title</td>
                                         @if (@item.MinutesRead >= 60)
                                         {
-                                            <td class="border-color-4">
+                                            <td class="border-color-1">
                                                 @hoursRead Hours
                                                 @minRead Minutes
                                             </td>
                                         }
                                         else
                                         {
-                                            <td class="border-color-4">
+                                            <td class="border-color-1">
                                                 @item.MinutesRead Minutes
                                             </td>
                                         }
                                             
-                                            <td class="border-color-4">@item.Type</td>
-                                            <td class="border-color-4">@item.Date.ToString("M/d/yy")</td>
-                                            <td class="border-color-4">
+                                            <td class="border-color-1">@item.Type</td>
+                                            <td class="border-color-1">@item.Date.ToString("M/d/yy")</td>
+                                            <td class="border-color-1">
                                                 @item.Status
                                             </td>
                                         </tr>
