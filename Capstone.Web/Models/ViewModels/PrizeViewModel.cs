@@ -37,11 +37,11 @@ namespace Capstone.Web
 
         [Required(ErrorMessage = "This field is required.")]
         [Display(Name = "Start Date")]
-        public DateTime StartDate { get; set; }
+        public DateTime StartDate { get; set; } = DateTime.Today;
 
         [Required(ErrorMessage = "This field is required.")]
         [Display(Name = "End Date")]
-        public DateTime EndDate { get; set; }
+        public DateTime EndDate { get; set; } = DateTime.Now;
 
         [Required(ErrorMessage = "This field is required.")]
         [Display(Name = "Title")]
