@@ -24,7 +24,7 @@ namespace Capstone.Web.Controllers
         {
             return View("Register");
         }
-
+        
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();

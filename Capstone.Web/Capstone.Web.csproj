@@ -544,6 +544,8 @@
     <Content Include="assets\plugins\rs-plugin\font\revicons.eot" />
     <Content Include="assets\plugins\rs-plugin\font\revicons.ttf" />
     <Content Include="assets\plugins\rs-plugin\font\revicons.woff" />
+    <None Include="Properties\PublishProfiles\pages-for-prizes - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\pages-for-prizes - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
